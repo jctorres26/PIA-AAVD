@@ -16,7 +16,7 @@ namespace BD_AAVD_CEE.ENTIDADES
         public string Apellido_Materno { get; set; }
         public string Fecha_Nacimiento { get; set; } //porque aqui es string la fecha??
         public string Genero { get; set; }
-        //Email SET<VARCHAR>, no se como ponerlo como set 
+        public IEnumerable <string> Email { get; set; }
         public string Nombre_Usuario { get; set; }
         public string Contrasenia { get; set; }
         public bool Activo { get; set; }

@@ -20,7 +20,8 @@ namespace BD_AAVD_CEE.ENTIDADES
         public string Contrasenia { get; set; }
         public bool Activo { get; set; }
         public LocalDate Fecha_Alta { get; set; }
-       // Fecha_Modificacion LIST<DATE>, no estoy segura de como se declara esto aca 
+        public IEnumerable<LocalDate> Fecha_Modificacion { get; set; }
+
 
     }
 }
