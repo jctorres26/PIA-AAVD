@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Cassandra;
+using Cassandra.Mapping;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
-using Cassandra;
+
+
 
 namespace BD_AAVD_CEE.DataBaseConnections
 {
@@ -12,7 +15,7 @@ namespace BD_AAVD_CEE.DataBaseConnections
     {
         private DataBaseManager()
         {
-            cassandraHome = ConfigurationManager.AppSettings["cassanda_home"].ToString();
+            cassandraHome = ConfigurationManager.AppSettings["cassandra_home"].ToString();
             keyspace = ConfigurationManager.AppSettings["keyspace"].ToString();
             cluster = Cluster.Builder().AddContactPoint(cassandraHome).Build();
         }
@@ -36,16 +39,39 @@ namespace BD_AAVD_CEE.DataBaseConnections
 
 
         //AQUI ABAJO VAN TODOS LOS QUERYS 
-        /*
-          //EJEMPLO DE COMO HACER EL QUERY 
-          public void insertStudent(string name,string lastName,string motherLastName,string career,string semester) {
-            string query = String.Format("INSERT INTO STUDENTS (STUDENT_ID,NAME,LAST_NAME,MOTHER_LAST_NAME,CAREER,SEMESTER,CREATION_DATE)" +
-               "VALUES(uuid(), '{0}', '{1}', '{2}', '{3}', {4}, ToTimestamp(now()));"
-               , name,lastName,motherLastName,career,semester);
-            session = cluster.Connect(keyspace);
-            session.Execute(query);
-        } 
-         
-         */
+     
+
+        //EMPLEADOS
+         public bool InsertUpdateDeleteEmpleado(char Opc, BD_AAVD_CEE.ENTIDADES.Empleado_por_Id_Empleado vEmpleado)
+        {
+            bool queryCorrecto = true;
+            try
+            {
+                switch (Opc)
+                {
+                    case 'I':
+                        string query = String.Format("INSERT INTO Empleado_por_Id_Empleado (Id_Empleado,CURP,RFC,Nombre,Apellido_Paterno,Apellido_Materno,Fecha_Nacimiento, Nombre_Usuario, Contrasenia,Activo,Fecha_Alta)" +
+                        "VALUES(uuid(),'{0}', '{1}', '{2}', '{3}', '{4}','{5}','{6}','{7}',true, todate(now()));"
+                      ,  vEmpleado.CURP, vEmpleado.RFC, vEmpleado.Nombre, vEmpleado.Apellido_Paterno, vEmpleado.Apellido_Materno, vEmpleado.Fecha_Nacimiento.ToString("yyyy-MM-dd"), vEmpleado.Nombre_Usuario, vEmpleado.Contrasenia, vEmpleado.Activo, vEmpleado.Fecha_Alta.ToString("yyyy-MM-dd"));
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query);
+                        break;
+                    case 'U':
+                        break;
+                    case 'D':
+                        break;
+
+                }
+              
+                
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return queryCorrecto;
+        }
     }
 }

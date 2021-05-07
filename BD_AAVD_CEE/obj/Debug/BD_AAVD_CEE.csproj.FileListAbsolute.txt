@@ -143,3 +143,41 @@ C:\Users\jctor\Desktop\FCFM\6- Sexto Semestre\AAVD\PIA AAVD\PIA-AAVD\BD_AAVD_CEE
 C:\Users\jctor\Desktop\FCFM\6- Sexto Semestre\AAVD\PIA AAVD\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.csproj.CopyComplete
 C:\Users\jctor\Desktop\FCFM\6- Sexto Semestre\AAVD\PIA AAVD\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.exe
 C:\Users\jctor\Desktop\FCFM\6- Sexto Semestre\AAVD\PIA AAVD\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.pdb
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\BD_AAVD_CEE.exe.config
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\BD_AAVD_CEE.exe
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\BD_AAVD_CEE.pdb
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\Cassandra.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\K4os.Compression.LZ4.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\Microsoft.Extensions.Logging.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\Newtonsoft.Json.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Buffers.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Memory.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Numerics.Vectors.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Threading.Tasks.Dataflow.dll
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\Cassandra.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\K4os.Compression.LZ4.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\Microsoft.Extensions.Logging.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\Newtonsoft.Json.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Buffers.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Memory.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Numerics.Vectors.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\bin\Debug\System.Threading.Tasks.Dataflow.xml
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.csprojAssemblyReference.cache
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.exe.config
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_MAD_CEE.ADMINISTRADOR.A_GESTION_EMPLEADOS.resources
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_MAD_CEE.CLIENTE.C_CLIENTES.resources
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_MAD_CEE.EMPLEADO.E_PANTALLA_PRINCIPAL.resources
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_MAD_CEE.Form1.resources
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.Properties.Resources.resources
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.csproj.GenerateResource.cache
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.csproj.CoreCompileInputs.cache
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.csproj.CopyComplete
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.exe
+D:\BD_AAVD_PROYECTO\PIA-AAVD\BD_AAVD_CEE\obj\Debug\BD_AAVD_CEE.pdb

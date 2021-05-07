@@ -208,6 +208,7 @@
             this.BTNA_GUARDAR.TabIndex = 22;
             this.BTNA_GUARDAR.Text = "Guardar";
             this.BTNA_GUARDAR.UseVisualStyleBackColor = true;
+            this.BTNA_GUARDAR.Click += new System.EventHandler(this.BTNA_GUARDAR_Click);
             // 
             // BTNA_BORRAR
             // 

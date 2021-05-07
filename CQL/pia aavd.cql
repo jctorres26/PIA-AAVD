@@ -9,14 +9,15 @@ PRIMARY KEY(Usuario)
 );
 
 
+
 CREATE TABLE Empleado_por_Id_Empleado(
-	Id_Empleado INT,
+	Id_Empleado UUID,
 	CURP VARCHAR,
 	RFC VARCHAR,
 	Nombre VARCHAR,
 	Apellido_Paterno VARCHAR,
 	Apellido_Materno VARCHAR,
-	Fecha_Nacimiento VARCHAR,
+	Fecha_Nacimiento DATE,
 	Nombre_Usuario VARCHAR,
 	Contrasenia VARCHAR,
 	Activo BOOLEAN,
@@ -24,7 +25,8 @@ CREATE TABLE Empleado_por_Id_Empleado(
 	Fecha_Modificacion LIST<DATE>,
 	PRIMARY KEY (Id_Empleado)
 );
-
+--drop table Empleado_por_Id_Empleado;
+--SELECT * FROM Empleado_por_Id_Empleado;
 CREATE TABLE Cliente_por_Id_Cliente(
 	Id_Cliente INT,
 	CURP VARCHAR,
@@ -172,3 +174,7 @@ CREATE TABLE Reporte_Consumos(
 	Excedente INT,
 	PRIMARY KEY(Anio,Mes,Numero_Medidor)
 );
+
+
+
+

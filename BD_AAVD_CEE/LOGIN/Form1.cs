@@ -19,6 +19,11 @@ namespace BD_MAD_CEE
 
         private void BTNL_INGRESAR_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            BD_MAD_CEE.ADMINISTRADOR.A_GESTION_EMPLEADOS fmr = new ADMINISTRADOR.A_GESTION_EMPLEADOS();
+            fmr.Show();
+
+
 
         }
     }
