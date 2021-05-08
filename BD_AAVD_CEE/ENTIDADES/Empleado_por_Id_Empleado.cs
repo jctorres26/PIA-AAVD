@@ -9,6 +9,13 @@ namespace BD_AAVD_CEE.ENTIDADES
 {
     class Empleado_por_Id_Empleado
     {
+       
+
+        public Empleado_por_Id_Empleado(string nombreDefault)
+        {
+            this.Nombre = nombreDefault;
+        }
+
         public Guid Id_Empleado { get; set; }
         public string CURP { get; set; }
         public string RFC { get; set; }
@@ -21,11 +28,23 @@ namespace BD_AAVD_CEE.ENTIDADES
         public bool Activo { get; set; }
         public DateTime Fecha_Alta { get; set; }
         public IEnumerable<LocalDate> Fecha_Modificacion { get; set; }
-
         //no estoy segura de porque agregar asi la fecha pero por mientras:
         public LocalDate Fecha_Nacimiento_C { get; set; }
         public LocalDate Fecha_AltaC { get; set; }
 
+        public Empleado_por_Id_Empleado(Empleado_por_Id_Empleado vEmpleado)
+        {
+            this.Nombre = vEmpleado.Nombre;
+            this.Id_Empleado = vEmpleado.Id_Empleado;
+        }
 
+        public Empleado_por_Id_Empleado()
+        {
+        }
+
+        public override string ToString()
+        {
+            return this.Nombre ;
+        }
     }
 }

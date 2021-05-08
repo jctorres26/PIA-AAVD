@@ -67,10 +67,13 @@
             // CMBA_EMPLEADOS
             // 
             this.CMBA_EMPLEADOS.FormattingEnabled = true;
+            this.CMBA_EMPLEADOS.Items.AddRange(new object[] {
+            "Ingrese nuevo empleado"});
             this.CMBA_EMPLEADOS.Location = new System.Drawing.Point(21, 55);
             this.CMBA_EMPLEADOS.Name = "CMBA_EMPLEADOS";
             this.CMBA_EMPLEADOS.Size = new System.Drawing.Size(149, 21);
             this.CMBA_EMPLEADOS.TabIndex = 1;
+            this.CMBA_EMPLEADOS.SelectedIndexChanged += new System.EventHandler(this.CMBA_EMPLEADOS_SelectedIndexChanged);
             // 
             // label3
             // 

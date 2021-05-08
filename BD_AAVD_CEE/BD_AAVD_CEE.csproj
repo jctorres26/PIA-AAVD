@@ -94,6 +94,7 @@
     <Compile Include="ADMINISTRADOR\A_GESTION_EMPLEADOS.Designer.cs">
       <DependentUpon>A_GESTION_EMPLEADOS.cs</DependentUpon>
     </Compile>
+    <Compile Include="CLASEGENERAL.cs" />
     <Compile Include="CLIENTE\C_CLIENTES.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -26,7 +26,8 @@ CREATE TABLE Empleado_por_Id_Empleado(
 	PRIMARY KEY (Id_Empleado)
 );
 --drop table Empleado_por_Id_Empleado;
---SELECT * FROM Empleado_por_Id_Empleado;
+truncate Empleado_por_Id_Empleado;
+SELECT * FROM Empleado_por_Id_Empleado;
 CREATE TABLE Cliente_por_Id_Cliente(
 	Id_Cliente INT,
 	CURP VARCHAR,
