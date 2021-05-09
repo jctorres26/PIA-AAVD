@@ -44,7 +44,26 @@ namespace BD_AAVD_CEE.ENTIDADES
 
         public override string ToString()
         {
-            return this.Nombre ;
+            return this.Nombre + " "+ this.Apellido_Paterno+ " "+ this.Apellido_Materno;
+        }
+
+        public void ActualizarFechaCQL()
+        {
+            try
+            {
+                if (Fecha_Nacimiento_C != null)
+                {
+                    Fecha_Nacimiento = new DateTime(Fecha_Nacimiento_C.Year, Fecha_Nacimiento_C.Month, Fecha_Nacimiento_C.Day);
+                }
+                if (Fecha_AltaC != null)
+                {
+                    Fecha_Alta = new DateTime(Fecha_AltaC.Year, Fecha_AltaC.Month, Fecha_AltaC.Day);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

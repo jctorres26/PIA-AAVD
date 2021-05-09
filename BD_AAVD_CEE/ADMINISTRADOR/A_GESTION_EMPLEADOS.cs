@@ -31,34 +31,46 @@ namespace BD_MAD_CEE.ADMINISTRADOR
             }
             else
             {
-                //LLENAR CAMPOS 
-                #region Llenar Campos
-                BD_AAVD_CEE.ENTIDADES.Empleado_por_Id_Empleado vEmpleado = new Empleado_por_Id_Empleado();
-                vEmpleado.Nombre = TEXTA_NOMBRES.Text;
-                vEmpleado.Apellido_Paterno = TEXTA_AP.Text;
-                vEmpleado.Apellido_Materno = TEXTA_AM.Text;
-                vEmpleado.RFC = TEXTA_RFC.Text;
-                vEmpleado.CURP = TEXTA_CURP.Text;
-                vEmpleado.Fecha_Nacimiento = DTP_FNAC.Value;
-                vEmpleado.Nombre_Usuario = TEXTA_USUARIO.Text;
-                vEmpleado.Contrasenia = TEXTA_CLAVE.Text;
-                #endregion
+                //SI SE VA A GUARDAR UN NUEVO EMPLEADO
+                if (CMBA_EMPLEADOS.SelectedIndex == 0)
+                {
 
-                //VALIDAR CAMPOS
-                #region Validar Campos
+                    //LLENAR CAMPOS 
+                    #region Llenar Campos
+                    BD_AAVD_CEE.ENTIDADES.Empleado_por_Id_Empleado vEmpleado = new Empleado_por_Id_Empleado();
+                    vEmpleado.Nombre = TEXTA_NOMBRES.Text;
+                    vEmpleado.Apellido_Paterno = TEXTA_AP.Text;
+                    vEmpleado.Apellido_Materno = TEXTA_AM.Text;
+                    vEmpleado.RFC = TEXTA_RFC.Text;
+                    vEmpleado.CURP = TEXTA_CURP.Text;
+                    vEmpleado.Fecha_Nacimiento = DTP_FNAC.Value;
+                    vEmpleado.Nombre_Usuario = TEXTA_USUARIO.Text;
+                    vEmpleado.Contrasenia = TEXTA_CLAVE.Text;
+                    #endregion
 
-                #endregion
+                    //VALIDAR CAMPOS
+                    #region Validar Campos
+
+                    #endregion
 
 
-                //AQUI ESTA EL LLENADO 
-                vEmpleado.Id_Empleado = Guid.NewGuid();
-                DataBaseManager dbm = DataBaseManager.getInstance();
-                dbm.InsertUpdateDeleteEmpleado('I', vEmpleado);
+                    //AQUI ESTA EL LLENADO 
+                    vEmpleado.Id_Empleado = Guid.NewGuid();
+                    DataBaseManager dbm = DataBaseManager.getInstance();
+                    dbm.InsertUpdateDeleteEmpleado('I', vEmpleado);
 
-                ActualizarDatosEmpleado();
-                MostrarDatosEMPLEADO();
+                    ActualizarDatosEmpleado();
+                    MostrarDatosEMPLEADO();
 
-                //
+                }
+                //SI SE VA A EDITAR 
+                else
+                {
+                    //aqui se editara, no se hara un duplicado 
+                    //en este caso en vez de un insert es un update 
+                }
+
+               
 
             }
 
@@ -107,7 +119,7 @@ namespace BD_MAD_CEE.ADMINISTRADOR
                 TEXTA_CURP.Text = empleadoElegido[0].CURP;
                 TEXTA_USUARIO.Text = empleadoElegido[0].Nombre_Usuario;
                 TEXTA_CLAVE.Text = empleadoElegido[0].Contrasenia;
-               // DTP_FNAC.Value = empleadoElegido[0].Fecha_Nacimiento;
+               DTP_FNAC.Value = empleadoElegido[0].Fecha_Nacimiento;
             }
         }
         #endregion
@@ -132,6 +144,14 @@ namespace BD_MAD_CEE.ADMINISTRADOR
         private void CMBA_EMPLEADOS_SelectedIndexChanged(object sender, EventArgs e)
         {
             MostrarDatosEMPLEADO();
+        }
+
+        private void A_GESTION_EMPLEADOS_Load(object sender, EventArgs e)
+        {
+            DataBaseManager dbm = DataBaseManager.getInstance();
+            List<Empleado_por_Id_Empleado> listaEmpleados = dbm.ObtenerEmpleado('X', null).ToList();
+            CLASEGENERAL.ActualizarCombo(CMBA_EMPLEADOS, listaEmpleados, "Ingrese nuevo empleado");
+
         }
     }
 }

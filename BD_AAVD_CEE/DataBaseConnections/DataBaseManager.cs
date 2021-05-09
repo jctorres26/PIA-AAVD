@@ -40,7 +40,13 @@ namespace BD_AAVD_CEE.DataBaseConnections
 
 
         //AQUI ABAJO VAN TODOS LOS QUERYS 
-
+        public void ActualizarFecha(List<Empleado_por_Id_Empleado> listaEmpleados)
+        {
+            for (int i = 0; i < listaEmpleados.Count; i++)
+            {
+                listaEmpleados[i].ActualizarFechaCQL();
+            }
+        }
 
         //EMPLEADOS
         //BD_AAVD_CEE.
@@ -85,7 +91,7 @@ namespace BD_AAVD_CEE.DataBaseConnections
              switch (Opc)
             {
                 case 'S':
-                    string query = "SELECT Id_Empleado AS Id_Empleado, CURP AS CURP, RFC AS RFC, Nombre AS Nombre, Apellido_Paterno AS Apellido_Paterno, Apellido_Materno AS Apellido_Materno, Fecha_Nacimiento AS Fecha_Nacimiento_C, Nombre_Usuario AS Nombre_Usuario, Contrasenia AS Contrasenia " +
+                    string query = "SELECT Id_Empleado AS Id_Empleado, CURP AS CURP, RFC AS RFC, Nombre AS Nombre, Apellido_Paterno AS Apellido_Paterno, Apellido_Materno AS Apellido_Materno, Fecha_Nacimiento AS Fecha_Nacimiento_C, Nombre_Usuario AS Nombre_Usuario, Contrasenia AS Contrasenia, Fecha_Nacimiento AS Fecha_Nacimiento_C " +
                         "FROM Empleado_por_Id_Empleado "+
                         "WHERE Id_Empleado = ? ;";
                   
@@ -94,7 +100,7 @@ namespace BD_AAVD_CEE.DataBaseConnections
                     break;
 
                 case 'X':
-                    string query2 = "SELECT Id_Empleado AS Id_Empleado, CURP AS CURP, RFC AS RFC, Nombre AS Nombre, Apellido_Paterno AS Apellido_Paterno, Apellido_Materno AS Apellido_Materno, Nombre_Usuario AS Nombre_Usuario, Contrasenia AS Contrasenia " +
+                    string query2 = "SELECT Id_Empleado AS Id_Empleado, CURP AS CURP, RFC AS RFC, Nombre AS Nombre, Apellido_Paterno AS Apellido_Paterno, Apellido_Materno AS Apellido_Materno, Nombre_Usuario AS Nombre_Usuario, Contrasenia AS Contrasenia, Fecha_Nacimiento AS Fecha_Nacimiento_C " +
                         "FROM Empleado_por_Id_Empleado ;";
                 
                     Empleados = mapper.Fetch<Empleado_por_Id_Empleado>(query2);
@@ -105,7 +111,9 @@ namespace BD_AAVD_CEE.DataBaseConnections
             if (Empleados != null)
             {
                 listaEmpleados = Empleados.ToList();
-                //actualizar fechas?
+              
+                ActualizarFecha(listaEmpleados);
+                
             }
 
 

@@ -28,7 +28,10 @@ namespace BD_AAVD_CEE
                 comboboxActualizar.Items.Add(listaEmpleados[i]);
             }
         }
-      
 
+
+      
+        
+        
     }
 }
