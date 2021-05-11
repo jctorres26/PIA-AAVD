@@ -65,6 +65,8 @@ namespace BD_AAVD_CEE.DataBaseConnections
                         session.Execute(query);
                         break;
                     case 'U':
+                        List<Empleado_por_Id_Empleado> empleadoElegido = this.ObtenerEmpleado('S', vEmpleado).ToList();
+
                         break;
                     case 'D':
                         break;
