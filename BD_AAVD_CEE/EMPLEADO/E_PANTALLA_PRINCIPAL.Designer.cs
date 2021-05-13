@@ -30,12 +30,12 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.BTNE_CNUEVO = new System.Windows.Forms.Button();
+            this.IDAUXCONTRATO = new System.Windows.Forms.TextBox();
+            this.ID_AUXCLIENTE = new System.Windows.Forms.TextBox();
+            this.BTNE_CACTUALIZAR = new System.Windows.Forms.Button();
             this.BTNE_RCONTRATO = new System.Windows.Forms.Button();
             this.BTNE_BAJA = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.TXTE_NROSERVICIO = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
             this.TXTE_CP = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.TXTE_MEDIDOR = new System.Windows.Forms.TextBox();
@@ -53,6 +53,7 @@
             this.CMBE_TIPOS = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BTNC_EMAIL = new System.Windows.Forms.Button();
             this.BTNE_REESTABLCER = new System.Windows.Forms.Button();
             this.TXTE_CLAVE = new System.Windows.Forms.TextBox();
             this.TXTE_USUARIO = new System.Windows.Forms.TextBox();
@@ -177,6 +178,9 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.CMBE_RMES = new System.Windows.Forms.ComboBox();
+            this.PIA = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.TXTE_NROSERVICIO = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -216,7 +220,10 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Controls.Add(this.BTNE_CNUEVO);
+            this.tabPage1.Controls.Add(this.PIA);
+            this.tabPage1.Controls.Add(this.IDAUXCONTRATO);
+            this.tabPage1.Controls.Add(this.ID_AUXCLIENTE);
+            this.tabPage1.Controls.Add(this.BTNE_CACTUALIZAR);
             this.tabPage1.Controls.Add(this.BTNE_RCONTRATO);
             this.tabPage1.Controls.Add(this.BTNE_BAJA);
             this.tabPage1.Controls.Add(this.groupBox2);
@@ -231,14 +238,32 @@
             this.tabPage1.Text = "Clientes";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // BTNE_CNUEVO
+            // IDAUXCONTRATO
             // 
-            this.BTNE_CNUEVO.Location = new System.Drawing.Point(794, 298);
-            this.BTNE_CNUEVO.Name = "BTNE_CNUEVO";
-            this.BTNE_CNUEVO.Size = new System.Drawing.Size(118, 40);
-            this.BTNE_CNUEVO.TabIndex = 8;
-            this.BTNE_CNUEVO.Text = "Contrato nuevo";
-            this.BTNE_CNUEVO.UseVisualStyleBackColor = true;
+            this.IDAUXCONTRATO.Enabled = false;
+            this.IDAUXCONTRATO.Location = new System.Drawing.Point(20, 311);
+            this.IDAUXCONTRATO.Name = "IDAUXCONTRATO";
+            this.IDAUXCONTRATO.Size = new System.Drawing.Size(141, 20);
+            this.IDAUXCONTRATO.TabIndex = 10;
+            this.IDAUXCONTRATO.Visible = false;
+            // 
+            // ID_AUXCLIENTE
+            // 
+            this.ID_AUXCLIENTE.Enabled = false;
+            this.ID_AUXCLIENTE.Location = new System.Drawing.Point(20, 257);
+            this.ID_AUXCLIENTE.Name = "ID_AUXCLIENTE";
+            this.ID_AUXCLIENTE.Size = new System.Drawing.Size(141, 20);
+            this.ID_AUXCLIENTE.TabIndex = 9;
+            this.ID_AUXCLIENTE.Visible = false;
+            // 
+            // BTNE_CACTUALIZAR
+            // 
+            this.BTNE_CACTUALIZAR.Location = new System.Drawing.Point(794, 298);
+            this.BTNE_CACTUALIZAR.Name = "BTNE_CACTUALIZAR";
+            this.BTNE_CACTUALIZAR.Size = new System.Drawing.Size(118, 40);
+            this.BTNE_CACTUALIZAR.TabIndex = 8;
+            this.BTNE_CACTUALIZAR.Text = "Actualizar Cliente";
+            this.BTNE_CACTUALIZAR.UseVisualStyleBackColor = true;
             // 
             // BTNE_RCONTRATO
             // 
@@ -248,6 +273,7 @@
             this.BTNE_RCONTRATO.TabIndex = 7;
             this.BTNE_RCONTRATO.Text = "Registrar contrato";
             this.BTNE_RCONTRATO.UseVisualStyleBackColor = true;
+            this.BTNE_RCONTRATO.Click += new System.EventHandler(this.BTNE_RCONTRATO_Click);
             // 
             // BTNE_BAJA
             // 
@@ -284,22 +310,6 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos del contrato";
-            // 
-            // TXTE_NROSERVICIO
-            // 
-            this.TXTE_NROSERVICIO.Location = new System.Drawing.Point(437, 22);
-            this.TXTE_NROSERVICIO.Name = "TXTE_NROSERVICIO";
-            this.TXTE_NROSERVICIO.Size = new System.Drawing.Size(134, 20);
-            this.TXTE_NROSERVICIO.TabIndex = 26;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(363, 25);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(68, 13);
-            this.label19.TabIndex = 25;
-            this.label19.Text = "Nro. Servicio";
             // 
             // TXTE_CP
             // 
@@ -416,6 +426,9 @@
             // CMBE_TIPOS
             // 
             this.CMBE_TIPOS.FormattingEnabled = true;
+            this.CMBE_TIPOS.Items.AddRange(new object[] {
+            "Domiciliar",
+            "Industrial"});
             this.CMBE_TIPOS.Location = new System.Drawing.Point(112, 25);
             this.CMBE_TIPOS.Name = "CMBE_TIPOS";
             this.CMBE_TIPOS.Size = new System.Drawing.Size(130, 21);
@@ -432,6 +445,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.BTNC_EMAIL);
             this.groupBox1.Controls.Add(this.BTNE_REESTABLCER);
             this.groupBox1.Controls.Add(this.TXTE_CLAVE);
             this.groupBox1.Controls.Add(this.TXTE_USUARIO);
@@ -457,6 +471,16 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos personales";
+            // 
+            // BTNC_EMAIL
+            // 
+            this.BTNC_EMAIL.Location = new System.Drawing.Point(368, 155);
+            this.BTNC_EMAIL.Name = "BTNC_EMAIL";
+            this.BTNC_EMAIL.Size = new System.Drawing.Size(75, 34);
+            this.BTNC_EMAIL.TabIndex = 27;
+            this.BTNC_EMAIL.Text = "Agregar Email";
+            this.BTNC_EMAIL.UseVisualStyleBackColor = true;
+            this.BTNC_EMAIL.Click += new System.EventHandler(this.BTNC_EMAIL_Click);
             // 
             // BTNE_REESTABLCER
             // 
@@ -506,6 +530,9 @@
             // CMBE_GENERO
             // 
             this.CMBE_GENERO.FormattingEnabled = true;
+            this.CMBE_GENERO.Items.AddRange(new object[] {
+            "Femenino",
+            "Masculino"});
             this.CMBE_GENERO.Location = new System.Drawing.Point(460, 23);
             this.CMBE_GENERO.Name = "CMBE_GENERO";
             this.CMBE_GENERO.Size = new System.Drawing.Size(178, 21);
@@ -1558,6 +1585,32 @@
             this.CMBE_RMES.Size = new System.Drawing.Size(121, 21);
             this.CMBE_RMES.TabIndex = 4;
             // 
+            // PIA
+            // 
+            this.PIA.Enabled = false;
+            this.PIA.Location = new System.Drawing.Point(851, 3);
+            this.PIA.Name = "PIA";
+            this.PIA.Size = new System.Drawing.Size(100, 20);
+            this.PIA.TabIndex = 11;
+            this.PIA.Text = "pia_aavd";
+            this.PIA.Visible = false;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(363, 25);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(68, 13);
+            this.label19.TabIndex = 25;
+            this.label19.Text = "Nro. Servicio";
+            // 
+            // TXTE_NROSERVICIO
+            // 
+            this.TXTE_NROSERVICIO.Location = new System.Drawing.Point(437, 22);
+            this.TXTE_NROSERVICIO.Name = "TXTE_NROSERVICIO";
+            this.TXTE_NROSERVICIO.Size = new System.Drawing.Size(134, 20);
+            this.TXTE_NROSERVICIO.TabIndex = 26;
+            // 
             // E_PANTALLA_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1637,8 +1690,6 @@
         private System.Windows.Forms.Button BTNE_REESTABLCER;
         private System.Windows.Forms.TextBox TXTE_CLAVE;
         private System.Windows.Forms.TextBox TXTE_USUARIO;
-        private System.Windows.Forms.TextBox TXTE_NROSERVICIO;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox TXTE_CP;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox TXTE_MEDIDOR;
@@ -1653,7 +1704,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button BTNE_CNUEVO;
+        private System.Windows.Forms.Button BTNE_CACTUALIZAR;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label25;
@@ -1752,5 +1803,11 @@
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.DateTimePicker DTPE_FECHACONSUMO;
+        private System.Windows.Forms.TextBox IDAUXCONTRATO;
+        private System.Windows.Forms.TextBox ID_AUXCLIENTE;
+        private System.Windows.Forms.Button BTNC_EMAIL;
+        private System.Windows.Forms.TextBox PIA;
+        private System.Windows.Forms.TextBox TXTE_NROSERVICIO;
+        private System.Windows.Forms.Label label19;
     }
 }

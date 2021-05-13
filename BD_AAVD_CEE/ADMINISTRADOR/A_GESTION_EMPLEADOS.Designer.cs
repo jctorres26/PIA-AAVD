@@ -51,6 +51,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.BTNA_REESTABLECER = new System.Windows.Forms.Button();
+            this.ID_AUX = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -221,6 +222,7 @@
             this.BTNA_BORRAR.TabIndex = 23;
             this.BTNA_BORRAR.Text = "Borrar";
             this.BTNA_BORRAR.UseVisualStyleBackColor = true;
+            this.BTNA_BORRAR.Click += new System.EventHandler(this.BTNA_BORRAR_Click);
             // 
             // groupBox1
             // 
@@ -267,11 +269,21 @@
             this.BTNA_REESTABLECER.Text = "RESTABLECER USUARIO";
             this.BTNA_REESTABLECER.UseVisualStyleBackColor = false;
             // 
+            // ID_AUX
+            // 
+            this.ID_AUX.Enabled = false;
+            this.ID_AUX.Location = new System.Drawing.Point(21, 202);
+            this.ID_AUX.Name = "ID_AUX";
+            this.ID_AUX.Size = new System.Drawing.Size(149, 20);
+            this.ID_AUX.TabIndex = 26;
+            this.ID_AUX.Visible = false;
+            // 
             // A_GESTION_EMPLEADOS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ID_AUX);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BTNA_BORRAR);
@@ -315,5 +327,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button BTNA_REESTABLECER;
+        private System.Windows.Forms.TextBox ID_AUX;
     }
 }

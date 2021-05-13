@@ -23,13 +23,14 @@ CREATE TABLE Empleado_por_Id_Empleado(
 	Activo BOOLEAN,
 	Fecha_Alta DATE,
 	Fecha_Modificacion LIST<DATE>,
+	UsuarioACT BOOLEAN,
 	PRIMARY KEY (Id_Empleado)
 );
 --drop table Empleado_por_Id_Empleado;
-truncate Empleado_por_Id_Empleado;
-SELECT * FROM Empleado_por_Id_Empleado;
+--truncate Empleado_por_Id_Empleado;
+--SELECT * FROM Empleado_por_Id_Empleado;
 CREATE TABLE Cliente_por_Id_Cliente(
-	Id_Cliente INT,
+	Id_Cliente UUID,
 	CURP VARCHAR,
 	Nombre VARCHAR,
 	Apellido_Paterno VARCHAR,
@@ -46,6 +47,7 @@ CREATE TABLE Cliente_por_Id_Cliente(
 	PRIMARY KEY (Id_Cliente)
 );
 
+
 CREATE TABLE Tarifa_por_Tipo_Anio_Mes(
 	Anio VARCHAR,
 	Mes VARCHAR,
@@ -58,19 +60,35 @@ CREATE TABLE Tarifa_por_Tipo_Anio_Mes(
 );
 
 CREATE TABLE Contrato_por_Numero_Servicio(
-	Numero_Servicio INT,
+	Numero_Servicio UUID,
+	NumSer BIGINT,
 	Numero_Medidor INT,
 	Tipo_Servicio VARCHAR,
 	Estado VARCHAR,
 	Ciudad VARCHAR,
 	Colonia VARCHAR,
 	Calle VARCHAR,
-	CP INT,
+	CP VARCHAR,
 	Numero_Exterior INT,
-	Id_Cliente INT,
+	Id_Cliente UUID,
 	Empleado_Modificacion VARCHAR,
 	PRIMARY KEY(Numero_Servicio, Id_Cliente)
 );
+
+CREATE TABLE NumServ (
+	idBASE VARCHAR,
+	numero COUNTER,
+	PRIMARY KEY (idBASE)
+);
+
+SELECT * FROM Cliente_por_Id_Cliente;
+SELECT * FROM NumServ;
+Select numero FROM NumServ;
+
+
+
+
+
 
 CREATE TABLE Consumo_por_Numero_Medidor_Fecha(
 	Numero_Medidor INT,
