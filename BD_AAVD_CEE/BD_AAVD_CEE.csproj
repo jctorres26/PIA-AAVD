@@ -114,6 +114,7 @@
     <Compile Include="ENTIDADES\Consumo_por_Numero_Medidor_Fecha.cs" />
     <Compile Include="ENTIDADES\Contrato_por_Numero_Servicio.cs" />
     <Compile Include="ENTIDADES\Empleado_por_Id_Empleado.cs" />
+    <Compile Include="ENTIDADES\NumCliente.cs" />
     <Compile Include="ENTIDADES\NumServ.cs" />
     <Compile Include="ENTIDADES\Recibo_por_Numero_Servicio_Anio_Mes.cs" />
     <Compile Include="ENTIDADES\Reporte_Consumos.cs" />

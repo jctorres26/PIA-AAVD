@@ -66,14 +66,18 @@ namespace BD_MAD_CEE.EMPLEADO
 
 
                     //lista de la base de datos donde estaran los ids 
-                    vCliente.Id_Cliente = Guid.NewGuid();
-                    vContrato.Id_Cliente = vCliente.Id_Cliente;
+                    //vCliente.Id_Cliente = Guid.NewGuid();
+                    
+                    //vContrato.Id_Cliente = vCliente.Id_Cliente;
        
-                    vServicio.idBASE = PIA.Text;
-                    dbm.INSERTSERVICIO('U', vServicio);
-                     string aux = "";
-                    aux= dbm.NUMSERVICIO();
-                    TXTE_NROSERVICIO.Text = aux;
+                    //vServicio.idBASE = PIA.Text;
+                    //dbm.INSERTSERVICIO('U', vServicio);
+                    // string aux = "";
+                    //aux= dbm.NUMSERVICIO();
+                    //TXTE_NROSERVICIO.Text = aux;
+
+                //CREAR UN ID PARA LA TABLA DE CLIENTES CON OTRO COUNTER 
+
 
                     //LLENAR CAMPOS 
 
@@ -81,12 +85,15 @@ namespace BD_MAD_CEE.EMPLEADO
                     vCliente.Nombre = TXTE_NOMBRES.Text;
                     vCliente.Apellido_Paterno = TXTE_AP.Text;
                     vCliente.Apellido_Materno = TXTE_AM.Text;
-                    vCliente.Fecha_Nacimiento = DTPE_FNAC.Value;
+                   // vCliente.Fecha_Nacimiento = DTPE_FNAC.Value;
                     vCliente.CURP = TXTE_CURP.Text;
                     vCliente.Genero = CMBE_GENERO.Text;
                     vCliente.Nombre_Usuario = TXTE_USUARIO.Text;
                     vCliente.Contrasenia = TXTE_CLAVE.Text;
                     vContrato.NumSer = Convert.ToInt64(TXTE_NROSERVICIO.Text);
+                    vContrato.Numero_Medidor = Convert.ToInt32(TXTE_MEDIDOR.Text);
+                    vCliente.Id_Cliente = Convert.ToInt64(ID_AUXCLIENTE.Text);
+                    vContrato.Id_Cliente = Convert.ToInt64(ID_AUXCLIENTE.Text); 
 
                     vContrato.Calle = TXTE_CALLE.Text;
                     vContrato.Ciudad = TXTE_CIUDAD.Text;
@@ -98,10 +105,10 @@ namespace BD_MAD_CEE.EMPLEADO
                    
                     vContrato.Tipo_Servicio = CMBE_TIPOS.Text;
 
-                    //identificadores del id del cliente y del numero de servicio 
-
-                    //FUNCION PARA HACER EL INSERT
-                    dbm.Contratos('I', vContrato, vCliente);
+                //identificadores del id del cliente y del numero de servicio 
+                vContrato.Numero_Servicio = Guid.NewGuid();
+                //FUNCION PARA HACER EL INSERT
+                dbm.Contratos('I', vContrato, vCliente);
 
                 
 
@@ -123,6 +130,30 @@ namespace BD_MAD_CEE.EMPLEADO
             Cliente_por_Id_Cliente vCliente = new Cliente_por_Id_Cliente();
             vCliente.Email = items;
 
+        }
+
+        private void CMBE_CLIENTES_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ( CMBE_CLIENTES.SelectedIndex == 0)
+            {
+                DataBaseManager dbm = DataBaseManager.getInstance();
+                NumServ vServicio = new NumServ();
+                vServicio.idBASE = PIA.Text;
+                dbm.INSERTSERVICIO('U', vServicio);
+                string aux = "";
+                aux = dbm.NUMSERVICIO();
+                TXTE_NROSERVICIO.Text = aux;
+
+                //para el id del cliente 
+                NumCliente vNCliente = new NumCliente();
+                vNCliente.idBASE2 = PIA.Text;
+                dbm.CLIENTEID('U', vNCliente);
+                string aux2 = "";
+                aux2 = dbm.NUMCLIENTE();
+                ID_AUXCLIENTE.Text = aux2;
+             
+               
+            }
         }
     }
 }

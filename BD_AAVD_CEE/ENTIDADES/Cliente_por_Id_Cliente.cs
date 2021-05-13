@@ -9,7 +9,7 @@ namespace BD_AAVD_CEE.ENTIDADES
 {
     class Cliente_por_Id_Cliente
     {
-        public Guid Id_Cliente { get; set; }
+        public long Id_Cliente { get; set; }
         public string CURP { get; set; }
         public string Nombre { get; set; }
         public string Apellido_Paterno { get; set; }

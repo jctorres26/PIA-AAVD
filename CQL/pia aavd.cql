@@ -30,7 +30,7 @@ CREATE TABLE Empleado_por_Id_Empleado(
 --truncate Empleado_por_Id_Empleado;
 --SELECT * FROM Empleado_por_Id_Empleado;
 CREATE TABLE Cliente_por_Id_Cliente(
-	Id_Cliente UUID,
+	Id_Cliente BIGINT,
 	CURP VARCHAR,
 	Nombre VARCHAR,
 	Apellido_Paterno VARCHAR,
@@ -70,7 +70,7 @@ CREATE TABLE Contrato_por_Numero_Servicio(
 	Calle VARCHAR,
 	CP VARCHAR,
 	Numero_Exterior INT,
-	Id_Cliente UUID,
+	Id_Cliente BIGINT,
 	Empleado_Modificacion VARCHAR,
 	PRIMARY KEY(Numero_Servicio, Id_Cliente)
 );
@@ -79,6 +79,12 @@ CREATE TABLE NumServ (
 	idBASE VARCHAR,
 	numero COUNTER,
 	PRIMARY KEY (idBASE)
+);
+
+CREATE TABLE NumCliente (
+	idBASE2 VARCHAR,
+	numero2 COUNTER,
+	PRIMARY KEY (idBASE2)
 );
 
 SELECT * FROM Cliente_por_Id_Cliente;

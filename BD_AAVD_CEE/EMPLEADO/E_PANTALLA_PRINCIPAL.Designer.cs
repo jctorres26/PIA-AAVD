@@ -30,12 +30,15 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.PIA = new System.Windows.Forms.TextBox();
             this.IDAUXCONTRATO = new System.Windows.Forms.TextBox();
             this.ID_AUXCLIENTE = new System.Windows.Forms.TextBox();
             this.BTNE_CACTUALIZAR = new System.Windows.Forms.Button();
             this.BTNE_RCONTRATO = new System.Windows.Forms.Button();
             this.BTNE_BAJA = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.TXTE_NROSERVICIO = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.TXTE_CP = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.TXTE_MEDIDOR = new System.Windows.Forms.TextBox();
@@ -178,9 +181,6 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.CMBE_RMES = new System.Windows.Forms.ComboBox();
-            this.PIA = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.TXTE_NROSERVICIO = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -238,6 +238,16 @@
             this.tabPage1.Text = "Clientes";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // PIA
+            // 
+            this.PIA.Enabled = false;
+            this.PIA.Location = new System.Drawing.Point(851, 3);
+            this.PIA.Name = "PIA";
+            this.PIA.Size = new System.Drawing.Size(100, 20);
+            this.PIA.TabIndex = 11;
+            this.PIA.Text = "pia_aavd";
+            this.PIA.Visible = false;
+            // 
             // IDAUXCONTRATO
             // 
             this.IDAUXCONTRATO.Enabled = false;
@@ -254,7 +264,6 @@
             this.ID_AUXCLIENTE.Name = "ID_AUXCLIENTE";
             this.ID_AUXCLIENTE.Size = new System.Drawing.Size(141, 20);
             this.ID_AUXCLIENTE.TabIndex = 9;
-            this.ID_AUXCLIENTE.Visible = false;
             // 
             // BTNE_CACTUALIZAR
             // 
@@ -310,6 +319,22 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos del contrato";
+            // 
+            // TXTE_NROSERVICIO
+            // 
+            this.TXTE_NROSERVICIO.Location = new System.Drawing.Point(437, 22);
+            this.TXTE_NROSERVICIO.Name = "TXTE_NROSERVICIO";
+            this.TXTE_NROSERVICIO.Size = new System.Drawing.Size(134, 20);
+            this.TXTE_NROSERVICIO.TabIndex = 26;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(363, 25);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(68, 13);
+            this.label19.TabIndex = 25;
+            this.label19.Text = "Nro. Servicio";
             // 
             // TXTE_CP
             // 
@@ -643,10 +668,14 @@
             // CMBE_CLIENTES
             // 
             this.CMBE_CLIENTES.FormattingEnabled = true;
+            this.CMBE_CLIENTES.Items.AddRange(new object[] {
+            "AGREGAR CLIENTE",
+            "CLIENTE VIEJO"});
             this.CMBE_CLIENTES.Location = new System.Drawing.Point(18, 49);
             this.CMBE_CLIENTES.Name = "CMBE_CLIENTES";
             this.CMBE_CLIENTES.Size = new System.Drawing.Size(137, 21);
             this.CMBE_CLIENTES.TabIndex = 1;
+            this.CMBE_CLIENTES.SelectedIndexChanged += new System.EventHandler(this.CMBE_CLIENTES_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -1584,32 +1613,6 @@
             this.CMBE_RMES.Name = "CMBE_RMES";
             this.CMBE_RMES.Size = new System.Drawing.Size(121, 21);
             this.CMBE_RMES.TabIndex = 4;
-            // 
-            // PIA
-            // 
-            this.PIA.Enabled = false;
-            this.PIA.Location = new System.Drawing.Point(851, 3);
-            this.PIA.Name = "PIA";
-            this.PIA.Size = new System.Drawing.Size(100, 20);
-            this.PIA.TabIndex = 11;
-            this.PIA.Text = "pia_aavd";
-            this.PIA.Visible = false;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(363, 25);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(68, 13);
-            this.label19.TabIndex = 25;
-            this.label19.Text = "Nro. Servicio";
-            // 
-            // TXTE_NROSERVICIO
-            // 
-            this.TXTE_NROSERVICIO.Location = new System.Drawing.Point(437, 22);
-            this.TXTE_NROSERVICIO.Name = "TXTE_NROSERVICIO";
-            this.TXTE_NROSERVICIO.Size = new System.Drawing.Size(134, 20);
-            this.TXTE_NROSERVICIO.TabIndex = 26;
             // 
             // E_PANTALLA_PRINCIPAL
             // 

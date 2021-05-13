@@ -174,6 +174,7 @@ namespace BD_AAVD_CEE.DataBaseConnections
                             "WHERE idBASE = '{0}';",
                             vServicio.idBASE
                        );
+
                         session = cluster.Connect(keyspace);
                         session.Execute(query2);
 
@@ -231,23 +232,21 @@ namespace BD_AAVD_CEE.DataBaseConnections
                         string query = String.Format("BEGIN BATCH " +
                             "INSERT INTO Contrato_por_Numero_Servicio " +
                             "(Numero_Servicio, NumSer, Numero_Medidor, Tipo_Servicio, Estado, Ciudad, Colonia, Calle, CP, Numero_Exterior,Id_Cliente) " +
-                            "VALUES ({0}, {1}, {2}, '{3}', '{4}', '{5}', '{6}', '{7}', '{8}',{9}, {10}); " +
+                            "VALUES (uuid(), {0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', {8}, {9}); " +
                             "INSERT INTO Cliente_por_Id_Cliente " +
                             "(Id_Cliente,CURP,Nombre, Apellido_Paterno,Apellido_Materno,Genero, Nombre_Usuario,Contrasenia) " +
-                            "VALUES ({11}, '{12}', '{13}', '{14}', '{15}', '{16}', '{17}', '{18}' );" +
+                            "VALUES ({10}, '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}' );" +
                             "APPLY BATCH ;" 
-                            , (vContrato.Numero_Servicio, vContrato.NumSer, vContrato.Numero_Medidor, 
-                            vContrato.Tipo_Servicio, vContrato.Estado, vContrato.Ciudad, vContrato.Colonia, vContrato.Calle,
-                            vContrato.CP, vContrato.Numero_Exterior, vCliente.Id_Cliente, vCliente.Id_Cliente, vCliente.CURP,
-                            vCliente.Nombre, vCliente.Apellido_Paterno, vCliente.Apellido_Materno, vCliente.Genero, vCliente.Contrasenia)
+                            , (vContrato.NumSer, vContrato.Numero_Medidor, vContrato.Tipo_Servicio, vContrato.Estado, vContrato.Ciudad,
+                            vContrato.Colonia, vContrato.Calle, vContrato.CP, vContrato.Numero_Exterior, vContrato.Id_Cliente, 
+                            vCliente.Id_Cliente, vCliente.CURP, vCliente.Nombre, vCliente.Apellido_Paterno, vCliente.Apellido_Materno,
+                            vCliente.Genero, vCliente.Nombre_Usuario, vCliente.Contrasenia)
                              );
                         session = cluster.Connect(keyspace);
                         session.Execute(query);
                         break;
                     case 'U':
                        
-
-
                         break;
                     case 'D':
                         
@@ -267,35 +266,56 @@ namespace BD_AAVD_CEE.DataBaseConnections
             return queryCorrecto;
         }
 
-        /*public IEnumerable <NumServ> ObtenerNumero( char Opc, NumServ vServicio)
+        public bool CLIENTEID(char Opc, NumCliente vNCliente)
+
+
+
         {
-            IEnumerable<NumServ> Servicios  = null;
+            bool queryCorrecto = true;
+            try
+            {
+                switch (Opc)
+                {
+                    case 'U':
+                        string query2 = String.Format(
+
+                            "UPDATE NumCliente  " +
+                            " SET " +
+                            "numero2 = numero2 + 1 " +
+                            "WHERE idBASE2 = '{0}';",
+                            vNCliente.idBASE2
+                       );
+
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query2);
+
+
+                        break;
+                  
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return queryCorrecto;
+        }
+
+        public string NUMCLIENTE()
+        {
+            var dato = "";
+            string query3 = "SELECT numero2 FROM NumCliente; ";
             session = cluster.Connect(keyspace);
-            IMapper mapper = new Mapper(session);
-            List<NumServ> listaServicios = null;
-
-            switch (Opc)
+            var rs = session.Execute(query3);
+            foreach (Row row in rs)
             {
-                case 'S':
-                    string query = "SELECT numero AS numero " +
-                        "FROM NumServ ; ";
-                    Servicios = mapper.Fetch<NumServ>(query);
+                dato = row["numero2"].ToString();
 
-                    break;
-
-             
 
             }
-            if (Servicios != null)
-            {
-                listaServicios = Servicios.ToList();
-
-               
-            }
-
-
-
-            return listaServicios;
-        }*/
+            return dato;
+        }
     }
 }
