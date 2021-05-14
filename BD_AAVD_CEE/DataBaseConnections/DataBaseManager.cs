@@ -48,6 +48,14 @@ namespace BD_AAVD_CEE.DataBaseConnections
             }
         }
 
+        public void ActualizarFechaC(List<Cliente_por_Id_Cliente> listaClientes)
+        {
+            for (int i=0; i<listaClientes.Count; i++)
+            {
+                listaClientes[i].ActualizarFechaCQLC();
+            }
+        }
+
         //EMPLEADOS
         //BD_AAVD_CEE.
         public bool InsertUpdateDeleteEmpleado(char Opc, ENTIDADES.Empleado_por_Id_Empleado vEmpleado)
@@ -221,35 +229,44 @@ namespace BD_AAVD_CEE.DataBaseConnections
     
 
         //CLIENTES 
-        public bool Contratos (char Opc , Contrato_por_Numero_Servicio vContrato, Cliente_por_Id_Cliente vCliente)
+
+        public bool UpdateDeleteCliente (char Opc, Cliente_por_Id_Cliente vCliente)
         {
             bool queryCorrecto = true;
             try
             {
                 switch (Opc)
                 {
-                    case 'I':
-                        string query = String.Format("BEGIN BATCH " +
-                            "INSERT INTO Contrato_por_Numero_Servicio " +
-                            "(Numero_Servicio, NumSer, Numero_Medidor, Tipo_Servicio, Estado, Ciudad, Colonia, Calle, CP, Numero_Exterior,Id_Cliente) " +
-                            "VALUES (uuid(), {0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', {8}, {9}); " +
-                            "INSERT INTO Cliente_por_Id_Cliente " +
-                            "(Id_Cliente,CURP,Nombre, Apellido_Paterno,Apellido_Materno,Genero, Nombre_Usuario,Contrasenia) " +
-                            "VALUES ({10}, '{11}', '{12}', '{13}', '{14}', '{15}', '{16}', '{17}' );" +
-                            "APPLY BATCH ;" 
-                            , (vContrato.NumSer, vContrato.Numero_Medidor, vContrato.Tipo_Servicio, vContrato.Estado, vContrato.Ciudad,
-                            vContrato.Colonia, vContrato.Calle, vContrato.CP, vContrato.Numero_Exterior, vContrato.Id_Cliente, 
-                            vCliente.Id_Cliente, vCliente.CURP, vCliente.Nombre, vCliente.Apellido_Paterno, vCliente.Apellido_Materno,
-                            vCliente.Genero, vCliente.Nombre_Usuario, vCliente.Contrasenia)
-                             );
-                        session = cluster.Connect(keyspace);
-                        session.Execute(query);
-                        break;
+                    
                     case 'U':
-                       
+                        string query2 = String.Format("UPDATE Cliente_por_Id_Cliente " +
+                            " SET " +
+                            "Nombre= '{1}', " +
+                            "Apellido_Paterno= '{2}', " +
+                            "Apellido_Materno= '{3}', " +
+                            "Fecha_Nacimiento= '{4}', " +
+                            "Nombre_Usuario= '{5}', " +
+                            "Contrasenia= '{6}', " +
+                            "CURP= '{7}' " +
+                            "WHERE Id_Cliente =  {0} ; "
+                     
+                        , vCliente.Id_Cliente, vCliente.Nombre, vCliente.Apellido_Paterno, vCliente.Apellido_Materno, vCliente.Fecha_Nacimiento.ToString("yyyy-MM-dd"), vCliente.Nombre_Usuario, vCliente.Contrasenia, vCliente.CURP);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query2);
+
+
+
                         break;
                     case 'D':
-                        
+                        string query3 = String.Format("UPDATE Cliente_por_Id_Cliente " +
+                           " SET " +
+                           "ACTIVO= false " +
+                           "WHERE  Id_Cliente =  {0} ; "
+
+                       , vCliente.Id_Cliente);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query3);
+
 
                         break;
 
@@ -265,6 +282,108 @@ namespace BD_AAVD_CEE.DataBaseConnections
 
             return queryCorrecto;
         }
+
+
+
+
+        public bool Contratos (char Opc , Contrato_por_Numero_Servicio vContrato, Cliente_por_Id_Cliente vCliente)
+        {
+            bool queryCorrecto = true;
+            try
+            {
+                switch (Opc)
+                {
+                    case 'C':
+                        string query3 = String.Format("INSERT INTO Contrato_por_Numero_Servicio ( Numero_Servicio, NumSer, Numero_Medidor, Tipo_Servicio, " +
+                            "Estado, Ciudad , Colonia, Calle, CP, Numero_Exterior, Id_Cliente " +
+                           " )" +
+                       "VALUES(uuid(), {0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', {8}, {9} );"
+                       , vContrato.NumSer, vContrato.Numero_Medidor, vContrato.Tipo_Servicio, vContrato.Estado, vContrato.Ciudad, vContrato.Colonia, vContrato.Calle,
+                       vContrato.CP, vContrato.Numero_Exterior, vContrato.Id_Cliente);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query3);
+
+
+                        break;
+                    case 'U':
+                        string query = String.Format("INSERT INTO Cliente_por_Id_Cliente (Id_Cliente, CURP, Nombre, Apellido_Paterno, " +
+                            "Apellido_Materno, Fecha_Nacimiento, Genero, Nombre_Usuario, Contrasenia, Activo, Fecha_Alta )" +
+                        "VALUES({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', true, toDate(now()) );"
+                        , vCliente.Id_Cliente, vCliente.CURP, vCliente.Nombre, vCliente.Apellido_Paterno, vCliente.Apellido_Materno, 
+                        vCliente.Fecha_Nacimiento.ToString("yyyy-MM-dd"), vCliente.Genero, vCliente.Nombre_Usuario, vCliente.Contrasenia, vCliente.Fecha_Alta.ToString("yyyy-MM-dd"));
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query);
+                        break;
+                    case 'D':
+                        string query2 = String.Format("INSERT INTO Contrato_por_Numero_Servicio ( Numero_Servicio, NumSer, Numero_Medidor, Tipo_Servicio, " +
+                            "Estado, Ciudad , Colonia, Calle, CP, Numero_Exterior, Id_Cliente " +
+                           " )" +
+                       "VALUES(uuid(), {0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', {8}, {9} );"
+                       , vContrato.NumSer, vContrato.Numero_Medidor, vContrato.Tipo_Servicio, vContrato.Estado, vContrato.Ciudad, vContrato.Colonia, vContrato.Calle, 
+                       vContrato.CP, vContrato.Numero_Exterior, vContrato.Id_Cliente);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query2);
+
+
+                        break;
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return queryCorrecto;
+        }
+        public IEnumerable <Cliente_por_Id_Cliente> ObtenerCliente (char Opc, Cliente_por_Id_Cliente vCliente)
+        {
+            IEnumerable<Cliente_por_Id_Cliente> Clientes = null;
+            session = cluster.Connect(keyspace);
+            IMapper mapper = new Mapper(session);
+            List<Cliente_por_Id_Cliente> listaClientes = null;
+
+            switch (Opc)
+            {
+                //Para mostrarlos en los campos
+                case 'S':
+                    string query = "SELECT Id_Cliente AS Id_Cliente, CURP AS CURP, Nombre AS Nombre, Apellido_Paterno AS Apellido_Paterno, " +
+                        "Apellido_Materno AS Apellido_Materno, Fecha_Nacimiento AS FN, Genero AS Genero, Nombre_Usuario AS Nombre_Usuario, " +
+                        "Contrasenia AS Contrasenia " +
+                        "FROM Cliente_por_Id_Cliente " +
+                        "WHERE Id_Cliente = ? ;";
+
+                    Clientes = mapper.Fetch<Cliente_por_Id_Cliente>(query, vCliente.Id_Cliente);
+
+                    break;
+                    //para actualizar el combo 
+                case 'X':
+                    string query2 = "SELECT Id_Cliente AS Id_Cliente, Nombre AS Nombre, Apellido_Paterno AS Apellido_Paterno, Apellido_Materno AS Apellido_Materno, Activo AS Activo  " +
+                        "FROM Cliente_por_Id_Cliente " +
+                        "WHERE Activo= true " +
+                        "ALLOW FILTERING ; ";
+
+                    Clientes = mapper.Fetch<Cliente_por_Id_Cliente>(query2);
+
+                    break;
+
+            }
+            if (Clientes != null)
+            {
+                listaClientes = Clientes.ToList();
+
+                ActualizarFechaC(listaClientes);
+
+            }
+
+
+
+            return listaClientes;
+        }
+      
 
         public bool CLIENTEID(char Opc, NumCliente vNCliente)
 

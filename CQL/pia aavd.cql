@@ -35,7 +35,7 @@ CREATE TABLE Cliente_por_Id_Cliente(
 	Nombre VARCHAR,
 	Apellido_Paterno VARCHAR,
 	Apellido_Materno VARCHAR,
-	Fecha_Nacimiento VARCHAR,
+	Fecha_Nacimiento DATE,
 	Genero VARCHAR,
 	Email SET<VARCHAR>,
 	Nombre_Usuario VARCHAR,
@@ -46,6 +46,8 @@ CREATE TABLE Cliente_por_Id_Cliente(
 	Empleado_Modificacion VARCHAR,
 	PRIMARY KEY (Id_Cliente)
 );
+
+
 
 
 CREATE TABLE Tarifa_por_Tipo_Anio_Mes(
@@ -88,13 +90,17 @@ CREATE TABLE NumCliente (
 );
 
 SELECT * FROM Cliente_por_Id_Cliente;
+SELECT * FROM Contrato_por_Numero_Servicio;
 SELECT * FROM NumServ;
 Select numero FROM NumServ;
 
 
 
 
-
+--truncate  NumCliente ;
+--truncate NumServ;
+--truncate Cliente_por_Id_Cliente;
+--truncate Contrato_por_Numero_Servicio;
 
 CREATE TABLE Consumo_por_Numero_Medidor_Fecha(
 	Numero_Medidor INT,

@@ -264,6 +264,7 @@
             this.ID_AUXCLIENTE.Name = "ID_AUXCLIENTE";
             this.ID_AUXCLIENTE.Size = new System.Drawing.Size(141, 20);
             this.ID_AUXCLIENTE.TabIndex = 9;
+            this.ID_AUXCLIENTE.Visible = false;
             // 
             // BTNE_CACTUALIZAR
             // 
@@ -273,6 +274,7 @@
             this.BTNE_CACTUALIZAR.TabIndex = 8;
             this.BTNE_CACTUALIZAR.Text = "Actualizar Cliente";
             this.BTNE_CACTUALIZAR.UseVisualStyleBackColor = true;
+            this.BTNE_CACTUALIZAR.Click += new System.EventHandler(this.BTNE_CACTUALIZAR_Click);
             // 
             // BTNE_RCONTRATO
             // 
@@ -292,6 +294,7 @@
             this.BTNE_BAJA.TabIndex = 6;
             this.BTNE_BAJA.Text = "Baja cliente";
             this.BTNE_BAJA.UseVisualStyleBackColor = true;
+            this.BTNE_BAJA.Click += new System.EventHandler(this.BTNE_BAJA_Click);
             // 
             // groupBox2
             // 
@@ -1623,6 +1626,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "E_PANTALLA_PRINCIPAL";
             this.Text = "SISTEMA EMPLEADO";
+            this.Load += new System.EventHandler(this.E_PANTALLA_PRINCIPAL_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

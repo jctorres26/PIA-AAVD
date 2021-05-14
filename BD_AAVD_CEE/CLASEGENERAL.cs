@@ -29,6 +29,23 @@ namespace BD_AAVD_CEE
             }
         }
 
+        static public void ActualizarComboC (ComboBox comboboxActualizar, List<Cliente_por_Id_Cliente> listaClientes, string text= "")
+        {
+            comboboxActualizar.DataSource = null;
+            comboboxActualizar.Items.Clear();
+            if (text != "")
+            {
+                Cliente_por_Id_Cliente firstvalue = new Cliente_por_Id_Cliente(text);
+                comboboxActualizar.Items.Add(firstvalue);
+            }
+
+            for (int i = 0; i < listaClientes.Count; i++)
+            {
+                comboboxActualizar.Items.Add(listaClientes[i]);
+            }
+
+        }
+
         
       
         

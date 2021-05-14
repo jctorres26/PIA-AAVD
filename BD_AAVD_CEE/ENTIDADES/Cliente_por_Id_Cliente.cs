@@ -9,6 +9,13 @@ namespace BD_AAVD_CEE.ENTIDADES
 {
     class Cliente_por_Id_Cliente
     {
+
+        public Cliente_por_Id_Cliente(string nombreDefault)
+        {
+            this.Nombre = nombreDefault;
+        }
+
+
         public long Id_Cliente { get; set; }
         public string CURP { get; set; }
         public string Nombre { get; set; }
@@ -20,11 +27,46 @@ namespace BD_AAVD_CEE.ENTIDADES
         public string Nombre_Usuario { get; set; }
         public string Contrasenia { get; set; }
         public bool Activo { get; set; }
-        public LocalDate Fecha_Alta { get; set; }
+        public DateTime Fecha_Alta { get; set; }
         public LocalDate Fecha_Modificacion { get; set; }
         public string Empleado_Modificacion { get; set; }
 
         public LocalDate FN { get; set; }
+        public LocalDate FA { get; set; }
 
+        public Cliente_por_Id_Cliente(Cliente_por_Id_Cliente vCliente)
+        {
+            this.Nombre = vCliente.Nombre;
+            this.Id_Cliente = vCliente.Id_Cliente;
+        }
+
+        public Cliente_por_Id_Cliente()
+        {
+        }
+
+        public override string ToString()
+        {
+            return this.Nombre + " " + this.Apellido_Paterno + " " + this.Apellido_Materno;
+        }
+
+        public void ActualizarFechaCQLC()
+        {
+            try
+            {
+                if (FN != null)
+                {
+                    Fecha_Nacimiento = new DateTime(FN.Year, FN.Month, FN.Day);
+                }
+                if (FA != null)
+                {
+                    Fecha_Alta = new DateTime(FA.Year, FA.Month, FA.Day);
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+        }
     }
 }
