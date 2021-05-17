@@ -5,11 +5,16 @@ CREATE TABLE Administrador(
 Usuario VARCHAR,
 Contrasenia VARCHAR,
 Gestion_Empleados MAP<TIMESTAMP, VARCHAR>,
+Administrador2 int,
 PRIMARY KEY(Usuario)
 );
 
+INSERT INTO Administrador (Usuario, Contrasenia) VALUES ('Admin', '123');
+SELECT Nombre_Usuario, Contrasenia FROM Empleado_por_Id_Empleado WHERE Activo = true ALLOW FILTERING;
 
 
+
+--SELECT * FROM Administrador;
 CREATE TABLE Empleado_por_Id_Empleado(
 	Id_Empleado UUID,
 	CURP VARCHAR,
@@ -22,13 +27,21 @@ CREATE TABLE Empleado_por_Id_Empleado(
 	Contrasenia VARCHAR,
 	Activo BOOLEAN,
 	Fecha_Alta DATE,
-	Fecha_Modificacion LIST<DATE>,
+	Fecha_Modificacion timestamp,
 	UsuarioACT BOOLEAN,
+	Empleado INT,
+	Clientes SET<VARCHAR>,
 	PRIMARY KEY (Id_Empleado)
 );
+
+--drop table 
 --drop table Empleado_por_Id_Empleado;
 --truncate Empleado_por_Id_Empleado;
---SELECT * FROM Empleado_por_Id_Empleado;
+SELECT * FROM Empleado_por_Id_Empleado;
+
+
+
+
 CREATE TABLE Cliente_por_Id_Cliente(
 	Id_Cliente BIGINT,
 	CURP VARCHAR,
@@ -37,13 +50,15 @@ CREATE TABLE Cliente_por_Id_Cliente(
 	Apellido_Materno VARCHAR,
 	Fecha_Nacimiento DATE,
 	Genero VARCHAR,
-	Email SET<VARCHAR>,
+	Email VARCHAR,
 	Nombre_Usuario VARCHAR,
 	Contrasenia VARCHAR,
 	Activo BOOLEAN,
 	Fecha_Alta DATE,
-	Fecha_Modificacion DATE,
+	Fecha_Modificacion LIST<timestamp>,
 	Empleado_Modificacion VARCHAR,
+	ClienteACT BOOLEAN,
+	Cliente INT,
 	PRIMARY KEY (Id_Cliente)
 );
 
@@ -92,15 +107,17 @@ CREATE TABLE NumCliente (
 SELECT * FROM Cliente_por_Id_Cliente;
 SELECT * FROM Contrato_por_Numero_Servicio;
 SELECT * FROM NumServ;
+
 Select numero FROM NumServ;
 
+SELECT * FROM Administrador;
 
 
-
---truncate  NumCliente ;
---truncate NumServ;
---truncate Cliente_por_Id_Cliente;
---truncate Contrato_por_Numero_Servicio;
+truncate  NumCliente ;
+truncate NumServ;
+truncate Empleado_por_Id_Empleado;
+truncate Cliente_por_Id_Cliente;
+truncate Contrato_por_Numero_Servicio;
 
 CREATE TABLE Consumo_por_Numero_Medidor_Fecha(
 	Numero_Medidor INT,

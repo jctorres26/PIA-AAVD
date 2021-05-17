@@ -58,6 +58,9 @@ namespace BD_MAD_CEE.ADMINISTRADOR
                     vEmpleado.Id_Empleado = Guid.NewGuid();
                     DataBaseManager dbm = DataBaseManager.getInstance();
                     dbm.InsertUpdateDeleteEmpleado('I', vEmpleado);
+                    string a = "";
+                    a = Program.usuarioIng;
+                    dbm.InsertAdmin('U', a, TEXTA_USUARIO.Text);
 
                     ActualizarDatosEmpleado();
                     MostrarDatosEMPLEADO();
@@ -84,6 +87,7 @@ namespace BD_MAD_CEE.ADMINISTRADOR
                    
                     DataBaseManager dbm = DataBaseManager.getInstance();
                     dbm.InsertUpdateDeleteEmpleado('U', vEmpleado);
+
                     ActualizarDatosEmpleado();
                     MostrarDatosEMPLEADO();
                 }
@@ -105,7 +109,6 @@ namespace BD_MAD_CEE.ADMINISTRADOR
             setPONERCOMBO0(0);
  
         }
-
 
 
         //MOSTRAR DATOS 

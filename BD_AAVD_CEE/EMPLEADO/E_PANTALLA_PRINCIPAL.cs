@@ -41,6 +41,7 @@ namespace BD_MAD_CEE.EMPLEADO
                 string.IsNullOrEmpty(TXTE_CLAVE.Text) || string.IsNullOrEmpty(CMBE_TIPOS.Text) || string.IsNullOrEmpty(TXTE_CIUDAD.Text) ||
                 string.IsNullOrEmpty(TXTE_COLONIA.Text) || string.IsNullOrEmpty(TXTE_ESTADO.Text) || string.IsNullOrEmpty(TXTE_CALLE.Text) ||
                 string.IsNullOrEmpty(TXTE_NUMCASA.Text) || string.IsNullOrEmpty(TXTE_CP.Text) || string.IsNullOrEmpty(TXTE_MEDIDOR.Text) 
+                || string.IsNullOrEmpty(TXTE_EMAIL.Text)
                 )
             {
                
@@ -57,7 +58,7 @@ namespace BD_MAD_CEE.EMPLEADO
                     Cliente_por_Id_Cliente vCliente = new Cliente_por_Id_Cliente();
                     NumServ vServicio = new NumServ();
                     DataBaseManager dbm = DataBaseManager.getInstance();
-
+                    Empleado_por_Id_Empleado vEmpleado = new Empleado_por_Id_Empleado();
                     //LLENAR CAMPOS 
 
                     vCliente.Nombre = TXTE_NOMBRES.Text;
@@ -68,6 +69,7 @@ namespace BD_MAD_CEE.EMPLEADO
                     vCliente.Genero = CMBE_GENERO.Text;
                     vCliente.Nombre_Usuario = TXTE_USUARIO.Text;
                     vCliente.Contrasenia = TXTE_CLAVE.Text;
+                    vCliente.Email = TXTE_EMAIL.Text;
                     vContrato.NumSer = Convert.ToInt64(TXTE_NROSERVICIO.Text);
                     vContrato.Numero_Medidor = Convert.ToInt32(TXTE_MEDIDOR.Text);
                     vCliente.Id_Cliente = Convert.ToInt64(ID_AUXCLIENTE.Text);
@@ -87,11 +89,14 @@ namespace BD_MAD_CEE.EMPLEADO
                     //FUNCION PARA HACER EL INSERT
                     dbm.Contratos('U', vContrato, vCliente);
                     dbm.Contratos('D', vContrato, vCliente);
+                    string US = "";
+                    US = TXTE_NOMBRES.Text+ " "+ TXTE_AP.Text+ " " + TXTE_AM.Text;
+               
+                    Guid g = new Guid(EMPLEADO_ID_T.Text);
+                    dbm.EMPLEADOU(g, US);
                     ActualizarDatosCliente();
                     MostrarDatosClientes();
-                    //  dbm.insertStudent(vCliente);
-                    //FUNCION DE ACTUALIZAR
-                    //FUNCION DE MOSTRAR
+                  
 
 
                 }
@@ -166,7 +171,7 @@ namespace BD_MAD_CEE.EMPLEADO
                 TXTE_AP.Text = clienteElegido[0].Apellido_Paterno;
                 TXTE_CLAVE.Text = clienteElegido[0].Contrasenia;
                 TXTE_CURP.Text = clienteElegido[0].CURP;
-                // TXTE_EMAIL.Text = "";
+                TXTE_EMAIL.Text = clienteElegido[0].Email;
                 CMBE_GENERO.Text = clienteElegido[0].Genero;
                 TXTE_USUARIO.Text = clienteElegido[0].Nombre_Usuario;
                 DTPE_FNAC.Value = clienteElegido[0].Fecha_Nacimiento;
@@ -190,15 +195,15 @@ namespace BD_MAD_CEE.EMPLEADO
             }
 
         }
-        private void BTNC_EMAIL_Click(object sender, EventArgs e)
-        {
-            IEnumerable<string> items = new string[] { (TXTE_EMAIL.Text) };
-            items = items.Concat(new[] { (TXTE_EMAIL.Text) });
+        //private void BTNC_EMAIL_Click(object sender, EventArgs e)
+        //{
+        //    IEnumerable<string> items = new string[] { (TXTE_EMAIL.Text) };
+        //    items = items.Concat(new[] { (TXTE_EMAIL.Text) });
 
-            Cliente_por_Id_Cliente vCliente = new Cliente_por_Id_Cliente();
-            vCliente.Email = items;
+        //    Cliente_por_Id_Cliente vCliente = new Cliente_por_Id_Cliente();
+        //    vCliente.Email = items;
 
-        }
+        //}
 
         private void CMBE_CLIENTES_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -244,6 +249,9 @@ namespace BD_MAD_CEE.EMPLEADO
             DataBaseManager dbm = DataBaseManager.getInstance();
             List<Cliente_por_Id_Cliente> listaClientes = dbm.ObtenerCliente('X', null).ToList();
             CLASEGENERAL.ActualizarComboC(CMBE_CLIENTES, listaClientes, "Ingrese nuevo empleado");
+            string id=dbm.IDEMPLEADO(Program.usuarioIng.ToString(), Program.ContraIng.ToString());
+            EMPLEADO_ID_T.Text = id;
+
         }
 
         private void BTNE_CACTUALIZAR_Click(object sender, EventArgs e)
@@ -251,7 +259,7 @@ namespace BD_MAD_CEE.EMPLEADO
             //EDICION DE ALGUN CLIENTE , SU INFO 
             if (string.IsNullOrEmpty(TXTE_NOMBRES.Text) || string.IsNullOrEmpty(TXTE_AP.Text) || string.IsNullOrEmpty(TXTE_AM.Text) ||
                 string.IsNullOrEmpty(TXTE_CURP.Text) || string.IsNullOrEmpty(CMBE_GENERO.Text) ||
-                string.IsNullOrEmpty(TXTE_CLAVE.Text)  || string.IsNullOrEmpty(TXTE_USUARIO.Text)
+                string.IsNullOrEmpty(TXTE_CLAVE.Text)  || string.IsNullOrEmpty(TXTE_USUARIO.Text) || string.IsNullOrEmpty(TXTE_EMAIL.Text)
 
                 )
             {
@@ -275,6 +283,7 @@ namespace BD_MAD_CEE.EMPLEADO
                     vCliente.Genero = CMBE_GENERO.Text;
                     vCliente.Nombre_Usuario = TXTE_USUARIO.Text;
                     vCliente.Contrasenia = TXTE_CLAVE.Text;
+                    vCliente.Email = TXTE_EMAIL.Text;
                     vCliente.Id_Cliente = Convert.ToInt64(ID_AUXCLIENTE.Text);
 
                     DataBaseManager dbm = DataBaseManager.getInstance();
@@ -305,5 +314,8 @@ namespace BD_MAD_CEE.EMPLEADO
                 MostrarDatosClientes();
             }
         }
+
+        
+
     }
 }

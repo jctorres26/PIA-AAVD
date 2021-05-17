@@ -80,6 +80,10 @@
             // CMBL_TIPO
             // 
             this.CMBL_TIPO.FormattingEnabled = true;
+            this.CMBL_TIPO.Items.AddRange(new object[] {
+            "Administrador",
+            "Empleado",
+            "Cliente"});
             this.CMBL_TIPO.Location = new System.Drawing.Point(69, 81);
             this.CMBL_TIPO.Name = "CMBL_TIPO";
             this.CMBL_TIPO.Size = new System.Drawing.Size(140, 21);
@@ -154,6 +158,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.Text = "LOGIN";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

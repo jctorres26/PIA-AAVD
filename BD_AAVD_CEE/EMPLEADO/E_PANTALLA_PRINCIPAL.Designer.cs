@@ -56,7 +56,6 @@
             this.CMBE_TIPOS = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.BTNC_EMAIL = new System.Windows.Forms.Button();
             this.BTNE_REESTABLCER = new System.Windows.Forms.Button();
             this.TXTE_CLAVE = new System.Windows.Forms.TextBox();
             this.TXTE_USUARIO = new System.Windows.Forms.TextBox();
@@ -181,6 +180,7 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.CMBE_RMES = new System.Windows.Forms.ComboBox();
+            this.EMPLEADO_ID_T = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -220,6 +220,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.EMPLEADO_ID_T);
             this.tabPage1.Controls.Add(this.PIA);
             this.tabPage1.Controls.Add(this.IDAUXCONTRATO);
             this.tabPage1.Controls.Add(this.ID_AUXCLIENTE);
@@ -473,7 +474,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.BTNC_EMAIL);
             this.groupBox1.Controls.Add(this.BTNE_REESTABLCER);
             this.groupBox1.Controls.Add(this.TXTE_CLAVE);
             this.groupBox1.Controls.Add(this.TXTE_USUARIO);
@@ -499,16 +499,6 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos personales";
-            // 
-            // BTNC_EMAIL
-            // 
-            this.BTNC_EMAIL.Location = new System.Drawing.Point(368, 155);
-            this.BTNC_EMAIL.Name = "BTNC_EMAIL";
-            this.BTNC_EMAIL.Size = new System.Drawing.Size(75, 34);
-            this.BTNC_EMAIL.TabIndex = 27;
-            this.BTNC_EMAIL.Text = "Agregar Email";
-            this.BTNC_EMAIL.UseVisualStyleBackColor = true;
-            this.BTNC_EMAIL.Click += new System.EventHandler(this.BTNC_EMAIL_Click);
             // 
             // BTNE_REESTABLCER
             // 
@@ -1617,6 +1607,13 @@
             this.CMBE_RMES.Size = new System.Drawing.Size(121, 21);
             this.CMBE_RMES.TabIndex = 4;
             // 
+            // EMPLEADO_ID_T
+            // 
+            this.EMPLEADO_ID_T.Location = new System.Drawing.Point(18, 217);
+            this.EMPLEADO_ID_T.Name = "EMPLEADO_ID_T";
+            this.EMPLEADO_ID_T.Size = new System.Drawing.Size(143, 20);
+            this.EMPLEADO_ID_T.TabIndex = 12;
+            // 
             // E_PANTALLA_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1812,9 +1809,9 @@
         private System.Windows.Forms.DateTimePicker DTPE_FECHACONSUMO;
         private System.Windows.Forms.TextBox IDAUXCONTRATO;
         private System.Windows.Forms.TextBox ID_AUXCLIENTE;
-        private System.Windows.Forms.Button BTNC_EMAIL;
         private System.Windows.Forms.TextBox PIA;
         private System.Windows.Forms.TextBox TXTE_NROSERVICIO;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox EMPLEADO_ID_T;
     }
 }

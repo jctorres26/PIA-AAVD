@@ -8,6 +8,10 @@ namespace BD_MAD_CEE
 {
     static class Program
     {
+        public static string usuarioIng = "";
+        public static string ContraIng = "";
+
+        public static int Contador = 0;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>

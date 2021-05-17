@@ -23,14 +23,15 @@ namespace BD_AAVD_CEE.ENTIDADES
         public string Apellido_Materno { get; set; }
         public DateTime Fecha_Nacimiento { get; set; } //porque aqui es string la fecha??
         public string Genero { get; set; }
-        public IEnumerable <string> Email { get; set; }
+        public string Email { get; set; }
         public string Nombre_Usuario { get; set; }
         public string Contrasenia { get; set; }
         public bool Activo { get; set; }
         public DateTime Fecha_Alta { get; set; }
         public LocalDate Fecha_Modificacion { get; set; }
         public string Empleado_Modificacion { get; set; }
-
+        public bool ClienteACT { get; set; }
+        public int Cliente { get; set; }
         public LocalDate FN { get; set; }
         public LocalDate FA { get; set; }
 

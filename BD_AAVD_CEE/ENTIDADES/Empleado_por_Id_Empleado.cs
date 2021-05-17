@@ -30,6 +30,7 @@ namespace BD_AAVD_CEE.ENTIDADES
         public DateTime Fecha_Alta { get; set; }
         public IEnumerable<DateTime> Fecha_Modificacion { get; set; }
         public bool UsuarioACT { get; set; }
+        public int Empleado { get; set; }
         //no estoy segura de porque agregar asi la fecha pero por mientras:
         public LocalDate Fecha_Nacimiento_C { get; set; }
         public LocalDate Fecha_AltaC { get; set; }
