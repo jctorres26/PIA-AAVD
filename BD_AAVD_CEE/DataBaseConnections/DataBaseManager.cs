@@ -249,10 +249,11 @@ namespace BD_AAVD_CEE.DataBaseConnections
                             "Contrasenia= '{6}', " +
                             "CURP= '{7}', " +
                             "Email = '{8}', " +
-                            "Fecha_Modificacion= Fecha_Modificacion + [toTimestamp(now())] " +
+                            "Fecha_Modificacion= Fecha_Modificacion + [toTimestamp(now())], " +
+                            "Empleado_Modificacion= '{9}'  " +
                             "WHERE Id_Cliente =  {0} ; "
 
-                        , vCliente.Id_Cliente, vCliente.Nombre, vCliente.Apellido_Paterno, vCliente.Apellido_Materno, vCliente.Fecha_Nacimiento.ToString("yyyy-MM-dd"), vCliente.Nombre_Usuario, vCliente.Contrasenia, vCliente.CURP, vCliente.Email);
+                        , vCliente.Id_Cliente, vCliente.Nombre, vCliente.Apellido_Paterno, vCliente.Apellido_Materno, vCliente.Fecha_Nacimiento.ToString("yyyy-MM-dd"), vCliente.Nombre_Usuario, vCliente.Contrasenia, vCliente.CURP, vCliente.Email, vCliente.Empleado_Modificacion);
                         session = cluster.Connect(keyspace);
                         session.Execute(query2);
 
@@ -297,11 +298,11 @@ namespace BD_AAVD_CEE.DataBaseConnections
                 {
                     case 'C':
                         string query3 = String.Format("INSERT INTO Contrato_por_Numero_Servicio ( Numero_Servicio, NumSer, Numero_Medidor, Tipo_Servicio, " +
-                            "Estado, Ciudad , Colonia, Calle, CP, Numero_Exterior, Id_Cliente " +
+                            "Estado, Ciudad , Colonia, Calle, CP, Numero_Exterior, Id_Cliente, Empleado_Modificacion " +
                            " )" +
-                       "VALUES(uuid(), {0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', {8}, {9} );"
+                       "VALUES(uuid(), {0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', {8}, {9}, '{10}' );"
                        , vContrato.NumSer, vContrato.Numero_Medidor, vContrato.Tipo_Servicio, vContrato.Estado, vContrato.Ciudad, vContrato.Colonia, vContrato.Calle,
-                       vContrato.CP, vContrato.Numero_Exterior, vContrato.Id_Cliente);
+                       vContrato.CP, vContrato.Numero_Exterior, vContrato.Id_Cliente, vContrato.Empleado_Modificacion);
                         session = cluster.Connect(keyspace);
                         session.Execute(query3);
 
@@ -309,20 +310,20 @@ namespace BD_AAVD_CEE.DataBaseConnections
                         break;
                     case 'U':
                         string query = String.Format("INSERT INTO Cliente_por_Id_Cliente (Id_Cliente, CURP, Nombre, Apellido_Paterno, " +
-                            "Apellido_Materno, Fecha_Nacimiento, Genero, Email, Nombre_Usuario, Contrasenia, Activo, Fecha_Alta, ClienteACT, Cliente )" +
-                        "VALUES({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}', true, toDate(now()), true, 0 );"
+                            "Apellido_Materno, Fecha_Nacimiento, Genero, Email, Nombre_Usuario, Contrasenia, Activo, Fecha_Alta,Empleado_Modificacion, ClienteACT, Cliente )" +
+                        "VALUES({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}','{9}', true, toDate(now()), '{10}', true, 0 );"
                         , vCliente.Id_Cliente, vCliente.CURP, vCliente.Nombre, vCliente.Apellido_Paterno, vCliente.Apellido_Materno,
-                        vCliente.Fecha_Nacimiento.ToString("yyyy-MM-dd"), vCliente.Genero, vCliente.Email, vCliente.Nombre_Usuario, vCliente.Contrasenia, vCliente.Fecha_Alta.ToString("yyyy-MM-dd"));
+                        vCliente.Fecha_Nacimiento.ToString("yyyy-MM-dd"), vCliente.Genero, vCliente.Email, vCliente.Nombre_Usuario, vCliente.Contrasenia, vCliente.Empleado_Modificacion);
                         session = cluster.Connect(keyspace);
                         session.Execute(query);
                         break;
                     case 'D':
                         string query2 = String.Format("INSERT INTO Contrato_por_Numero_Servicio ( Numero_Servicio, NumSer, Numero_Medidor, Tipo_Servicio, " +
-                            "Estado, Ciudad , Colonia, Calle, CP, Numero_Exterior, Id_Cliente " +
+                            "Estado, Ciudad , Colonia, Calle, CP, Numero_Exterior, Id_Cliente, Empleado_Modificacion " +
                            " )" +
-                       "VALUES(uuid(), {0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', {8}, {9} );"
+                       "VALUES(uuid(), {0}, {1}, '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', {8}, {9}, '{10}' );"
                        , vContrato.NumSer, vContrato.Numero_Medidor, vContrato.Tipo_Servicio, vContrato.Estado, vContrato.Ciudad, vContrato.Colonia, vContrato.Calle,
-                       vContrato.CP, vContrato.Numero_Exterior, vContrato.Id_Cliente);
+                       vContrato.CP, vContrato.Numero_Exterior, vContrato.Id_Cliente, vContrato.Empleado_Modificacion);
                         session = cluster.Connect(keyspace);
                         session.Execute(query2);
 

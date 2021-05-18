@@ -82,7 +82,8 @@ namespace BD_MAD_CEE.EMPLEADO
                     vContrato.Estado = TXTE_ESTADO.Text;
                     // vContrato.Numero_Servicio = Convert.ToInt32(TXTE_NROSERVICIO.Text);
                     vContrato.Numero_Exterior = Convert.ToInt32(TXTE_NUMCASA.Text);
-
+                    vContrato.Empleado_Modificacion = Program.usuarioIng.ToString();
+                    vCliente.Empleado_Modificacion = Program.usuarioIng.ToString();
                     vContrato.Tipo_Servicio = CMBE_TIPOS.Text;
 
 
@@ -117,6 +118,7 @@ namespace BD_MAD_CEE.EMPLEADO
                     vContrato.Tipo_Servicio = CMBE_TIPOS.Text;
                     vContrato.Numero_Medidor = Convert.ToInt32(TXTE_MEDIDOR.Text);
                     vContrato.Id_Cliente = Convert.ToInt64(ID_AUXCLIENTE.Text);
+                    vContrato.Empleado_Modificacion = Program.usuarioIng.ToString();
                     dbm.Contratos('C', vContrato,null);
                     ActualizarDatosCliente();
                     MostrarDatosClientes();
@@ -285,7 +287,7 @@ namespace BD_MAD_CEE.EMPLEADO
                     vCliente.Contrasenia = TXTE_CLAVE.Text;
                     vCliente.Email = TXTE_EMAIL.Text;
                     vCliente.Id_Cliente = Convert.ToInt64(ID_AUXCLIENTE.Text);
-
+                    vCliente.Empleado_Modificacion = Program.usuarioIng.ToString();
                     DataBaseManager dbm = DataBaseManager.getInstance();
                     dbm.UpdateDeleteCliente('U', vCliente);
                     ActualizarDatosCliente();

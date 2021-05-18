@@ -81,6 +81,7 @@ namespace BD_MAD_CEE.ADMINISTRADOR
                     vEmpleado.Fecha_Nacimiento = DTP_FNAC.Value;
                     vEmpleado.Nombre_Usuario = TEXTA_USUARIO.Text;
                     vEmpleado.Contrasenia = TEXTA_CLAVE.Text;
+                    
                     //aqui obtengo cual es el id del textbox
                     Guid g= new Guid(ID_AUX.Text);
                     vEmpleado.Id_Empleado = g;
