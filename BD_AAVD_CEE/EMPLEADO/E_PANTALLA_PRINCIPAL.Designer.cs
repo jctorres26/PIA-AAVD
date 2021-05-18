@@ -518,6 +518,7 @@
             this.BTNE_REESTABLCER.TabIndex = 26;
             this.BTNE_REESTABLCER.Text = "RESTABLECER USUARIO";
             this.BTNE_REESTABLCER.UseVisualStyleBackColor = false;
+            this.BTNE_REESTABLCER.Click += new System.EventHandler(this.BTNE_REESTABLCER_Click);
             // 
             // TXTE_CLAVE
             // 
@@ -1625,6 +1626,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "E_PANTALLA_PRINCIPAL";
             this.Text = "SISTEMA EMPLEADO";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.E_PANTALLA_PRINCIPAL_FormClosed);
             this.Load += new System.EventHandler(this.E_PANTALLA_PRINCIPAL_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

@@ -317,7 +317,35 @@ namespace BD_MAD_CEE.EMPLEADO
             }
         }
 
-        
+        private void BTNE_REESTABLCER_Click(object sender, EventArgs e)
+        {
+            //HACER FUNCION PARA QUE SE HAGA UN UPDATE 
 
+            //Checar que haya un cliente seleccionado del combobox para poder recuperar el id
+            if (CMBE_CLIENTES.SelectedIndex == -1 || CMBE_CLIENTES.SelectedIndex == 0)
+            {
+                //  que no este seleccionado nada o que este seleccionado el de ingresar nuevo empleado
+                MessageBox.Show("Debe seleccionar el cliente a reestablecer");
+            }
+            else
+            {
+                Cliente_por_Id_Cliente vCliente = new Cliente_por_Id_Cliente();
+               
+                
+                int num = Convert.ToInt32(ID_AUXCLIENTE.Text);
+                vCliente.Id_Cliente = num;
+              
+                DataBaseManager dbm = DataBaseManager.getInstance();
+                dbm.CLIENTE_REESTABLECER(vCliente);
+                ActualizarDatosCliente();
+                MostrarDatosClientes();
+
+            }
+        }
+
+        private void E_PANTALLA_PRINCIPAL_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

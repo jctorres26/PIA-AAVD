@@ -99,9 +99,10 @@ namespace BD_MAD_CEE.ADMINISTRADOR
 
         }
 
+       
 
         //ACTUALIZARDATOS
-         public void ActualizarDatosEmpleado()
+        public void ActualizarDatosEmpleado()
         {
             //Aqui se actualiza el combo 
             DataBaseManager dbm = DataBaseManager.getInstance();
@@ -224,6 +225,11 @@ namespace BD_MAD_CEE.ADMINISTRADOR
                 MostrarDatosEMPLEADO();
 
             }
+        }
+
+        private void A_GESTION_EMPLEADOS_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

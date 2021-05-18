@@ -21,5 +21,10 @@ namespace BD_MAD_CEE.CLIENTE
         {
 
         }
+
+        private void C_CLIENTES_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

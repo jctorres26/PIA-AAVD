@@ -34,24 +34,45 @@ namespace BD_MAD_CEE
             
             DataBaseManager dbm = DataBaseManager.getInstance();
             Program.Contador = dbm.PROGRAM_CHECK(CMBL_TIPO.Text, TEXTL_USUARIO.Text, TEXTL_CLAVE.Text);
-            if ( Program.Contador != 1)
+            if ( Program.Contador != 1 )
             {
                 Program.cont2 = Program.cont2 + 1;
             }
             if ( Program.cont2 >= 3)
             {
                 //CAMBIARA EL VALOR DE ACTIVO EN EL SELECT Y NO DEJARA ENTRAR
-               string id= dbm.IDEMPLEADOL(TEXTL_USUARIO.Text);
-                if (id == "")
+                if (CMBL_TIPO.Text == "Empleado")
                 {
-                    MessageBox.Show("No existe el usuario", "Login", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    string id = dbm.IDEMPLEADOL('E',TEXTL_USUARIO.Text);
+                    if (id == "")
+                    {
+                        MessageBox.Show("No existe el usuario", "Login", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
+                    else
+                    {
+                        Guid g = new Guid(id);
+                        dbm.EMPLEADOUL('E',g, TEXTL_USUARIO.Text, 0);
+
+                        MessageBox.Show("Usuario bloqueado", "Login", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
+                    
                 }
-                else
+                if (CMBL_TIPO.Text == "Cliente")
                 {
-                    Guid g = new Guid(id);
-                    dbm.EMPLEADOUL(g, TEXTL_USUARIO.Text);
-                   
-                    MessageBox.Show("Usuario bloqueado", "Login", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    string id = dbm.IDEMPLEADOL('C', TEXTL_USUARIO.Text);
+                    if (id == "")
+                    {
+                        MessageBox.Show("No existe el usuario", "Login", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
+                    else
+                    {
+                        var guid = Guid.NewGuid();
+                        int g = Convert.ToInt32(id);
+                        dbm.EMPLEADOUL('C', guid, TEXTL_USUARIO.Text, g);
+
+                        MessageBox.Show("Usuario bloqueado", "Login", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
+
                 }
                 Program.Contador = 0;
                 Program.cont2 = 0;

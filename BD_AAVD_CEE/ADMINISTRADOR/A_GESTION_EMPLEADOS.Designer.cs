@@ -293,6 +293,7 @@
             this.Controls.Add(this.label1);
             this.Name = "A_GESTION_EMPLEADOS";
             this.Text = "Gestion de Empleados";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.A_GESTION_EMPLEADOS_FormClosed);
             this.Load += new System.EventHandler(this.A_GESTION_EMPLEADOS_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

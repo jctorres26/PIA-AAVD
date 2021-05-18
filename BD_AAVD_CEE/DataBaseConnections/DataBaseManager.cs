@@ -483,7 +483,7 @@ namespace BD_AAVD_CEE.DataBaseConnections
                 //si ingresa un cliente 
                 else if (Tipo == "Cliente")
                 {
-                    string qry = "SELECT Nombre_Usuario, Contrasenia FROM Cliente_por_Id_Cliente WHERE Activo = true ALLOW FILTERING;";
+                    string qry = "SELECT Nombre_Usuario, Contrasenia FROM Cliente_por_Id_Cliente WHERE Activo = true AND ClienteACT= true ALLOW FILTERING;";
                     session = cluster.Connect(keyspace);
                     var rs = session.Execute(qry);
                     foreach (Row row in rs)
@@ -522,9 +522,25 @@ namespace BD_AAVD_CEE.DataBaseConnections
                     {
                         ps = row["contrasenia"].ToString();
                         if (clave == ps) { ret = 1; }
+                       
 
                     }
                 }
+                if (Tipo == "Cliente")
+                {
+                    string query = String.Format("SELECT  Contrasenia FROM Cliente_por_Id_Cliente WHERE Nombre_Usuario = '{0}' ALLOW FILTERING; ",
+                      usuario);
+
+
+                    var rs = session.Execute(query);
+                    foreach (Row row in rs)
+                    {
+                        ps = row["contrasenia"].ToString();
+                        if (clave == ps) { ret = 1; }
+
+                    }
+                }
+
             }
             catch (Exception e)
             {
@@ -675,18 +691,46 @@ namespace BD_AAVD_CEE.DataBaseConnections
             return dato;
         }
         //SELECT DEL ID DEL EMPLEADO EN EL LOGIN
-        public string IDEMPLEADOL(string NU)
+        public string IDEMPLEADOL(char opc, string NU)
         {
             var dato = "";
-            string query3 = "SELECT Id_Empleado FROM Empleado_por_Id_Empleado WHERE Nombre_Usuario= '" + NU + "' ALLOW FILTERING ; ";
-            session = cluster.Connect(keyspace);
-            var rs = session.Execute(query3);
-            foreach (Row row in rs)
+            switch (opc)
             {
-                dato = row["id_empleado"].ToString();
+                case 'E':
+                    
+                    string query3 = "SELECT Id_Empleado FROM Empleado_por_Id_Empleado WHERE Nombre_Usuario= '" + NU + "' ALLOW FILTERING ; ";
+                    session = cluster.Connect(keyspace);
+                    var rs = session.Execute(query3);
+                    foreach (Row row in rs)
+                    {
+                        dato = row["id_empleado"].ToString();
 
 
+                    }
+                    break;
+                case 'C':
+                    string query4 = "SELECT Id_Cliente FROM Cliente_por_Id_Cliente WHERE Nombre_Usuario= '" + NU + "' ALLOW FILTERING ; ";
+                    session = cluster.Connect(keyspace);
+                    var rs2 = session.Execute(query4);
+                    foreach (Row row in rs2)
+                    {
+                        dato = row["id_cliente"].ToString();
+
+
+                    }
+
+                    break;
             }
+            //var dato = "";
+            //string query3 = "SELECT Id_Empleado FROM Empleado_por_Id_Empleado WHERE Nombre_Usuario= '" + NU + "' ALLOW FILTERING ; ";
+            //session = cluster.Connect(keyspace);
+            //var rs = session.Execute(query3);
+            //foreach (Row row in rs)
+            //{
+            //    dato = row["id_empleado"].ToString();
+
+
+            //}
             return dato;
         }
         //UPDATE DEL SET DE EMPLEADOS 
@@ -710,16 +754,31 @@ namespace BD_AAVD_CEE.DataBaseConnections
             return queryCorrecto;
         }
         //UPDATE DEL EMPLEADO POR EL LOGIN
-        public bool EMPLEADOUL(Guid c, string Client)
+        public bool EMPLEADOUL(char opc, Guid c, string Client, int num)
         {
             bool queryCorrecto = true;
             try
             {
+                switch (opc)
+                {
+                    case 'E':
+                        session = cluster.Connect(keyspace);
+                        string qry = "UPDATE Empleado_por_Id_Empleado SET UsuarioACT = false WHERE Id_Empleado = " + c + ";";
 
-                session = cluster.Connect(keyspace);
-                string qry = "UPDATE Empleado_por_Id_Empleado SET UsuarioACT = false WHERE Id_Empleado = " + c + ";";
+                        var rs = session.Execute(qry);
+                        break;
+                    case 'C':
+                        session = cluster.Connect(keyspace);
+                        string qry2 = "UPDATE Cliente_por_Id_Cliente SET ClienteACT = false WHERE Id_Cliente = " + num + ";";
 
-                var rs = session.Execute(qry);
+                        var rs2 = session.Execute(qry2);
+                        break;
+
+                }
+                //session = cluster.Connect(keyspace);
+                //string qry = "UPDATE Empleado_por_Id_Empleado SET UsuarioACT = false WHERE Id_Empleado = " + c + ";";
+
+                //var rs = session.Execute(qry);
             }
             catch (Exception e)
             {
@@ -743,6 +802,32 @@ namespace BD_AAVD_CEE.DataBaseConnections
                        , vEmpleado.Id_Empleado);
                         session = cluster.Connect(keyspace);
                         session.Execute(query3);
+
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return queryCorrecto;
+        }
+        //CLIENTES
+        public bool CLIENTE_REESTABLECER (Cliente_por_Id_Cliente vCliente)
+        {
+            bool queryCorrecto = true;
+            try
+            {
+
+                string query3 = String.Format("UPDATE Cliente_por_Id_Cliente " +
+                   " SET " +
+                   "ClienteACT= true " +
+                   "WHERE  Id_Empleado =  {0} ; "
+
+               , vCliente.Id_Cliente);
+                session = cluster.Connect(keyspace);
+                session.Execute(query3);
 
 
             }

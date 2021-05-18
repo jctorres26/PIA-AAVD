@@ -113,13 +113,13 @@ CREATE TABLE NumCliente (
 	PRIMARY KEY (idBASE2)
 );
 
-SELECT * FROM Cliente_por_Id_Cliente;
-SELECT * FROM Contrato_por_Numero_Servicio;
-SELECT * FROM NumServ;
+--SELECT * FROM Cliente_por_Id_Cliente;
+--SELECT * FROM Contrato_por_Numero_Servicio;
+--SELECT * FROM NumServ;
 
-Select numero FROM NumServ;
+--Select numero FROM NumServ;
 
-SELECT * FROM Administrador;
+--SELECT * FROM Administrador;
 
 
 truncate  NumCliente ;

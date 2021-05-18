@@ -513,6 +513,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "C_CLIENTES";
             this.Text = "CLIENTE";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.C_CLIENTES_FormClosed);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
