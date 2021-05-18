@@ -200,5 +200,30 @@ namespace BD_MAD_CEE.ADMINISTRADOR
 
             }
         }
+
+        private void BTNA_REESTABLECER_Click(object sender, EventArgs e)
+        {
+            //HACER FUNCION PARA QUE SE HAGA UN UPDATE 
+
+            //Checar que haya un empleado seleccionado del combobox para poder recuperar el id
+            if (CMBA_EMPLEADOS.SelectedIndex == -1 || CMBA_EMPLEADOS.SelectedIndex == 0)
+            {
+                //  que no este seleccionado nada o que este seleccionado el de ingresar nuevo empleado
+                MessageBox.Show("Debe seleccionar el empleado a reestablecer");
+            }
+            else
+            {
+                
+                BD_AAVD_CEE.ENTIDADES.Empleado_por_Id_Empleado vEmpleado = new Empleado_por_Id_Empleado();
+                Guid g = new Guid(ID_AUX.Text);
+                vEmpleado.Id_Empleado = g;
+
+                DataBaseManager dbm = DataBaseManager.getInstance();
+                dbm.EMPLEADO_REESTABLECER(vEmpleado);
+                ActualizarDatosEmpleado();
+                MostrarDatosEMPLEADO();
+
+            }
+        }
     }
 }

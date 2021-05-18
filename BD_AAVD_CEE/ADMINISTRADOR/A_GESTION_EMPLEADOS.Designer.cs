@@ -268,6 +268,7 @@
             this.BTNA_REESTABLECER.TabIndex = 26;
             this.BTNA_REESTABLECER.Text = "RESTABLECER USUARIO";
             this.BTNA_REESTABLECER.UseVisualStyleBackColor = false;
+            this.BTNA_REESTABLECER.Click += new System.EventHandler(this.BTNA_REESTABLECER_Click);
             // 
             // ID_AUX
             // 

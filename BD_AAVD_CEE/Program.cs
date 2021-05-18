@@ -10,6 +10,7 @@ namespace BD_MAD_CEE
     {
         public static string usuarioIng = "";
         public static string ContraIng = "";
+        public static int cont2 = 0;
 
         public static int Contador = 0;
         /// <summary>

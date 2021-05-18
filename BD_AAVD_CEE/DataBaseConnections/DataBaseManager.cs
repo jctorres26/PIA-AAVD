@@ -468,7 +468,7 @@ namespace BD_AAVD_CEE.DataBaseConnections
                 //si ingresa un empleado 
                 else if (Tipo == "Empleado")
                 {
-                    string qry = "SELECT Nombre_Usuario, Contrasenia FROM Empleado_por_Id_Empleado WHERE Activo = true ALLOW FILTERING;";
+                    string qry = "SELECT Nombre_Usuario, Contrasenia FROM Empleado_por_Id_Empleado WHERE Activo = true AND UsuarioACT= true ALLOW FILTERING;";
                     session = cluster.Connect(keyspace);
                     var rs = session.Execute(qry);
                     foreach (Row row in rs)
@@ -500,6 +500,126 @@ namespace BD_AAVD_CEE.DataBaseConnections
             }
 
             return ret;
+        }
+
+        public int PROGRAM_CHECK (string Tipo, string usuario, string clave)
+        {
+            int ret = 0;
+            
+            var ps = "";
+            try
+            {
+                session = cluster.Connect(keyspace);
+                if (Tipo == "Empleado")
+                {
+
+                    string query = String.Format("SELECT  Contrasenia FROM Empleado_por_Id_Empleado WHERE Nombre_Usuario = '{0}' ALLOW FILTERING; ",
+                      usuario);
+
+
+                    var rs = session.Execute(query);
+                    foreach (Row row in rs)
+                    {
+                        ps = row["contrasenia"].ToString();
+                        if (clave == ps) { ret = 1; }
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+
+            return ret;
+
+        }
+
+       public bool INSERTLOGIN_INGRESO(string usuario, string clave, string tipo)
+        {
+            bool queryCorrecto = true;
+            try
+            {
+                        string query3 = String.Format("INSERT INTO LOGIN_GUARDADO ( BASE, Tipo, Recordar, Usuario, Contrasenia ) " +
+                            "VALUES ('pia','{0}', true, '{1}', '{2}') ;"
+                       ,tipo, usuario, clave);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query3);
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return queryCorrecto;
+        }
+        public bool UPDATELOGIN_INGRESO ()
+        {
+            bool queryCorrecto = true;
+            try
+            {
+                string query2 = String.Format(
+
+                            "UPDATE LOGIN_GUARDADO " +
+                            " SET " +
+                            "Recordar = false " +
+                            "WHERE BASE = 'pia';"
+                            
+                       );
+
+                session = cluster.Connect(keyspace);
+                session.Execute(query2);
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return queryCorrecto;
+        }
+        public string USUARIOLOGIN()
+        {
+            var dato = "";
+            string query3 = "SELECT Usuario FROM LOGIN_GUARDADO WHERE Recordar = true ALLOW FILTERING;; ";
+            session = cluster.Connect(keyspace);
+            var rs = session.Execute(query3);
+            foreach (Row row in rs)
+            {
+                dato = row["usuario"].ToString();
+
+
+            }
+            return dato;
+        }
+        public string CLAVELOGIN()
+        {
+            var dato = "";
+            string query3 = "SELECT Contrasenia FROM LOGIN_GUARDADO WHERE Recordar = true ALLOW FILTERING; ";
+            session = cluster.Connect(keyspace);
+            var rs = session.Execute(query3);
+            foreach (Row row in rs)
+            {
+                dato = row["contrasenia"].ToString();
+                
+            }
+            return dato;
+        }
+        public string TIPOLOGIN()
+        {
+            var dato = "";
+            string query3 = "SELECT Tipo FROM LOGIN_GUARDADO WHERE Recordar = true ALLOW FILTERING; ";
+            session = cluster.Connect(keyspace);
+            var rs = session.Execute(query3);
+            foreach (Row row in rs)
+            {
+                dato = row["tipo"].ToString();
+
+            }
+            return dato;
         }
 
         //ADMINISTRADOR,  MAP CON LOS EMPLEADOS AGREGADOS Y LA FECHA EN LA QUE FUERON INGRESADOS
@@ -554,6 +674,21 @@ namespace BD_AAVD_CEE.DataBaseConnections
             }
             return dato;
         }
+        //SELECT DEL ID DEL EMPLEADO EN EL LOGIN
+        public string IDEMPLEADOL(string NU)
+        {
+            var dato = "";
+            string query3 = "SELECT Id_Empleado FROM Empleado_por_Id_Empleado WHERE Nombre_Usuario= '" + NU + "' ALLOW FILTERING ; ";
+            session = cluster.Connect(keyspace);
+            var rs = session.Execute(query3);
+            foreach (Row row in rs)
+            {
+                dato = row["id_empleado"].ToString();
+
+
+            }
+            return dato;
+        }
         //UPDATE DEL SET DE EMPLEADOS 
         public bool EMPLEADOU( Guid c, string Client)
         {
@@ -574,7 +709,50 @@ namespace BD_AAVD_CEE.DataBaseConnections
 
             return queryCorrecto;
         }
+        //UPDATE DEL EMPLEADO POR EL LOGIN
+        public bool EMPLEADOUL(Guid c, string Client)
+        {
+            bool queryCorrecto = true;
+            try
+            {
+
+                session = cluster.Connect(keyspace);
+                string qry = "UPDATE Empleado_por_Id_Empleado SET UsuarioACT = false WHERE Id_Empleado = " + c + ";";
+
+                var rs = session.Execute(qry);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
 
 
+            return queryCorrecto;
+        }
+        public bool EMPLEADO_REESTABLECER (Empleado_por_Id_Empleado vEmpleado)
+        {
+            bool queryCorrecto = true;
+            try
+            {
+                
+                        string query3 = String.Format("UPDATE Empleado_por_Id_Empleado " +
+                           " SET " +
+                           "UsuarioACT= true " +
+                           "WHERE  Id_Empleado =  {0} ; "
+
+                       , vEmpleado.Id_Empleado);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query3);
+
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return queryCorrecto;
+        }
     }
 }

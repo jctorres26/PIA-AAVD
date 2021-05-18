@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.EMPLEADO_ID_T = new System.Windows.Forms.TextBox();
             this.PIA = new System.Windows.Forms.TextBox();
             this.IDAUXCONTRATO = new System.Windows.Forms.TextBox();
             this.ID_AUXCLIENTE = new System.Windows.Forms.TextBox();
@@ -180,7 +181,6 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.CMBE_RMES = new System.Windows.Forms.ComboBox();
-            this.EMPLEADO_ID_T = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -238,6 +238,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Clientes";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // EMPLEADO_ID_T
+            // 
+            this.EMPLEADO_ID_T.Enabled = false;
+            this.EMPLEADO_ID_T.Location = new System.Drawing.Point(18, 217);
+            this.EMPLEADO_ID_T.Name = "EMPLEADO_ID_T";
+            this.EMPLEADO_ID_T.Size = new System.Drawing.Size(143, 20);
+            this.EMPLEADO_ID_T.TabIndex = 12;
+            this.EMPLEADO_ID_T.Visible = false;
             // 
             // PIA
             // 
@@ -1606,13 +1615,6 @@
             this.CMBE_RMES.Name = "CMBE_RMES";
             this.CMBE_RMES.Size = new System.Drawing.Size(121, 21);
             this.CMBE_RMES.TabIndex = 4;
-            // 
-            // EMPLEADO_ID_T
-            // 
-            this.EMPLEADO_ID_T.Location = new System.Drawing.Point(18, 217);
-            this.EMPLEADO_ID_T.Name = "EMPLEADO_ID_T";
-            this.EMPLEADO_ID_T.Size = new System.Drawing.Size(143, 20);
-            this.EMPLEADO_ID_T.TabIndex = 12;
             // 
             // E_PANTALLA_PRINCIPAL
             // 

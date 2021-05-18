@@ -10,10 +10,19 @@ PRIMARY KEY(Usuario)
 );
 
 INSERT INTO Administrador (Usuario, Contrasenia) VALUES ('Admin', '123');
-SELECT Nombre_Usuario, Contrasenia FROM Empleado_por_Id_Empleado WHERE Activo = true ALLOW FILTERING;
+--SELECT Nombre_Usuario, Contrasenia FROM Empleado_por_Id_Empleado WHERE Activo = true ALLOW FILTERING;
 
+CREATE TABLE LOGIN_GUARDADO (
+	BASE VARCHAR,
+	Tipo VARCHAR,
+	Recordar BOOLEAN,
+	Usuario VARCHAR,
+	Contrasenia VARCHAR,
+	PRIMARY KEY (BASE)
+	
+);
 
-
+SELECT * FROM LOGIN_GUARDADO;
 --SELECT * FROM Administrador;
 CREATE TABLE Empleado_por_Id_Empleado(
 	Id_Empleado UUID,

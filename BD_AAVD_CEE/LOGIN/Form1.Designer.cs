@@ -128,6 +128,7 @@
             this.CBL_RECORDAR.TabIndex = 9;
             this.CBL_RECORDAR.Text = "Recordar contraseña";
             this.CBL_RECORDAR.UseVisualStyleBackColor = true;
+            this.CBL_RECORDAR.CheckedChanged += new System.EventHandler(this.CBL_RECORDAR_CheckedChanged);
             // 
             // BTNL_INGRESAR
             // 
