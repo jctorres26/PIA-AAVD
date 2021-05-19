@@ -13,6 +13,8 @@ namespace BD_MAD_CEE
         public static int cont2 = 0;
         public static int Contador2 = 0;
         public static int Contador = 0;
+        public static int CBasico = 150;
+        public static int CIntermedio = 75;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>

@@ -84,6 +84,8 @@ CREATE TABLE Tarifa_por_Tipo_Anio_Mes(
 	Empleado_Modificacion VARCHAR,
 	PRIMARY KEY ((Anio,Mes,Tipo_Servicio))
 );
+SELECT * FROM Tarifa_por_Tipo_Anio_Mes;
+SELECT *FROM Contrato_por_Numero_Servicio;
 
 CREATE TABLE Contrato_por_Numero_Servicio(
 	Numero_Servicio UUID,
@@ -114,7 +116,7 @@ CREATE TABLE NumCliente (
 );
 
 --SELECT * FROM Cliente_por_Id_Cliente;
---SELECT * FROM Contrato_por_Numero_Servicio;
+SELECT * FROM Contrato_por_Numero_Servicio;
 --SELECT * FROM NumServ;
 
 --Select numero FROM NumServ;
@@ -136,8 +138,17 @@ CREATE TABLE Consumo_por_Numero_Medidor_Fecha(
 	Intermedio INT,
 	Excedente INT,
 	Empleado_Modificacion VARCHAR,
-	PRIMARY KEY((Numero_Medidor, Fecha))
+	Basicot FLOAT,
+	Intermediot FLOAT,
+	Excedentet FLOAT,
+	FechaAnio VARCHAR,
+	FechaMes VARCHAR,
+	PRIMARY KEY((Numero_Medidor, FechaAnio, FechaMes))
 );
+
+
+
+SELECT * FROM Consumo_por_Numero_Medidor_Fecha;
 
 CREATE TABLE Recibo_por_Numero_Servicio_Anio_Mes(
 	Numero_Servicio INT,
@@ -171,6 +182,8 @@ CREATE TABLE Tarifa_por_Anio(
 	Excedente FLOAT,
 	PRIMARY KEY(Anio, Mes, Tipo_Servicio)
 );
+
+SELECT * FROM Tarifa_por_Anio;
 
 CREATE TABLE Reporte_General_por_Anio(
 	Anio VARCHAR,

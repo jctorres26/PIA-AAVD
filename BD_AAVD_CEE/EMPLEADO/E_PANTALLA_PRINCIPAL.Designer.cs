@@ -99,8 +99,6 @@
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.CMBE_TCANIO = new System.Windows.Forms.ComboBox();
-            this.CMBE_TCMES = new System.Windows.Forms.ComboBox();
             this.CMBE_TCSERVICIO = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -181,6 +179,8 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.CMBE_RMES = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -753,6 +753,7 @@
             this.BTNE_CCONSUMO.TabIndex = 12;
             this.BTNE_CCONSUMO.Text = "Cargar consumo";
             this.BTNE_CCONSUMO.UseVisualStyleBackColor = true;
+            this.BTNE_CCONSUMO.Click += new System.EventHandler(this.BTNE_CCONSUMO_Click);
             // 
             // TXTE_CONSUMOKWH
             // 
@@ -798,6 +799,8 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox3.Controls.Add(this.dateTimePicker2);
+            this.groupBox3.Controls.Add(this.dateTimePicker1);
             this.groupBox3.Controls.Add(this.BTNE_ARCHIVOT);
             this.groupBox3.Controls.Add(this.label26);
             this.groupBox3.Controls.Add(this.BTNE_CTARIFA);
@@ -807,8 +810,6 @@
             this.groupBox3.Controls.Add(this.label25);
             this.groupBox3.Controls.Add(this.label24);
             this.groupBox3.Controls.Add(this.label23);
-            this.groupBox3.Controls.Add(this.CMBE_TCANIO);
-            this.groupBox3.Controls.Add(this.CMBE_TCMES);
             this.groupBox3.Controls.Add(this.CMBE_TCSERVICIO);
             this.groupBox3.Controls.Add(this.label22);
             this.groupBox3.Controls.Add(this.label21);
@@ -847,6 +848,7 @@
             this.BTNE_CTARIFA.TabIndex = 12;
             this.BTNE_CTARIFA.Text = "Cargar tarifa";
             this.BTNE_CTARIFA.UseVisualStyleBackColor = true;
+            this.BTNE_CTARIFA.Click += new System.EventHandler(this.BTNE_CTARIFA_Click);
             // 
             // TXTE_TEXC
             // 
@@ -897,25 +899,12 @@
             this.label23.TabIndex = 6;
             this.label23.Text = "Tarifa basico ";
             // 
-            // CMBE_TCANIO
-            // 
-            this.CMBE_TCANIO.FormattingEnabled = true;
-            this.CMBE_TCANIO.Location = new System.Drawing.Point(317, 52);
-            this.CMBE_TCANIO.Name = "CMBE_TCANIO";
-            this.CMBE_TCANIO.Size = new System.Drawing.Size(121, 21);
-            this.CMBE_TCANIO.TabIndex = 5;
-            // 
-            // CMBE_TCMES
-            // 
-            this.CMBE_TCMES.FormattingEnabled = true;
-            this.CMBE_TCMES.Location = new System.Drawing.Point(178, 52);
-            this.CMBE_TCMES.Name = "CMBE_TCMES";
-            this.CMBE_TCMES.Size = new System.Drawing.Size(121, 21);
-            this.CMBE_TCMES.TabIndex = 4;
-            // 
             // CMBE_TCSERVICIO
             // 
             this.CMBE_TCSERVICIO.FormattingEnabled = true;
+            this.CMBE_TCSERVICIO.Items.AddRange(new object[] {
+            "Domiciliar",
+            "Industrial"});
             this.CMBE_TCSERVICIO.Location = new System.Drawing.Point(23, 52);
             this.CMBE_TCSERVICIO.Name = "CMBE_TCSERVICIO";
             this.CMBE_TCSERVICIO.Size = new System.Drawing.Size(121, 21);
@@ -1617,6 +1606,22 @@
             this.CMBE_RMES.Size = new System.Drawing.Size(121, 21);
             this.CMBE_RMES.TabIndex = 4;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "yyyy";
+            this.dateTimePicker1.Location = new System.Drawing.Point(317, 53);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(115, 20);
+            this.dateTimePicker1.TabIndex = 15;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(178, 53);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(115, 20);
+            this.dateTimePicker2.TabIndex = 16;
+            // 
             // E_PANTALLA_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1718,8 +1723,6 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.ComboBox CMBE_TCANIO;
-        private System.Windows.Forms.ComboBox CMBE_TCMES;
         private System.Windows.Forms.ComboBox CMBE_TCSERVICIO;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
@@ -1817,5 +1820,7 @@
         private System.Windows.Forms.TextBox TXTE_NROSERVICIO;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox EMPLEADO_ID_T;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
     }
 }

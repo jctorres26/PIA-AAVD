@@ -18,6 +18,12 @@ namespace BD_MAD_CEE.EMPLEADO
         public E_PANTALLA_PRINCIPAL()
         {
             InitializeComponent();
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "yyyy";
+            dateTimePicker1.ShowUpDown = true;
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
+            dateTimePicker2.CustomFormat = "M";
+            dateTimePicker2.ShowUpDown = true;
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -346,6 +352,281 @@ namespace BD_MAD_CEE.EMPLEADO
         private void E_PANTALLA_PRINCIPAL_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void BTNE_CTARIFA_Click(object sender, EventArgs e)
+        {
+            //HACER FUNCION PARA EL INSERT DE LAS TARIFAS 
+
+            //CHECAR QUE ESTE TODO LLENO
+           if (string.IsNullOrEmpty(TXTE_TBASICA.Text) || string.IsNullOrEmpty(TXTE_TINT.Text) ||
+                string.IsNullOrEmpty(TXTE_TEXC.Text) || string.IsNullOrEmpty(CMBE_TCSERVICIO.Text)  )
+            {
+                MessageBox.Show("Faltan campos a llenar ");
+            }
+            else
+            {
+                //Checar si ya hay una tarifa para ese tipo, año y mes
+                //si hay ya una tarifa existente entonces se manda mensaje, si no existe, se inserta
+                DataBaseManager dbm = DataBaseManager.getInstance();
+                bool chek = false;
+               
+                chek =dbm.TarifaExistente(CMBE_TCSERVICIO.Text, dateTimePicker2.Text, dateTimePicker1.Text);
+
+                if (chek == true)
+                {
+                    //Significa que si existe, entonces ya no se hace el insert porque ya se cargo
+                    MessageBox.Show("La tarifa ya se ha cargado en esta fecha ");
+                    CMBE_TCSERVICIO.Text = "";
+                    TXTE_TBASICA.Text = "";
+                    TXTE_TINT.Text = "";
+                    TXTE_TEXC.Text = "";
+                }
+                else
+                {
+                    
+                    float b = 0;
+                    float i = 0;
+                    float ex = 0;
+                    string emp = "";
+                    b = Convert.ToSingle(TXTE_TBASICA.Text);
+                    i = Convert.ToSingle(TXTE_TINT.Text);
+                    ex = Convert.ToSingle(TXTE_TEXC.Text);
+                    emp = Program.usuarioIng.ToString();
+                    dbm.InserTarifaUNIT(CMBE_TCSERVICIO.Text, dateTimePicker2.Text, dateTimePicker1.Text, b, i, ex, emp);
+                    CMBE_TCSERVICIO.Text = "";
+                    TXTE_TBASICA.Text = "";
+                    TXTE_TINT.Text = "";
+                    TXTE_TEXC.Text = "";
+                    MessageBox.Show("Tarifa cargada con exito");
+                }
+
+            }
+           
+
+        }
+
+        private void BTNE_CCONSUMO_Click(object sender, EventArgs e)
+        {
+            //PRIMERO CHECAR QUE TODOS LOS DATOS ESTEN LLENOS 
+            if (string.IsNullOrEmpty(TXTE_CMEDIDOR.Text) || string.IsNullOrEmpty(TXTE_CONSUMOKWH.Text))
+            {
+                MessageBox.Show("Faltan campos a llenar ");
+            }
+            else
+            {
+                //CHECAR QUE EXISTA EL MEDIDOR QUE SE QUIERE CARGAR CONSUMO 
+                bool existe = false;
+                DataBaseManager dbm = DataBaseManager.getInstance();
+                existe = dbm.MedidorExistente(TXTE_CMEDIDOR.Text);
+                if (existe == true)
+                {
+                    MessageBox.Show("Si hay un contrato con este medidor ");
+
+                    //SI existe un medidor, entonces hay que checar cual es su tipo de contrato, si domiciliar o industrial, y poner 
+                    //esto en una variable , para poder meter esto en la tabla de consumos 
+
+                    //CHECAR SI EXISTE UN CONSUMO CARGADO ANTERIORMENTE EN LA FECHA INDICADA PARA ESE MEDIDOR
+                    //que haga un select en la tabla de consumos 
+                    string tipo = "";
+                    tipo = dbm.MedidorTipo(TXTE_CMEDIDOR.Text);
+                    string a = "";
+                    string m = "";
+                    bool existe3 = false;
+                    
+                    //Esta checando que exista una tarifa cargada para ese mes, donde cheque si para el numero de medidor,
+                    //con su numero de medidor, mes, año  hay algo cargado 
+                    //Sacar del select el año, mes 
+                    a = DTPE_FECHACONSUMO.Value.Year.ToString();
+                    m = DTPE_FECHACONSUMO.Value.Month.ToString();
+                    existe3 = dbm.ConsumoExistente(TXTE_CMEDIDOR.Text, a, m);
+                    if (existe3 == true)
+                    {
+                        //si existe entonces que ponga mensaje de que ya hay un consumo 
+                        MessageBox.Show("Ya existe un cargo de consumo en esta fecha");
+
+
+                    }
+                    else
+                    {
+                        bool existe2 = false;
+                        existe2 = dbm.TarifaExistente(tipo, m, a);
+                        if (existe2 == true)
+                        {
+                            //Entonces si podremos hacer la carga del consumo 
+                            //primero hacer una funcion donde saque que tarifas le corresponde segun el año, y mes que se escogio
+                            //Pondremos que
+                            //Consumo basico = 150
+                            //Consumo intermedio = 200 
+                            //Consumo excedente = pues el sobrante de esto 
+                            //Calcular consumo basico, intermedio, excedente 
+                            string tb = "";
+                            string ti = "";
+                            string tx = "";
+                            int Cons = 0;
+                            int bas = 0;
+                            int med = 0;
+                            int exp = 0;
+                            float tb1 = 0;
+                            float tb2 = 0;
+                            float tb3 = 0;
+                            //Aqui calcular cual sera el consumo basico, intermedio y excedente
+                            Cons = Convert.ToInt32(TXTE_CONSUMOKWH.Text);
+                            if (Cons >= 150)
+                            {
+                                bas = 150;
+                                if (Cons > 150)
+                                {
+                                    Cons = Cons - 150;
+                                    if (Cons <= 200)
+                                    {
+                                        med = Cons;
+                                        exp = 0;
+                                    }
+                                    else
+                                    {
+                                        med = 200;
+                                        Cons = Cons - 200;
+                                        exp = Cons;
+                                    }
+                                }
+                                else
+                                {
+                                    med = 0;
+                                    exp = 0;
+                                }
+
+                            }
+                            else
+                            {
+                                bas = Cons;
+                                med = 0;
+                                exp = 0;
+                            }
+                            //Aqui calcule las tarifas para ese cargo de consumo especifico 
+                            tb = dbm.TarifasParaConsumo('B', tipo, m, a);
+                            ti = dbm.TarifasParaConsumo('I', tipo, m, a);
+                            tx = dbm.TarifasParaConsumo('E', tipo, m, a);
+                            //convertir tarifas a float 
+                            tb1 = Convert.ToSingle(tb);
+                            tb2 = Convert.ToSingle(ti);
+                            tb3 = Convert.ToSingle(tx);
+                            //llenar datos finales para insercion 
+                            Consumo_por_Numero_Medidor_Fecha vConsumo = new Consumo_por_Numero_Medidor_Fecha();
+                            vConsumo.Numero_Medidor = Convert.ToInt32(TXTE_CMEDIDOR.Text);
+                            vConsumo.Fecha = DTPE_FECHACONSUMO.Value;
+                            vConsumo.Consumo = Convert.ToInt32(TXTE_CONSUMOKWH.Text);
+                            vConsumo.Basico = bas;
+                            vConsumo.Intermedio = med;
+                            vConsumo.Excedente = exp;
+                            vConsumo.Empleado_Modificacion = Program.usuarioIng.ToString();
+                            vConsumo.Basicot = tb1;
+                            vConsumo.Intermediot = tb2;
+                            vConsumo.Excedentet = tb3;
+                            vConsumo.FechaAnio = DTPE_FECHACONSUMO.Value.Year.ToString();
+                            vConsumo.FechaMes = DTPE_FECHACONSUMO.Value.Month.ToString();
+                            //Hacer ahora el insert en la tabla de consumos 
+                            dbm.InsertConsumoUNIT(vConsumo);
+
+                            MessageBox.Show("Consumo cargado con exito ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No hay tarifas cargadas para esta fecha");
+                        }
+                    }
+
+                    //bool existe2 = false;
+                    //existe2 = dbm.TarifaExistente(tipo, m, a);
+                    //if ( existe2 == true)
+                    //{
+                    //    //Entonces si podremos hacer la carga del consumo 
+                    //    //primero hacer una funcion donde saque que tarifas le corresponde segun el año, y mes que se escogio
+                    //    //Pondremos que
+                    //    //Consumo basico = 150
+                    //    //Consumo intermedio = 200 
+                    //    //Consumo excedente = pues el sobrante de esto 
+                    //    //Calcular consumo basico, intermedio, excedente 
+                    //    string tb = "";
+                    //    string ti = "";
+                    //    string tx = "";
+                    //    int Cons = 0;
+                    //    int bas = 0;
+                    //    int med = 0;
+                    //    int exp = 0;
+                    //    float tb1 = 0;
+                    //    float tb2 = 0;
+                    //    float tb3 = 0;
+                    //    //Aqui calcular cual sera el consumo basico, intermedio y excedente
+                    //    Cons = Convert.ToInt32(TXTE_CONSUMOKWH.Text);
+                    //    if (Cons >= 150) {
+                    //        bas = 150;
+                    //        if ( Cons > 150)
+                    //        {
+                    //            Cons = Cons - 150;
+                    //            if ( Cons <= 200)
+                    //            {
+                    //                med = Cons;
+                    //                exp = 0;
+                    //            }
+                    //            else
+                    //            {
+                    //                med = 200;
+                    //                Cons = Cons - 200;
+                    //                exp = Cons;
+                    //            }
+                    //        }
+                    //        else
+                    //        {
+                    //            med = 0;
+                    //            exp = 0;
+                    //        }
+
+                    //    }
+                    //    else
+                    //    {
+                    //        bas = Cons;
+                    //        med = 0;
+                    //        exp = 0;
+                    //    }
+                    //    //Aqui calcule las tarifas para ese cargo de consumo especifico 
+                    //    tb= dbm.TarifasParaConsumo('B', tipo, m, a);
+                    //    ti=dbm.TarifasParaConsumo('I', tipo, m, a);
+                    //    tx=dbm.TarifasParaConsumo('E', tipo, m, a);
+                    //    //convertir tarifas a float 
+                    //    tb1 = Convert.ToSingle(tb);
+                    //    tb2 = Convert.ToSingle(ti);
+                    //    tb3 = Convert.ToSingle(tx);
+                    //    //llenar datos finales para insercion 
+                    //    Consumo_por_Numero_Medidor_Fecha vConsumo = new Consumo_por_Numero_Medidor_Fecha();
+                    //    vConsumo.Numero_Medidor = Convert.ToInt32(TXTE_CMEDIDOR.Text);
+                    //    vConsumo.Fecha = DTPE_FECHACONSUMO.Value;
+                    //    vConsumo.Consumo = Convert.ToInt32(TXTE_CONSUMOKWH.Text);
+                    //    vConsumo.Basico = bas;
+                    //    vConsumo.Intermedio = med;
+                    //    vConsumo.Excedente = exp;
+                    //    vConsumo.Empleado_Modificacion = Program.usuarioIng.ToString();
+                    //    vConsumo.Basicot = tb1;
+                    //    vConsumo.Intermediot = tb2;
+                    //    vConsumo.Excedentet = tb3;
+                    //    vConsumo.FechaAnio = DTPE_FECHACONSUMO.Value.Year.ToString();
+                    //    vConsumo.FechaMes = DTPE_FECHACONSUMO.Value.Month.ToString();
+                    //    //Hacer ahora el insert en la tabla de consumos 
+                    //    dbm.InsertConsumoUNIT(vConsumo);
+
+                    //    MessageBox.Show("Consumo cargado con exito ");
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("No hay tarifas cargadas para esta fecha");
+                    //} 
+
+                }
+                else
+                {
+                    MessageBox.Show("No hay contrato con este medidor ");
+                }
+            }
         }
     }
 }
