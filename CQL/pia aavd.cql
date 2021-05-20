@@ -176,14 +176,17 @@ CREATE TABLE Recibo_por_Numero_Servicio_Anio_Mes(
 CREATE TABLE Tarifa_por_Anio(
 	Anio VARCHAR,
 	Mes VARCHAR,
-	Tipo_Servicio VARCHAR,
 	Basico FLOAT,
 	Intermedio FLOAT,
 	Excedente FLOAT,
-	PRIMARY KEY(Anio, Mes, Tipo_Servicio)
-);
+	Tipo_Servicio VARCHAR,
+	PRIMARY KEY(Anio,Mes,Tipo_Servicio)
+)WITH CLUSTERING ORDER BY(Mes ASC);
 
-SELECT * FROM Tarifa_por_Anio;
+
+
+truncate Tarifa_por_Anio;
+--Select * FROM Tarifa_por_Anio;
 
 CREATE TABLE Reporte_General_por_Anio(
 	Anio VARCHAR,
@@ -243,8 +246,10 @@ CREATE TABLE Reporte_Consumos(
 	Intermedio INT,
 	Excedente INT,
 	PRIMARY KEY(Anio,Mes,Numero_Medidor)
-);
+)WITH CLUSTERING ORDER BY(Mes ASC);
 
+SELECT * FROM   Reporte_Consumos;
+truncate Consumo_por_Numero_Medidor_Fecha;
 
 
 

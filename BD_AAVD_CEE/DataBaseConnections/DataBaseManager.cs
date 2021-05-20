@@ -850,20 +850,38 @@ namespace BD_AAVD_CEE.DataBaseConnections
 
 
         //TARIFASSS
-        public bool InserTarifaUNIT ( string tipo, string mes, string anio, float basico, float intermedio, float excedente, string empleado)
+        public bool InserTarifaUNIT ( char opc, string tipo, string mes, string anio, float basico, float intermedio, float excedente, string empleado)
         {
             bool queryCorrecto = true;
             try
             {
-                string query3 = String.Format("INSERT INTO Tarifa_por_Tipo_Anio_Mes ( Anio, Mes, Tipo_Servicio, Basico, Intermedio, Excedente, Empleado_Modificacion ) " +
+                switch (opc)
+                {
+                    case 'I':
+                        string query3 = String.Format("INSERT INTO Tarifa_por_Tipo_Anio_Mes ( Anio, Mes, Tipo_Servicio, Basico, Intermedio, Excedente, Empleado_Modificacion ) " +
                     "VALUES ('{0}', '{1}', '{2}', {3}, {4}, {5}, '{6}' ) ;"
                , anio, mes, tipo, basico, intermedio, excedente, empleado);
-                session = cluster.Connect(keyspace);
-                session.Execute(query3);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query3);
+                        break;
+                    case 'S':
+                        string query4 = String.Format("INSERT INTO Tarifa_por_Anio ( Anio, Mes,Basico, Intermedio, Excedente, Tipo_Servicio ) " +
+                    "VALUES ('{0}', '{1}', {2}, {3}, {4}, '{5}' ) ;"
+               , anio, mes, basico, intermedio, excedente, tipo);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query4);
+                        break;
+
+                }
+               // string query3 = String.Format("INSERT INTO Tarifa_por_Tipo_Anio_Mes ( Anio, Mes, Tipo_Servicio, Basico, Intermedio, Excedente, Empleado_Modificacion ) " +
+               //     "VALUES ('{0}', '{1}', '{2}', {3}, {4}, {5}, '{6}' ) ;"
+               //, anio, mes, tipo, basico, intermedio, excedente, empleado);
+               // session = cluster.Connect(keyspace);
+               // session.Execute(query3);
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Ya existe la tarifa ingresada", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
 
 
@@ -929,16 +947,34 @@ namespace BD_AAVD_CEE.DataBaseConnections
             }
             return ps;
         }
-         public bool InsertConsumoUNIT ( Consumo_por_Numero_Medidor_Fecha vConsumo)
+         public bool InsertConsumoUNIT (char opc, Consumo_por_Numero_Medidor_Fecha vConsumo)
         {
             bool queryCorrecto = true;
             try
             {
-                string query3 = String.Format("INSERT INTO Consumo_por_Numero_Medidor_Fecha ( Numero_Medidor, Fecha, Consumo, Basico, Intermedio, Excedente, Empleado_Modificacion, Basicot, Intermediot, Excedentet, FechaAnio, FechaMes ) " +
+                switch (opc)
+                {
+                    case 'S':
+                        string query3 = String.Format("INSERT INTO Consumo_por_Numero_Medidor_Fecha ( Numero_Medidor, Fecha, Consumo, Basico, Intermedio, Excedente, Empleado_Modificacion, Basicot, Intermediot, Excedentet, FechaAnio, FechaMes ) " +
                     "VALUES ({0}, '{1}', {2}, {3}, {4}, {5}, '{6}', {7}, {8}, {9}, '{10}', '{11}' ) ;"
-               ,vConsumo.Numero_Medidor, vConsumo.Fecha.ToString("yyyy-MM-dd"),vConsumo.Consumo, vConsumo.Basico, vConsumo.Intermedio, vConsumo.Excedente,vConsumo.Empleado_Modificacion, vConsumo.Basicot, vConsumo.Intermediot, vConsumo.Excedentet, vConsumo.FechaAnio, vConsumo.FechaMes );
-                session = cluster.Connect(keyspace);
-                session.Execute(query3);
+               , vConsumo.Numero_Medidor, vConsumo.Fecha.ToString("yyyy-MM-dd"), vConsumo.Consumo, vConsumo.Basico, vConsumo.Intermedio, vConsumo.Excedente, vConsumo.Empleado_Modificacion, vConsumo.Basicot, vConsumo.Intermediot, vConsumo.Excedentet, vConsumo.FechaAnio, vConsumo.FechaMes);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query3);
+                        break;
+                    case 'I':
+                        string query4 = String.Format("INSERT INTO Reporte_Consumos ( Anio, Mes, Numero_Medidor, Basico, Intermedio, Excedente ) " +
+                    "VALUES ('{0}', '{1}', {2}, {3}, {4}, {5} ) ;"
+               , vConsumo.FechaAnio, vConsumo.FechaMes, vConsumo.Numero_Medidor, vConsumo.Basico, vConsumo.Intermedio, vConsumo.Excedente);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query4);
+                        break;
+
+                }
+               // string query3 = String.Format("INSERT INTO Consumo_por_Numero_Medidor_Fecha ( Numero_Medidor, Fecha, Consumo, Basico, Intermedio, Excedente, Empleado_Modificacion, Basicot, Intermediot, Excedentet, FechaAnio, FechaMes ) " +
+               //     "VALUES ({0}, '{1}', {2}, {3}, {4}, {5}, '{6}', {7}, {8}, {9}, '{10}', '{11}' ) ;"
+               //,vConsumo.Numero_Medidor, vConsumo.Fecha.ToString("yyyy-MM-dd"),vConsumo.Consumo, vConsumo.Basico, vConsumo.Intermedio, vConsumo.Excedente,vConsumo.Empleado_Modificacion, vConsumo.Basicot, vConsumo.Intermediot, vConsumo.Excedentet, vConsumo.FechaAnio, vConsumo.FechaMes );
+               // session = cluster.Connect(keyspace);
+               // session.Execute(query3);
             }
             catch (Exception e)
             {
@@ -1014,6 +1050,71 @@ namespace BD_AAVD_CEE.DataBaseConnections
             }
 
             return existe;
+        }
+
+
+        //REPORTES 
+
+        //REPORTE DE TARIFAS POR AÑO 
+        public bool TarifaPorAnio ( string anio)
+        {
+            bool existe = false;
+            var ps = "";
+            var ps2 = "";
+            var ps3 = "";
+            session = cluster.Connect(keyspace);
+            string query = String.Format("SELECT  Anio FROM Tarifa_por_Tipo_Anio_Mes WHERE Anio= '{0}' ALLOW FILTERING; ",
+                  anio);
+            var rs = session.Execute(query);
+            foreach (Row row in rs)
+            {
+                ps = row["anio"].ToString();
+                if (anio == ps)
+                { existe = true; }
+            }
+
+
+            return existe;
+        }
+        public List<Tarifa_por_Anio> AllTarifas ( string anio)
+        {
+            string query = String.Format("SELECT  Anio, Mes, Basico, Intermedio, Excedente, Tipo_Servicio FROM Tarifa_por_Anio WHERE Anio = '{0}' ; ",
+                          anio);
+            session = cluster.Connect(keyspace);
+            IMapper mapper = new Mapper(session);
+            IEnumerable<Tarifa_por_Anio> tarifa = mapper.Fetch<Tarifa_por_Anio>(query);
+            return tarifa.ToList();
+        }
+        //REPORTE DE CONSUMOS POR AÑO
+        public bool ConsumoPorAnio (string anio)
+        {
+            bool existe = false;
+            var ps = "";
+            var ps2 = "";
+            var ps3 = "";
+            session = cluster.Connect(keyspace);
+            string query = String.Format("SELECT  Anio FROM Reporte_Consumos WHERE Anio= '{0}'" +
+                "; ",
+                  anio);
+            var rs = session.Execute(query);
+            foreach (Row row in rs)
+            {
+                ps = row["anio"].ToString();
+                if (anio == ps)
+                { existe = true; }
+            }
+
+
+            return existe;
+        }
+        public List<Reporte_Consumos> AllConsumos (string anio)
+        {
+            string query = String.Format("SELECT  Anio, Mes, Numero_Medidor, Basico, Intermedio, Excedente FROM Reporte_Consumos WHERE Anio = '{0}' ; ",
+                         anio);
+            session = cluster.Connect(keyspace);
+            IMapper mapper = new Mapper(session);
+            IEnumerable<Reporte_Consumos> consumo = mapper.Fetch<Reporte_Consumos>(query);
+            return consumo.ToList();
         }
     }
 }

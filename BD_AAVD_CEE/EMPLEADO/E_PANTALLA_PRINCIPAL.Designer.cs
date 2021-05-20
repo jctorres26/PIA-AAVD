@@ -90,6 +90,8 @@
             this.TXTE_CMEDIDOR = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.BTNE_ARCHIVOT = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
             this.BTNE_CTARIFA = new System.Windows.Forms.Button();
@@ -122,27 +124,16 @@
             this.label27 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.BTNE_TCCSVC = new System.Windows.Forms.Button();
             this.BTNE_TCPDFC = new System.Windows.Forms.Button();
             this.DGVE_REPORTEC = new System.Windows.Forms.DataGridView();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CMBE_RTCCANIO = new System.Windows.Forms.ComboBox();
             this.label39 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.BTNE_TCCVST = new System.Windows.Forms.Button();
             this.BTNE_TCPDFT = new System.Windows.Forms.Button();
             this.DGVE_REPORTET = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CMBE_RTCTANIO = new System.Windows.Forms.ComboBox();
             this.label38 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.BTNE_CHCSV = new System.Windows.Forms.Button();
@@ -179,8 +170,20 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.CMBE_RMES = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.Consultar_Tarifa = new System.Windows.Forms.Button();
+            this.Consultar_Consumo = new System.Windows.Forms.Button();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -821,6 +824,22 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Carga de tarifas";
             // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(178, 53);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(115, 20);
+            this.dateTimePicker2.TabIndex = 16;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "yyyy";
+            this.dateTimePicker1.Location = new System.Drawing.Point(317, 53);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(115, 20);
+            this.dateTimePicker1.TabIndex = 15;
+            // 
             // BTNE_ARCHIVOT
             // 
             this.BTNE_ARCHIVOT.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -1094,10 +1113,11 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.Consultar_Consumo);
+            this.groupBox5.Controls.Add(this.dateTimePicker4);
             this.groupBox5.Controls.Add(this.BTNE_TCCSVC);
             this.groupBox5.Controls.Add(this.BTNE_TCPDFC);
             this.groupBox5.Controls.Add(this.DGVE_REPORTEC);
-            this.groupBox5.Controls.Add(this.CMBE_RTCCANIO);
             this.groupBox5.Controls.Add(this.label39);
             this.groupBox5.Location = new System.Drawing.Point(454, 9);
             this.groupBox5.Name = "groupBox5";
@@ -1105,6 +1125,13 @@
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Reporte Consumos";
+            // 
+            // dateTimePicker4
+            // 
+            this.dateTimePicker4.Location = new System.Drawing.Point(21, 41);
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.Size = new System.Drawing.Size(97, 20);
+            this.dateTimePicker4.TabIndex = 13;
             // 
             // BTNE_TCCSVC
             // 
@@ -1136,54 +1163,10 @@
             this.Column14,
             this.Column15,
             this.Column16});
-            this.DGVE_REPORTEC.Location = new System.Drawing.Point(9, 100);
+            this.DGVE_REPORTEC.Location = new System.Drawing.Point(6, 100);
             this.DGVE_REPORTEC.Name = "DGVE_REPORTEC";
-            this.DGVE_REPORTEC.Size = new System.Drawing.Size(492, 150);
+            this.DGVE_REPORTEC.Size = new System.Drawing.Size(495, 150);
             this.DGVE_REPORTEC.TabIndex = 4;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "Año";
-            this.Column11.Name = "Column11";
-            this.Column11.Width = 75;
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "Mes";
-            this.Column12.Name = "Column12";
-            this.Column12.Width = 75;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "Nro. medidor";
-            this.Column13.Name = "Column13";
-            this.Column13.Width = 75;
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "Kw Basica";
-            this.Column14.Name = "Column14";
-            this.Column14.Width = 75;
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "Kw Intermedio";
-            this.Column15.Name = "Column15";
-            this.Column15.Width = 75;
-            // 
-            // Column16
-            // 
-            this.Column16.HeaderText = "Kw Excedente";
-            this.Column16.Name = "Column16";
-            this.Column16.Width = 75;
-            // 
-            // CMBE_RTCCANIO
-            // 
-            this.CMBE_RTCCANIO.FormattingEnabled = true;
-            this.CMBE_RTCCANIO.Location = new System.Drawing.Point(21, 41);
-            this.CMBE_RTCCANIO.Name = "CMBE_RTCCANIO";
-            this.CMBE_RTCCANIO.Size = new System.Drawing.Size(100, 21);
-            this.CMBE_RTCCANIO.TabIndex = 3;
             // 
             // label39
             // 
@@ -1196,10 +1179,11 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.Consultar_Tarifa);
+            this.groupBox6.Controls.Add(this.dateTimePicker3);
             this.groupBox6.Controls.Add(this.BTNE_TCCVST);
             this.groupBox6.Controls.Add(this.BTNE_TCPDFT);
             this.groupBox6.Controls.Add(this.DGVE_REPORTET);
-            this.groupBox6.Controls.Add(this.CMBE_RTCTANIO);
             this.groupBox6.Controls.Add(this.label38);
             this.groupBox6.Location = new System.Drawing.Point(8, 9);
             this.groupBox6.Name = "groupBox6";
@@ -1207,6 +1191,13 @@
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Reporte Tarifas";
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Location = new System.Drawing.Point(19, 41);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(97, 20);
+            this.dateTimePicker3.TabIndex = 12;
             // 
             // BTNE_TCCVST
             // 
@@ -1234,6 +1225,7 @@
             this.DGVE_REPORTET.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column7,
+            this.Column17,
             this.Column8,
             this.Column9,
             this.Column10});
@@ -1241,44 +1233,6 @@
             this.DGVE_REPORTET.Name = "DGVE_REPORTET";
             this.DGVE_REPORTET.Size = new System.Drawing.Size(418, 150);
             this.DGVE_REPORTET.TabIndex = 2;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Año";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 75;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Mes";
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 75;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "Tarifa basica";
-            this.Column8.Name = "Column8";
-            this.Column8.Width = 75;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "Tarifa intermedia";
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 75;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "Tarifa excedente";
-            this.Column10.Name = "Column10";
-            this.Column10.Width = 75;
-            // 
-            // CMBE_RTCTANIO
-            // 
-            this.CMBE_RTCTANIO.FormattingEnabled = true;
-            this.CMBE_RTCTANIO.Location = new System.Drawing.Point(21, 41);
-            this.CMBE_RTCTANIO.Name = "CMBE_RTCTANIO";
-            this.CMBE_RTCTANIO.Size = new System.Drawing.Size(100, 21);
-            this.CMBE_RTCTANIO.TabIndex = 1;
             // 
             // label38
             // 
@@ -1606,21 +1560,109 @@
             this.CMBE_RMES.Size = new System.Drawing.Size(121, 21);
             this.CMBE_RMES.TabIndex = 4;
             // 
-            // dateTimePicker1
+            // Consultar_Tarifa
             // 
-            this.dateTimePicker1.CustomFormat = "yyyy";
-            this.dateTimePicker1.Location = new System.Drawing.Point(317, 53);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(115, 20);
-            this.dateTimePicker1.TabIndex = 15;
+            this.Consultar_Tarifa.Location = new System.Drawing.Point(299, 31);
+            this.Consultar_Tarifa.Name = "Consultar_Tarifa";
+            this.Consultar_Tarifa.Size = new System.Drawing.Size(104, 30);
+            this.Consultar_Tarifa.TabIndex = 13;
+            this.Consultar_Tarifa.Text = "Consultar";
+            this.Consultar_Tarifa.UseVisualStyleBackColor = true;
+            this.Consultar_Tarifa.Click += new System.EventHandler(this.Consultar_Tarifa_Click);
             // 
-            // dateTimePicker2
+            // Consultar_Consumo
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(178, 53);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(115, 20);
-            this.dateTimePicker2.TabIndex = 16;
+            this.Consultar_Consumo.Location = new System.Drawing.Point(373, 31);
+            this.Consultar_Consumo.Name = "Consultar_Consumo";
+            this.Consultar_Consumo.Size = new System.Drawing.Size(104, 30);
+            this.Consultar_Consumo.TabIndex = 14;
+            this.Consultar_Consumo.Text = "Consultar";
+            this.Consultar_Consumo.UseVisualStyleBackColor = true;
+            this.Consultar_Consumo.Click += new System.EventHandler(this.Consultar_Consumo_Click);
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Anio";
+            this.Column1.HeaderText = "Año";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 70;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "Mes";
+            this.Column7.HeaderText = "Mes";
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 60;
+            // 
+            // Column17
+            // 
+            this.Column17.DataPropertyName = "Tipo_Servicio";
+            this.Column17.HeaderText = "Tipo";
+            this.Column17.Name = "Column17";
+            this.Column17.Width = 80;
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "Basico";
+            this.Column8.HeaderText = "Tarifa basica";
+            this.Column8.Name = "Column8";
+            this.Column8.Width = 75;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "Intermedio";
+            this.Column9.HeaderText = "Tarifa intermedia";
+            this.Column9.Name = "Column9";
+            this.Column9.Width = 75;
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "Excedente";
+            this.Column10.HeaderText = "Tarifa excedente";
+            this.Column10.Name = "Column10";
+            this.Column10.Width = 75;
+            // 
+            // Column11
+            // 
+            this.Column11.DataPropertyName = "Anio";
+            this.Column11.HeaderText = "Año";
+            this.Column11.Name = "Column11";
+            this.Column11.Width = 75;
+            // 
+            // Column12
+            // 
+            this.Column12.DataPropertyName = "Mes";
+            this.Column12.HeaderText = "Mes";
+            this.Column12.Name = "Column12";
+            this.Column12.Width = 75;
+            // 
+            // Column13
+            // 
+            this.Column13.DataPropertyName = "Numero_Medidor";
+            this.Column13.HeaderText = "Nro. medidor";
+            this.Column13.Name = "Column13";
+            this.Column13.Width = 75;
+            // 
+            // Column14
+            // 
+            this.Column14.DataPropertyName = "Basico";
+            this.Column14.HeaderText = "Kw Basica";
+            this.Column14.Name = "Column14";
+            this.Column14.Width = 75;
+            // 
+            // Column15
+            // 
+            this.Column15.DataPropertyName = "Intermedio";
+            this.Column15.HeaderText = "Kw Intermedio";
+            this.Column15.Name = "Column15";
+            this.Column15.Width = 75;
+            // 
+            // Column16
+            // 
+            this.Column16.DataPropertyName = "Excedente";
+            this.Column16.HeaderText = "Kw Excedente";
+            this.Column16.Name = "Column16";
+            this.Column16.Width = 75;
             // 
             // E_PANTALLA_PRINCIPAL
             // 
@@ -1777,23 +1819,10 @@
         private System.Windows.Forms.Button BTNE_TCCSVC;
         private System.Windows.Forms.Button BTNE_TCPDFC;
         private System.Windows.Forms.DataGridView DGVE_REPORTEC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
-        private System.Windows.Forms.ComboBox CMBE_RTCCANIO;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Button BTNE_TCCVST;
         private System.Windows.Forms.Button BTNE_TCPDFT;
         private System.Windows.Forms.DataGridView DGVE_REPORTET;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.ComboBox CMBE_RTCTANIO;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label42;
@@ -1822,5 +1851,21 @@
         private System.Windows.Forms.TextBox EMPLEADO_ID_T;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker4;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.Button Consultar_Consumo;
+        private System.Windows.Forms.Button Consultar_Tarifa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
     }
 }

@@ -24,6 +24,13 @@ namespace BD_MAD_CEE.EMPLEADO
             dateTimePicker2.Format = DateTimePickerFormat.Custom;
             dateTimePicker2.CustomFormat = "M";
             dateTimePicker2.ShowUpDown = true;
+
+            dateTimePicker3.Format = DateTimePickerFormat.Custom;
+            dateTimePicker3.CustomFormat = "yyyy";
+            dateTimePicker3.ShowUpDown = true;
+            dateTimePicker4.Format = DateTimePickerFormat.Custom;
+            dateTimePicker4.CustomFormat = "yyyy";
+            dateTimePicker4.ShowUpDown = true;
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -203,15 +210,7 @@ namespace BD_MAD_CEE.EMPLEADO
             }
 
         }
-        //private void BTNC_EMAIL_Click(object sender, EventArgs e)
-        //{
-        //    IEnumerable<string> items = new string[] { (TXTE_EMAIL.Text) };
-        //    items = items.Concat(new[] { (TXTE_EMAIL.Text) });
-
-        //    Cliente_por_Id_Cliente vCliente = new Cliente_por_Id_Cliente();
-        //    vCliente.Email = items;
-
-        //}
+       
 
         private void CMBE_CLIENTES_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -393,7 +392,8 @@ namespace BD_MAD_CEE.EMPLEADO
                     i = Convert.ToSingle(TXTE_TINT.Text);
                     ex = Convert.ToSingle(TXTE_TEXC.Text);
                     emp = Program.usuarioIng.ToString();
-                    dbm.InserTarifaUNIT(CMBE_TCSERVICIO.Text, dateTimePicker2.Text, dateTimePicker1.Text, b, i, ex, emp);
+                    dbm.InserTarifaUNIT('I',CMBE_TCSERVICIO.Text, dateTimePicker2.Text, dateTimePicker1.Text, b, i, ex, emp);
+                    dbm.InserTarifaUNIT('S', CMBE_TCSERVICIO.Text, dateTimePicker2.Text, dateTimePicker1.Text, b, i, ex, emp);
                     CMBE_TCSERVICIO.Text = "";
                     TXTE_TBASICA.Text = "";
                     TXTE_TINT.Text = "";
@@ -443,6 +443,8 @@ namespace BD_MAD_CEE.EMPLEADO
                     if (existe3 == true)
                     {
                         //si existe entonces que ponga mensaje de que ya hay un consumo 
+                        TXTE_CMEDIDOR.Text = "";
+                        TXTE_CONSUMOKWH.Text = "";
                         MessageBox.Show("Ya existe un cargo de consumo en esta fecha");
 
 
@@ -526,12 +528,16 @@ namespace BD_MAD_CEE.EMPLEADO
                             vConsumo.FechaAnio = DTPE_FECHACONSUMO.Value.Year.ToString();
                             vConsumo.FechaMes = DTPE_FECHACONSUMO.Value.Month.ToString();
                             //Hacer ahora el insert en la tabla de consumos 
-                            dbm.InsertConsumoUNIT(vConsumo);
-
+                            dbm.InsertConsumoUNIT('S',vConsumo);
+                            dbm.InsertConsumoUNIT('I', vConsumo);
+                            TXTE_CMEDIDOR.Text = "";
+                            TXTE_CONSUMOKWH.Text = "";
                             MessageBox.Show("Consumo cargado con exito ");
                         }
                         else
                         {
+                            TXTE_CMEDIDOR.Text = "";
+                            TXTE_CONSUMOKWH.Text = "";
                             MessageBox.Show("No hay tarifas cargadas para esta fecha");
                         }
                     }
@@ -624,9 +630,57 @@ namespace BD_MAD_CEE.EMPLEADO
                 }
                 else
                 {
+                    TXTE_CMEDIDOR.Text = "";
+                    TXTE_CONSUMOKWH.Text = "";
                     MessageBox.Show("No hay contrato con este medidor ");
                 }
             }
+        }
+
+        private void Consultar_Tarifa_Click(object sender, EventArgs e)
+        {
+            bool existe = false;
+            string anio = "";
+            anio = dateTimePicker3.Value.Year.ToString();
+            //Hacer un select para ver si existen tarifas cargadas para el año que se pide 
+            DataBaseManager dbm = DataBaseManager.getInstance();
+            existe = dbm.TarifaPorAnio(anio);
+            if (existe == true)
+            {
+                //Entonces hacer el despliegue de los datos en esta parte
+                List<Tarifa_por_Anio> Tarifas = new List<Tarifa_por_Anio>();
+                Tarifas = dbm.AllTarifas(anio);
+                DGVE_REPORTET.DataSource = Tarifas;
+
+            }
+            else
+            {
+                
+                MessageBox.Show("No existen tarifas cargadas en el año de "+ anio + " " );
+
+            }
+        }
+
+        private void Consultar_Consumo_Click(object sender, EventArgs e)
+        {
+            //Checar si existen consumos cargados en ese año 
+            bool existe = false;
+            string anio = "";
+            anio = dateTimePicker4.Value.Year.ToString();
+            DataBaseManager dbm = DataBaseManager.getInstance();
+            existe = dbm.ConsumoPorAnio(anio);
+            if ( existe == true)
+            {
+                //Hacer despliegue de los datos en el datagriew
+                List<Reporte_Consumos> Consumos = new List<Reporte_Consumos>();
+                Consumos = dbm.AllConsumos(anio);
+                DGVE_REPORTEC.DataSource = Consumos;
+            }
+            else
+            {
+                MessageBox.Show("No existen consumos cargados en el año de " + anio + " ");
+            }
+
         }
     }
 }
