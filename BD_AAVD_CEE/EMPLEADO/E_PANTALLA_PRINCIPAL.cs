@@ -579,12 +579,15 @@ namespace BD_MAD_CEE.EMPLEADO
                                 // vConsumo.FechaInicio = DTPE_FECHACONSUMO.Value.AddMonths(-1).ToString();
 
                                 //Hacer ahora el insert en la tabla de consumos 
-                                string idN = "";
-
+                                long num = 0;
+                                string numcheck = "";
+                                
+                                numcheck= dbm.NumeroServicioGET(TXTE_CMEDIDOR.Text);
+                                num = Convert.ToInt64(numcheck);
                                 //Sacar numero de servicio con el numero de medidor 
-                                idN = dbm.NumeroServicioGET(TXTE_CMEDIDOR.Text);
-                                Guid g = new Guid(idN); //Convertir ese string en un guid para meter en la tabla 
-                                                        //Insertar para la tabla de recibos 
+                                //  idN = dbm.NumeroServicioGET(TXTE_CMEDIDOR.Text);
+                                // Guid g = new Guid(idN); //Convertir ese string en un guid para meter en la tabla 
+                                //Insertar para la tabla de recibos 
                                 #region before
                                 //if (tipo == "Industrial")
                                 //{
@@ -616,7 +619,33 @@ namespace BD_MAD_CEE.EMPLEADO
                                 //int aux = 0;
                                 dbm.InsertConsumoUNIT('S', vConsumo);
                                 dbm.InsertConsumoUNIT('I', vConsumo);
-
+                                // VARIABLES PARA LLENAR EL RECIBO
+                                Recibo_por_Numero_Servicio_Anio_Mes vRecibo = new Recibo_por_Numero_Servicio_Anio_Mes();
+                                vRecibo.Numero_Servicio = num;
+                                vRecibo.Fecha = DTPE_FECHACONSUMO.Value;
+                                vRecibo.AnioF = DTPE_FECHACONSUMO.Value.Year.ToString();
+                                vRecibo.MesF = DTPE_FECHACONSUMO.Value.Month.ToString();
+                                vRecibo.FechaF = DTPE_FECHACONSUMO.Value.ToShortDateString();
+                                vRecibo.FechaI = DTPE_FECHACONSUMO.Value.AddMonths(-1).ToShortDateString();
+                                vRecibo.Tipo_Servicio = tipo;
+                                vRecibo.Consumo_Basico = bas;
+                                vRecibo.Consumo_Intermedio = med;
+                                vRecibo.Consumo_Excedente = exp;
+                                vRecibo.Tarifa_Basico = tb1;
+                                vRecibo.Tarifa_Intermedio = tb2;
+                                vRecibo.Tarifa_Excedente = tb3;
+                                vRecibo.Cantidad_Pagada = 0;
+                                vRecibo.Medidor = Convert.ToInt32(TXTE_CMEDIDOR.Text);
+                                //CALCULO DE LOS COBROS 
+                                vRecibo.Subtotal_Basico = bas * tb1;
+                                vRecibo.Subtotal_Intermedio = med * tb2;
+                                vRecibo.Subtotal_Excedente = exp * tb3;
+                                vRecibo.Importe = vRecibo.Subtotal_Basico + vRecibo.Subtotal_Intermedio + vRecibo.Subtotal_Excedente;
+                                double iva = 0;
+                                iva = vRecibo.Importe * .16;
+                                vRecibo.Importe_IVA = vRecibo.Importe + iva;
+                                vRecibo.Cantidad_Pendiente = vRecibo.Importe_IVA;
+                                dbm.Recibo(vRecibo);
                                 TXTE_CMEDIDOR.Text = "";
                                 TXTE_CONSUMOKWH.Text = "";
                                 MessageBox.Show("Consumo cargado con exito ");
@@ -812,12 +841,42 @@ namespace BD_MAD_CEE.EMPLEADO
 
                                 //Hacer ahora el insert en la tabla de consumos 
                                 string idN = "";
+                                long num = 0;
+                                string numcheck = "";
 
+                                numcheck = dbm.NumeroServicioGET(TXTE_CMEDIDOR.Text);
+                                num = Convert.ToInt64(numcheck);
                                 //Sacar numero de servicio con el numero de medidor 
-                                idN = dbm.NumeroServicioGET(TXTE_CMEDIDOR.Text);
-                                Guid g = new Guid(idN); //Convertir ese string en un guid para meter en la tabla 
-                                                        //Insertar para la tabla de recibos 
-                               
+                                //idN = dbm.NumeroServicioGET(TXTE_CMEDIDOR.Text);
+                                //Guid g = new Guid(idN); //Convertir ese string en un guid para meter en la tabla 
+                                //Insertar para la tabla de recibos 
+                                Recibo_por_Numero_Servicio_Anio_Mes vRecibo = new Recibo_por_Numero_Servicio_Anio_Mes();
+                                vRecibo.Numero_Servicio = num;
+                                vRecibo.Fecha = DTPE_FECHACONSUMO.Value;
+                                vRecibo.AnioF = DTPE_FECHACONSUMO.Value.Year.ToString();
+                                vRecibo.MesF = DTPE_FECHACONSUMO.Value.Month.ToString();
+                                vRecibo.FechaF = DTPE_FECHACONSUMO.Value.ToShortDateString();
+                                vRecibo.FechaI = DTPE_FECHACONSUMO.Value.AddMonths(-2).ToShortDateString();
+                                vRecibo.Tipo_Servicio = tipo;
+                                vRecibo.Consumo_Basico = bas;
+                                vRecibo.Consumo_Intermedio = med;
+                                vRecibo.Consumo_Excedente = exp;
+                                vRecibo.Tarifa_Basico = tb1;
+                                vRecibo.Tarifa_Intermedio = tb2;
+                                vRecibo.Tarifa_Excedente = tb3;
+                                vRecibo.Cantidad_Pagada = 0;
+                                vRecibo.Medidor = Convert.ToInt32(TXTE_CMEDIDOR.Text);
+                                //CALCULO DE LOS COBROS 
+                                vRecibo.Subtotal_Basico = bas * tb1;
+                                vRecibo.Subtotal_Intermedio = med * tb2;
+                                vRecibo.Subtotal_Excedente = exp * tb3;
+                                vRecibo.Importe = vRecibo.Subtotal_Basico + vRecibo.Subtotal_Intermedio + vRecibo.Subtotal_Excedente;
+                                double iva = 0;
+                                iva = vRecibo.Importe * .16;
+                                vRecibo.Importe_IVA = vRecibo.Importe + iva;
+                                vRecibo.Cantidad_Pendiente = vRecibo.Importe_IVA;
+                                dbm.Recibo(vRecibo);
+
                                 dbm.InsertConsumoUNIT('S', vConsumo);
                                 dbm.InsertConsumoUNIT('I', vConsumo);
 
@@ -962,5 +1021,7 @@ namespace BD_MAD_CEE.EMPLEADO
             
            
         }
+
+
     }
 }

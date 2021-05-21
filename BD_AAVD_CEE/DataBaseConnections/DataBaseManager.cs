@@ -1171,12 +1171,12 @@ namespace BD_AAVD_CEE.DataBaseConnections
         {
             var ps = "";
             session = cluster.Connect(keyspace);
-            string query = String.Format("SELECT  Numero_Servicio FROM Contrato_por_Numero_Servicio WHERE Numero_Medidor = {0} ALLOW FILTERING; ",
+            string query = String.Format("SELECT  NumSer FROM Contrato_por_Numero_Servicio WHERE Numero_Medidor = {0} ALLOW FILTERING; ",
                   medidor);
             var rs = session.Execute(query);
             foreach (Row row in rs)
             {
-                ps = row["numero_servicio"].ToString();
+                ps = row["numser"].ToString();
 
 
             }
@@ -1185,23 +1185,23 @@ namespace BD_AAVD_CEE.DataBaseConnections
         public bool Recibo(Recibo_por_Numero_Servicio_Anio_Mes vRecibo)
         {
             bool queryCorrecto = true;
-        //    try
-        //    {
-        //        string query3 = String.Format("INSERT INTO Recibo_por_Numero_Servicio_Anio_Mes ( Numero_Servicio, Anio, Mes, Fecha, Tipo_Servicio, " +
-        //            "Consumo_Basico, Consumo_Intermedio, Consumo_Excedente, Tarifa_Basico, Tarifa_Intermedio, Tarifa_Excedente, " +
-        //            "Recibo_Generado) " +
-        //           "VALUES ( ) ;"
-        //      , anio, mes, tipo, basico, intermedio, excedente, empleado);
-        //        session = cluster.Connect(keyspace);
-        //        session.Execute(query3);
+            try
+            {
+                string query3 = String.Format("INSERT INTO Recibo_por_Numero_Servicio_Anio_Mes ( Numero_Servicio, Fecha,  AnioF, MesF, FechaF, FechaI, Tipo_Servicio, Consumo_Basico, Consumo_Intermedio, Consumo_Excedente, Tarifa_Basico, Tarifa_Intermedio, Tarifa_Excedente, Subtotal_Basico, Subtotal_Intermedio, Subtotal_Excedente, Is_Paid, Importe, Importe_IVA, Cantidad_Pagada, Cantidad_Pendiente, Recibo_Generado, Medidor) " +
+                   "VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, false, {16}, {17}, {18}, {19}, false, {20} ) ;"
+              , vRecibo.Numero_Servicio,vRecibo.Fecha.ToString("yyyy-MM-dd"), vRecibo.AnioF, vRecibo.MesF, vRecibo.FechaF, vRecibo.FechaI, vRecibo.Tipo_Servicio, 
+              vRecibo.Consumo_Basico, vRecibo.Consumo_Intermedio, vRecibo.Consumo_Excedente, vRecibo.Tarifa_Basico, vRecibo.Tarifa_Intermedio, vRecibo.Tarifa_Excedente, vRecibo.Subtotal_Basico,
+              vRecibo.Subtotal_Intermedio, vRecibo.Subtotal_Excedente,  vRecibo.Importe, vRecibo.Importe_IVA, vRecibo.Cantidad_Pagada, vRecibo.Cantidad_Pendiente,  vRecibo.Medidor);
+                session = cluster.Connect(keyspace);
+                session.Execute(query3);
 
 
 
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
 
             return queryCorrecto;
@@ -1237,6 +1237,7 @@ namespace BD_AAVD_CEE.DataBaseConnections
 
             return existe;
         }
+      
         
     }
 }

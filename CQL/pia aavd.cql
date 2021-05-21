@@ -157,14 +157,14 @@ CREATE TABLE Consumo_por_Numero_Medidor_Fecha(
 
 SELECT *FROM  Consumo_por_Numero_Medidor_Fecha;
 SELECT *FROM Reporte_Consumos;
-
+SELECT * FROM Recibo_por_Numero_Servicio_Anio_Mes;
 CREATE TABLE Recibo_por_Numero_Servicio_Anio_Mes(
-	Numero_Servicio INT,
-	Anio VARCHAR,
-	Mes VARCHAR,
-	Mes2 VARCHAR,
+	Numero_Servicio BIGINT,
 	Fecha DATE,
-	Fecha2 DATE,
+	AnioF VARCHAR,
+	MesF VARCHAR,
+	FechaF VARCHAR,
+	FechaI VARCHAR,
 	Tipo_Servicio VARCHAR,
 	Consumo INT,
 	Consumo_Basico INT,
@@ -173,20 +173,19 @@ CREATE TABLE Recibo_por_Numero_Servicio_Anio_Mes(
 	Tarifa_Basico FLOAT,
 	Tarifa_Intermedio FLOAT,
 	Tarifa_Excedente FLOAT,
-	Tarifa_Basico2 FLOAT,
-	Tarifa_Intermedio2 FLOAT,
-	Tarifa_Excedente2 FLOAT,
 	Subtotal_Basico FLOAT,
 	Subtotal_Intermedio FLOAT,
 	Subtotal_Excedente FLOAT,
 	Is_Paid BOOLEAN,
 	Importe FLOAT,
-	Importe_IVA FLOAT,
+	Importe_IVA DOUBLE,
 	Cantidad_Pagada FLOAT,
-	Cantidad_Pendiente FLOAT,
+	Cantidad_Pendiente DOUBLE,
 	Recibo_Generado BOOLEAN,
-	PRIMARY KEY ((Numero_Servicio, Anio, Mes))
+	Medidor INT,
+	PRIMARY KEY ((Numero_Servicio, AnioF, MesF,Fecha ))
 );
+
 
 
 
@@ -269,9 +268,10 @@ CREATE TABLE Reporte_Consumos(
 
 
 SELECT * FROM   Reporte_Consumos;
+SELECT * FROM Recibo_por_Numero_Servicio_Anio_Mes;
 truncate Consumo_por_Numero_Medidor_Fecha;
 truncate Reporte_Consumos;
 truncate Tarifa_por_Tipo_Anio_Mes;
-
+truncate Tarifa_por_Anio;
 
 

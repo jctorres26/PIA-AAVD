@@ -9,10 +9,12 @@ namespace BD_AAVD_CEE.ENTIDADES
 {
     class Recibo_por_Numero_Servicio_Anio_Mes
     {
-        public int Numero_Servicio { get; set; }
-        public string Anio { get; set; }
-        public string Mes { get; set; }
-        public LocalDate Fecha { get; set; }
+        public long Numero_Servicio { get; set; }
+        public string AnioF { get; set; }
+        public string MesF { get; set; }
+        public DateTime Fecha { get; set; }
+        public string FechaF { get; set; }
+        public string FechaI { get; set; }
         public string Tipo_Servicio { get; set; }
         public int Consumo_Basico { get; set; }
         public int Consumo_Intermedio { get; set; }
@@ -25,10 +27,11 @@ namespace BD_AAVD_CEE.ENTIDADES
         public float Subtotal_Excedente { get; set; }
         public bool Is_Paid { get; set; }
         public float Importe { get; set; }
-        public float Importe_IVA { get; set; }
+        public double Importe_IVA { get; set; }
         public float Cantidad_Pagada { get; set; }
-        public float Cantidad_Pendiente { get; set; }
+        public double Cantidad_Pendiente { get; set; }
         public bool Recibo_Generado { get; set; }
+        public int Medidor { get; set; }
 
     }
 }
