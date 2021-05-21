@@ -28,6 +28,7 @@ namespace BD_AAVD_CEE.ENTIDADES
         public float Importe_IVA { get; set; }
         public float Cantidad_Pagada { get; set; }
         public float Cantidad_Pendiente { get; set; }
+        public bool Recibo_Generado { get; set; }
 
     }
 }

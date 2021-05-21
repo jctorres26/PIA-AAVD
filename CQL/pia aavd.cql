@@ -84,7 +84,7 @@ CREATE TABLE Tarifa_por_Tipo_Anio_Mes(
 	Empleado_Modificacion VARCHAR,
 	PRIMARY KEY ((Anio,Mes,Tipo_Servicio))
 );
-SELECT * FROM Tarifa_por_Tipo_Anio_Mes;
+
 SELECT *FROM Contrato_por_Numero_Servicio;
 
 CREATE TABLE Contrato_por_Numero_Servicio(
@@ -128,7 +128,7 @@ truncate  NumCliente ;
 truncate NumServ;
 truncate Empleado_por_Id_Empleado;
 truncate Cliente_por_Id_Cliente;
-truncate Contrato_por_Numero_Servicio;
+SELECT * FROM Contrato_por_Numero_Servicio;
 
 CREATE TABLE Consumo_por_Numero_Medidor_Fecha(
 	Numero_Medidor INT,
@@ -143,25 +143,39 @@ CREATE TABLE Consumo_por_Numero_Medidor_Fecha(
 	Excedentet FLOAT,
 	FechaAnio VARCHAR,
 	FechaMes VARCHAR,
-	PRIMARY KEY((Numero_Medidor, FechaAnio, FechaMes))
+	tipo VARCHAR,
+	FechaInicio VARCHAR,
+	FechaFinal VARCHAR,
+	FechaExcedente VARCHAR,
+	PRIMARY KEY((Numero_Medidor, FechaAnio, FechaMes, FechaFinal))
 );
 
 
 
-SELECT * FROM Consumo_por_Numero_Medidor_Fecha;
+
+
+
+SELECT *FROM  Consumo_por_Numero_Medidor_Fecha;
+SELECT *FROM Reporte_Consumos;
 
 CREATE TABLE Recibo_por_Numero_Servicio_Anio_Mes(
 	Numero_Servicio INT,
 	Anio VARCHAR,
 	Mes VARCHAR,
+	Mes2 VARCHAR,
 	Fecha DATE,
+	Fecha2 DATE,
 	Tipo_Servicio VARCHAR,
+	Consumo INT,
 	Consumo_Basico INT,
 	Consumo_Intermedio INT,
 	Consumo_Excedente INT,
 	Tarifa_Basico FLOAT,
 	Tarifa_Intermedio FLOAT,
 	Tarifa_Excedente FLOAT,
+	Tarifa_Basico2 FLOAT,
+	Tarifa_Intermedio2 FLOAT,
+	Tarifa_Excedente2 FLOAT,
 	Subtotal_Basico FLOAT,
 	Subtotal_Intermedio FLOAT,
 	Subtotal_Excedente FLOAT,
@@ -170,8 +184,11 @@ CREATE TABLE Recibo_por_Numero_Servicio_Anio_Mes(
 	Importe_IVA FLOAT,
 	Cantidad_Pagada FLOAT,
 	Cantidad_Pendiente FLOAT,
+	Recibo_Generado BOOLEAN,
 	PRIMARY KEY ((Numero_Servicio, Anio, Mes))
 );
+
+
 
 CREATE TABLE Tarifa_por_Anio(
 	Anio VARCHAR,
@@ -245,11 +262,16 @@ CREATE TABLE Reporte_Consumos(
 	Basico INT,
 	Intermedio INT,
 	Excedente INT,
-	PRIMARY KEY(Anio,Mes,Numero_Medidor)
+	Fecha VARCHAR,
+	PRIMARY KEY(Anio,Mes,Numero_Medidor,Fecha)
 )WITH CLUSTERING ORDER BY(Mes ASC);
+
+
 
 SELECT * FROM   Reporte_Consumos;
 truncate Consumo_por_Numero_Medidor_Fecha;
+truncate Reporte_Consumos;
+truncate Tarifa_por_Tipo_Anio_Mes;
 
 
 

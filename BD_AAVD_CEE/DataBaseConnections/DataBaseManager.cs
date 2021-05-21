@@ -871,13 +871,11 @@ namespace BD_AAVD_CEE.DataBaseConnections
                         session = cluster.Connect(keyspace);
                         session.Execute(query4);
                         break;
+                        //Caso de que sea domiciliar la tarifa 
+                    
 
                 }
-               // string query3 = String.Format("INSERT INTO Tarifa_por_Tipo_Anio_Mes ( Anio, Mes, Tipo_Servicio, Basico, Intermedio, Excedente, Empleado_Modificacion ) " +
-               //     "VALUES ('{0}', '{1}', '{2}', {3}, {4}, {5}, '{6}' ) ;"
-               //, anio, mes, tipo, basico, intermedio, excedente, empleado);
-               // session = cluster.Connect(keyspace);
-               // session.Execute(query3);
+            
             }
             catch (Exception e)
             {
@@ -955,18 +953,25 @@ namespace BD_AAVD_CEE.DataBaseConnections
                 switch (opc)
                 {
                     case 'S':
-                        string query3 = String.Format("INSERT INTO Consumo_por_Numero_Medidor_Fecha ( Numero_Medidor, Fecha, Consumo, Basico, Intermedio, Excedente, Empleado_Modificacion, Basicot, Intermediot, Excedentet, FechaAnio, FechaMes ) " +
-                    "VALUES ({0}, '{1}', {2}, {3}, {4}, {5}, '{6}', {7}, {8}, {9}, '{10}', '{11}' ) ;"
-               , vConsumo.Numero_Medidor, vConsumo.Fecha.ToString("yyyy-MM-dd"), vConsumo.Consumo, vConsumo.Basico, vConsumo.Intermedio, vConsumo.Excedente, vConsumo.Empleado_Modificacion, vConsumo.Basicot, vConsumo.Intermediot, vConsumo.Excedentet, vConsumo.FechaAnio, vConsumo.FechaMes);
+                        string query3 = String.Format("INSERT INTO Consumo_por_Numero_Medidor_Fecha ( Numero_Medidor, Fecha, Consumo, Basico, Intermedio, Excedente, Empleado_Modificacion, Basicot, Intermediot, Excedentet, FechaAnio, FechaMes, tipo, FechaInicio, FechaFinal, FechaExcedente ) " +
+                    "VALUES ({0}, '{1}', {2}, {3}, {4}, {5}, '{6}', {7}, {8}, {9}, '{10}', '{11}', '{12}', '{13}', '{14}', '{15}' ) ;"
+               , vConsumo.Numero_Medidor, vConsumo.Fecha.ToString("yyyy-MM-dd"), vConsumo.Consumo, vConsumo.Basico, vConsumo.Intermedio, vConsumo.Excedente, vConsumo.Empleado_Modificacion, vConsumo.Basicot, vConsumo.Intermediot, vConsumo.Excedentet, vConsumo.FechaAnio, vConsumo.FechaMes, vConsumo.tipo, vConsumo.FechaInicio, vConsumo.FechaFinal, vConsumo.FechaExcedente);
                         session = cluster.Connect(keyspace);
                         session.Execute(query3);
                         break;
                     case 'I':
-                        string query4 = String.Format("INSERT INTO Reporte_Consumos ( Anio, Mes, Numero_Medidor, Basico, Intermedio, Excedente ) " +
-                    "VALUES ('{0}', '{1}', {2}, {3}, {4}, {5} ) ;"
-               , vConsumo.FechaAnio, vConsumo.FechaMes, vConsumo.Numero_Medidor, vConsumo.Basico, vConsumo.Intermedio, vConsumo.Excedente);
+                        string query4 = String.Format("INSERT INTO Reporte_Consumos ( Anio, Mes, Numero_Medidor, Basico, Intermedio, Excedente, Fecha ) " +
+                    "VALUES ('{0}', '{1}', {2}, {3}, {4}, {5}, '{6}' ) ;"
+               , vConsumo.FechaAnio, vConsumo.FechaMes, vConsumo.Numero_Medidor, vConsumo.Basico, vConsumo.Intermedio, vConsumo.Excedente, vConsumo.FechaFinal);
                         session = cluster.Connect(keyspace);
                         session.Execute(query4);
+                        break;
+                    case 'R':
+                        string query5 = String.Format("INSERT INTO Reporte_Consumos ( Anio, Mes, Numero_Medidor, Basico, Intermedio, Excedente, Fecha ) " +
+                    "VALUES ('{0}', '{1}', {2}, {3}, {4}, {5} . '{6}') ;"
+               , vConsumo.FechaAnio, vConsumo.FechaMes, vConsumo.Numero_Medidor, vConsumo.Basico, vConsumo.Intermedio, vConsumo.Excedente, vConsumo.FechaFinal);
+                        session = cluster.Connect(keyspace);
+                        session.Execute(query5);
                         break;
 
                 }
@@ -1028,22 +1033,24 @@ namespace BD_AAVD_CEE.DataBaseConnections
             return dato;
 
         }
-        public bool ConsumoExistente (string medidor, string anio, string mes)
+        public bool ConsumoExistente (string medidor, string anio, string mes, string fecha)
         {
             bool existe = false;
             var ps = "";
             var ps2 = "";
             var ps3 = "";
+            var ps4 = "";
             session = cluster.Connect(keyspace);
-            string query = String.Format("SELECT  Numero_Medidor,FechaAnio, FechaMes FROM Consumo_por_Numero_Medidor_Fecha WHERE Numero_Medidor = {0} AND FechaAnio = '{1}' AND FechaMes= '{2}' ; ",
-                  medidor, anio, mes);
+            string query = String.Format("SELECT  Numero_Medidor,FechaAnio, FechaMes, FechaFinal FROM Consumo_por_Numero_Medidor_Fecha WHERE Numero_Medidor = {0} AND FechaAnio = '{1}' AND FechaMes= '{2}' AND FechaFinal= '{3}' ; ",
+                  medidor, anio, mes, fecha);
             var rs = session.Execute(query);
             foreach (Row row in rs)
             {
                 ps = row["numero_medidor"].ToString();
                 ps2 = row["fechaanio"].ToString();
                 ps3 = row["fechames"].ToString();
-                if (medidor == ps && anio == ps2 && mes == ps3)
+                ps4= row["fechafinal"].ToString();
+                if (medidor == ps && anio == ps2 && mes == ps3 && fecha == ps4)
                 { existe = true; }
 
 
@@ -1051,8 +1058,50 @@ namespace BD_AAVD_CEE.DataBaseConnections
 
             return existe;
         }
+        public bool ConsumoPeriodo (string medidor, string fecha)
+        {
+            //Esto sera para los contratos de tipo industrial, los que son por mes
+            bool existe = false;
+            var ps = "";
+            var ps2 = "";
+            var ps3 = "";
+            var ps4 = "";
+            DateTime fI;
+            DateTime fF;
+            //Hacer el calculo de la fecha hacia adelante que no debe de dejar tampoco 
+            string fechaexcedente = "";
+           
+            DateTime fechaO;
+            DateTime fechaex;
+            fechaO = DateTime.ParseExact(fecha, "dd/MM/yyyy", null);
+            //fechaexcedente = fechaO.AddMonths(1).ToShortDateString();
+           // fechaex = DateTime.ParseExact(fechaexcedente,"dd/MM/yyyy", null);
+            session = cluster.Connect(keyspace);
+            string query = String.Format("SELECT  Numero_Medidor,FechaInicio, FechaFinal, FechaExcedente FROM Consumo_por_Numero_Medidor_Fecha WHERE Numero_Medidor = {0}  ALLOW FILTERING; ",
+                  medidor);
+            var rs = session.Execute(query);
+            foreach (Row row in rs)
+            {
+                
+                ps = row["fechainicio"].ToString();
+                ps2 = row["fechafinal"].ToString();
+                ps3 = row["fechaexcedente"].ToString();
+                fI = DateTime.ParseExact(ps, "dd/MM/yyyy", null);
+                fF = DateTime.ParseExact (ps2, "dd/MM/yyyy", null);
+                fechaex= DateTime.ParseExact(ps3,"dd/MM/yyyy", null);
+                
+                int aux = 0;
+                if ((fechaO >= fI) && (fechaO <= fechaex))
+                {
+                    //significa que la fecha esta en un rango de cobro que no se puede && (fechaO <= fF)) && ((fechaO >= fF) &&
+                    existe = true;
+                }
+              
+            }
 
-
+            return existe;
+        }
+       
         //REPORTES 
 
         //REPORTE DE TARIFAS POR AÑO 
@@ -1116,5 +1165,78 @@ namespace BD_AAVD_CEE.DataBaseConnections
             IEnumerable<Reporte_Consumos> consumo = mapper.Fetch<Reporte_Consumos>(query);
             return consumo.ToList();
         }
+
+        //SACAR NUMERO DE SERVICIO SEGUN EL MEDIDOR 
+        public string NumeroServicioGET(string medidor)
+        {
+            var ps = "";
+            session = cluster.Connect(keyspace);
+            string query = String.Format("SELECT  Numero_Servicio FROM Contrato_por_Numero_Servicio WHERE Numero_Medidor = {0} ALLOW FILTERING; ",
+                  medidor);
+            var rs = session.Execute(query);
+            foreach (Row row in rs)
+            {
+                ps = row["numero_servicio"].ToString();
+
+
+            }
+            return ps;
+        }
+        public bool Recibo(Recibo_por_Numero_Servicio_Anio_Mes vRecibo)
+        {
+            bool queryCorrecto = true;
+        //    try
+        //    {
+        //        string query3 = String.Format("INSERT INTO Recibo_por_Numero_Servicio_Anio_Mes ( Numero_Servicio, Anio, Mes, Fecha, Tipo_Servicio, " +
+        //            "Consumo_Basico, Consumo_Intermedio, Consumo_Excedente, Tarifa_Basico, Tarifa_Intermedio, Tarifa_Excedente, " +
+        //            "Recibo_Generado) " +
+        //           "VALUES ( ) ;"
+        //      , anio, mes, tipo, basico, intermedio, excedente, empleado);
+        //        session = cluster.Connect(keyspace);
+        //        session.Execute(query3);
+
+
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+
+
+            return queryCorrecto;
+        }
+
+        //GENERACION DE RECIBO
+        public bool ConsumosParaRecibo(char opc, string anio, string mes, string tipo)
+        {
+            bool existe = false;
+            var ps = "";
+            var ps2 = "";
+            var ps3 = "";
+            switch (opc)
+            {
+                case 'I':
+                    session = cluster.Connect(keyspace);
+                    string query = String.Format("SELECT  FechaAnio, FechaMes, tipo  FROM Consumo_por_Numero_Medidor_Fecha WHERE FechaAnio = '{0}' AND FechaMes= '{1}' AND tipo= '{2}' ALLOW FILTERING; ",
+                          anio, mes, tipo);
+                    var rs = session.Execute(query);
+                    foreach (Row row in rs)
+                    {
+                        ps = row["fechaanio"].ToString();
+                        ps2 = row["fechames"].ToString();
+                        ps3 = row["tipo"].ToString();
+                        if (anio == ps && mes == ps2 && tipo == ps3)
+                        { existe = true; }
+                    }
+                    break;
+                case 'D':
+                    break;
+            }
+            
+
+            return existe;
+        }
+        
     }
 }

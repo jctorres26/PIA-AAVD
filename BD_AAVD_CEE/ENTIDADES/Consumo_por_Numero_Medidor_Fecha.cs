@@ -21,6 +21,10 @@ namespace BD_AAVD_CEE.ENTIDADES
         public float Excedentet { get; set; }
         public string FechaAnio { get; set; }
         public string FechaMes { get; set; }
+        public string tipo { get; set; }
+        public string FechaInicio { get; set; }
+        public string FechaFinal { get; set; }
+        public string FechaExcedente { get; set; }
         public LocalDate FechaC { get; set; }
         public void ActualizarFechaCQLC()
         {
