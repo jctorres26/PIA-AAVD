@@ -10,8 +10,6 @@ namespace BD_AAVD_CEE.ENTIDADES
     {
         private string text;
 
-       
-
         public string idBASE { get; set; }
         public long numero { get; set; }
     }

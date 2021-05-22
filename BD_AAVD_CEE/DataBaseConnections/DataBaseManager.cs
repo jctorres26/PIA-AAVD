@@ -1187,9 +1187,9 @@ namespace BD_AAVD_CEE.DataBaseConnections
             bool queryCorrecto = true;
             try
             {
-                string query3 = String.Format("INSERT INTO Recibo_por_Numero_Servicio_Anio_Mes ( Numero_Servicio, Fecha,  AnioF, MesF, FechaF, FechaI, Tipo_Servicio, Consumo_Basico, Consumo_Intermedio, Consumo_Excedente, Tarifa_Basico, Tarifa_Intermedio, Tarifa_Excedente, Subtotal_Basico, Subtotal_Intermedio, Subtotal_Excedente, Is_Paid, Importe, Importe_IVA, Cantidad_Pagada, Cantidad_Pendiente, Recibo_Generado, Medidor, Dia) " +
-                   "VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, false, {16}, {17}, {18}, {19}, false, {20}, '{21}' ) ;"
-              , vRecibo.Numero_Servicio,vRecibo.Fecha.ToString("yyyy-MM-dd"), vRecibo.AnioF, vRecibo.MesF, vRecibo.FechaF, vRecibo.FechaI, vRecibo.Tipo_Servicio, 
+                string query3 = String.Format("INSERT INTO Recibo_por_Numero_Servicio_Anio_Mes ( Numero_Servicio, Fecha,  AnioF, MesF, FechaF, FechaI, Tipo_Servicio,Consumo, Consumo_Basico, Consumo_Intermedio, Consumo_Excedente, Tarifa_Basico, Tarifa_Intermedio, Tarifa_Excedente, Subtotal_Basico, Subtotal_Intermedio, Subtotal_Excedente, Is_Paid, Importe, Importe_IVA, Cantidad_Pagada, Cantidad_Pendiente, Recibo_Generado, Medidor, Dia) " +
+                   "VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}',{7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, {16}, false, {17}, {18}, {19}, {20}, false, {21}, '{22}' ) ;"
+              , vRecibo.Numero_Servicio,vRecibo.Fecha.ToString("yyyy-MM-dd"), vRecibo.AnioF, vRecibo.MesF, vRecibo.FechaF, vRecibo.FechaI, vRecibo.Tipo_Servicio, vRecibo.Consumo,
               vRecibo.Consumo_Basico, vRecibo.Consumo_Intermedio, vRecibo.Consumo_Excedente, vRecibo.Tarifa_Basico, vRecibo.Tarifa_Intermedio, vRecibo.Tarifa_Excedente, vRecibo.Subtotal_Basico,
               vRecibo.Subtotal_Intermedio, vRecibo.Subtotal_Excedente,  vRecibo.Importe, vRecibo.Importe_IVA, vRecibo.Cantidad_Pagada, vRecibo.Cantidad_Pendiente,  vRecibo.Medidor, vRecibo.Dia);
                 session = cluster.Connect(keyspace);
@@ -1206,7 +1206,28 @@ namespace BD_AAVD_CEE.DataBaseConnections
 
             return queryCorrecto;
         }
+        public bool ConsumoH(long ns, int medidor, string anio, string mes, string dia, int consumo, double importe, float cantidadp, double cantidadpendiente, string tipo, string fecha)
+        {
+            bool queryCorrecto = true;
+            try
+            {
+                string query3 = String.Format("INSERT INTO ConsumoH ( Numero_Servicio, Medidor, AnioF, MesF, Dia, Consumo, Importe_IVA, Cantidad_Pagada, Cantidad_Pendiente, Generado, Tipo, Fecha ) " +
+                   "VALUES ({0}, {1}, '{2}', '{3}', '{4}', {5}, {6}, {7}, {8}, false, '{9}', '{10}') ;"
+              ,ns, medidor, anio, mes, dia, consumo, importe, cantidadp, cantidadpendiente, tipo, fecha);
+                session = cluster.Connect(keyspace);
+                session.Execute(query3);
 
+
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return queryCorrecto;
+        }
         //GENERACION DE RECIBO
         public bool ConsumosParaRecibo(char opc, string anio, string mes, string tipo)
         {
@@ -1306,6 +1327,167 @@ namespace BD_AAVD_CEE.DataBaseConnections
 
 
             return queryCorrecto;
+        }
+       public bool ActivarConsumoH(string anio, string mes, string tipo)
+        {
+            bool queryCorrecto = true;
+            try
+            {
+                var ps = "";
+                var ps2 = "";
+                var ps3 = "";
+                var fechita1 = "";
+                var num = "";
+                int num2 = 0;
+                session = cluster.Connect(keyspace);
+                string query = String.Format("SELECT  Numero_Servicio, AnioF, MesF, Tipo, Dia   FROM ConsumoH WHERE  AnioF = '{0}' AND MesF= '{1}' AND Tipo= '{2}' ALLOW FILTERING; ",
+                      anio, mes, tipo);
+                var rs = session.Execute(query);
+                foreach (Row row in rs)
+                {
+                    num = row["numero_servicio"].ToString();
+                    ps = row["aniof"].ToString();
+                    ps2 = row["mesf"].ToString();
+                    ps3 = row["tipo"].ToString();
+                    fechita1 = row["dia"].ToString();
+                    num2 = Convert.ToInt32(num);
+                    int aux = 0;
+                   
+                    session = cluster.Connect(keyspace);
+                    string qry = "UPDATE ConsumoH SET Generado = true WHERE Numero_Servicio = " + num2 + " AND AnioF='" + anio + "' AND MesF= '" + mes + "' AND Dia= '" + fechita1 + "'  ;";
+
+                    var rs2 = session.Execute(qry);
+                }
+
+
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return queryCorrecto;
+        }
+        public bool ReciboRGExistente(string anio, string mes, string tipo)
+        {
+
+            bool existe = false;
+            var ps = "";
+            var ps2 = "";
+            var ps3 = "";
+            session = cluster.Connect(keyspace);
+            string query = String.Format("SELECT  AnioF, MesF, Tipo_Servicio  FROM Recibo_por_Numero_Servicio_Anio_Mes WHERE  AnioF = '{0}' AND MesF= '{1}' AND Tipo_Servicio= '{2}' AND Recibo_Generado= true ALLOW FILTERING; ",
+                  anio, mes, tipo);
+            var rs = session.Execute(query);
+            foreach (Row row in rs)
+            {
+                ps = row["aniof"].ToString();
+                ps2 = row["mesf"].ToString();
+                ps3 = row["tipo_servicio"].ToString();
+                if (anio == ps && mes == ps2 && tipo == ps3)
+                { existe = true; }
+            }
+
+
+            return existe;
+        }
+        public List<Recibo_por_Numero_Servicio_Anio_Mes> AllRecibosRG(string anio, string mes, string tipo)
+        {
+            string query = String.Format("SELECT  Numero_Servicio, AnioF, MesF, Tipo_Servicio, Cantidad_Pagada, Cantidad_Pendiente FROM Recibo_por_Numero_Servicio_Anio_Mes WHERE AnioF = '{0}' AND MesF = '{1}' AND Tipo_Servicio= '{2}' ALLOW FILTERING ; ",
+                         anio, mes, tipo);
+            session = cluster.Connect(keyspace);
+            IMapper mapper = new Mapper(session);
+            IEnumerable<Recibo_por_Numero_Servicio_Anio_Mes> consumo = mapper.Fetch<Recibo_por_Numero_Servicio_Anio_Mes>(query);
+            return consumo.ToList();
+        }
+        //CONSUMO HISTORICO 
+        public bool ConsumoHistoricoExistente (char opc,string anio, int medidor, int servicio)
+        {
+            bool existe = false;
+            var ps = "";
+            var ps2 = "";
+            var ps3 = "";
+            var ps4 = "";
+            switch (opc)
+            {
+                case 'M':
+                    //Caso en el que consulte con el medidor 
+                    session = cluster.Connect(keyspace);
+                    string query = String.Format("SELECT  AnioF,  Medidor  FROM ConsumoH WHERE  AnioF = '{0}' AND Medidor= {1} AND Generado= true ALLOW FILTERING; ",
+                          anio, medidor);
+                    var rs = session.Execute(query);
+                    foreach (Row row in rs)
+                    {
+                        ps = row["aniof"].ToString();
+                        ps2 = row["medidor"].ToString();
+                        int m = 0;
+                        m = Convert.ToInt32(ps2);
+                        if (anio == ps && medidor== m)
+                        { existe = true; }
+                    }
+
+                    break;
+                case 'S':
+                    session = cluster.Connect(keyspace);
+                    string query2 = String.Format("SELECT  AnioF,  Numero_Servicio  FROM ConsumoH WHERE  AnioF = '{0}' AND  Numero_Servicio= {1} AND Generado= true ALLOW FILTERING; ",
+                          anio, servicio);
+                    var rs2 = session.Execute(query2);
+                    foreach (Row row in rs2)
+                    {
+                        ps3 = row["aniof"].ToString();
+                        ps4 = row["numero_servicio"].ToString();
+                        int m = 0;
+                        m = Convert.ToInt32(ps4);
+                        if (anio == ps3 && servicio == m)
+                        { existe = true; }
+                    }
+                    break;
+            }
+
+
+
+            return existe;
+        }
+        public bool NumSerExistente(int servicio)
+        {
+            bool existe = false;
+            var ps = "";
+            session = cluster.Connect(keyspace);
+            string query = String.Format("SELECT  Numero_Servicio FROM ConsumoH WHERE Numero_Servicio = {0} ALLOW FILTERING; ",
+                  servicio);
+            var rs = session.Execute(query);
+            foreach (Row row in rs)
+            {
+                ps = row["numero_servicio"].ToString();
+                int i = 0;
+                i = Convert.ToInt32(ps);
+                if (servicio == i) { existe = true; }
+
+
+            }
+
+            return existe;
+        }
+        public List <ConsumoH> AllConsumosM (string anio, int medidor)
+        {
+            string query = String.Format("SELECT  Fecha, Consumo, Importe_IVA, Cantidad_Pagada, Cantidad_Pendiente FROM ConsumoH WHERE AnioF = '{0}' AND Medidor ={1} ALLOW FILTERING ; ",
+                         anio, medidor);
+            session = cluster.Connect(keyspace);
+            IMapper mapper = new Mapper(session);
+            IEnumerable<ConsumoH> consumo = mapper.Fetch<ConsumoH>(query);
+            return consumo.ToList();
+        }
+
+        public List<ConsumoH> AllConsumosS(string anio, int servicio)
+        {
+            string query = String.Format("SELECT  Fecha, Consumo, Importe_IVA, Cantidad_Pagada, Cantidad_Pendiente FROM ConsumoH WHERE AnioF = '{0}' AND Numero_Servicio ={1} ALLOW FILTERING ; ",
+                         anio, servicio);
+            session = cluster.Connect(keyspace);
+            IMapper mapper = new Mapper(session);
+            IEnumerable<ConsumoH> consumo = mapper.Fetch<ConsumoH>(query);
+            return consumo.ToList();
         }
     }
 }

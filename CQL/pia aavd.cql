@@ -187,7 +187,27 @@ CREATE TABLE Recibo_por_Numero_Servicio_Anio_Mes(
 	PRIMARY KEY ((Numero_Servicio, AnioF, MesF,Dia ))
 );
 
+CREATE TABLE ConsumoH(
+	Numero_Servicio BIGINT,
+	Medidor INT,
+	AnioF VARCHAR,
+	MesF VARCHAR,
+	Dia VARCHAR,
+	Consumo INT, 
+	Importe_IVA DOUBLE,
+	Cantidad_Pagada FLOAT,
+	Cantidad_Pendiente DOUBLE,
+	Generado BOOLEAN,
+	Tipo VARCHAR,
+	Fecha VARCHAR,
+	PRIMARY KEY ((Numero_Servicio, AnioF, MesF,Dia ))
+	
+); 
 
+SELECT  Numero_Servicio, AnioF, MesF, Tipo, Dia   FROM ConsumoH WHERE  AnioF = '2021' AND MesF= '5' AND Tipo= 'Domiciliar' ALLOW FILTERING;
+
+SELECT * FROM ConsumoH;
+SELECT * FROM Recibo_por_Numero_Servicio_Anio_Mes;
 
 
 CREATE TABLE Tarifa_por_Anio(
@@ -268,9 +288,10 @@ CREATE TABLE Reporte_Consumos(
 
 
 
-SELECT * FROM   Reporte_Consumos;
-SELECT * FROM Recibo_por_Numero_Servicio_Anio_Mes;
+truncate   Reporte_Consumos;
+truncate Recibo_por_Numero_Servicio_Anio_Mes;
 truncate Consumo_por_Numero_Medidor_Fecha;
+SELECT * FROM ConsumoH;
 truncate Reporte_Consumos;
 truncate Tarifa_por_Tipo_Anio_Mes;
 --truncate Tarifa_por_Anio;

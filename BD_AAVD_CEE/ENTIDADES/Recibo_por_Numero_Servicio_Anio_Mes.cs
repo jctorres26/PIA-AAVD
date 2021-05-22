@@ -16,6 +16,7 @@ namespace BD_AAVD_CEE.ENTIDADES
         public string FechaF { get; set; }
         public string FechaI { get; set; }
         public string Tipo_Servicio { get; set; }
+        public int Consumo { get; set; }
         public int Consumo_Basico { get; set; }
         public int Consumo_Intermedio { get; set; }
         public int Consumo_Excedente { get; set; }

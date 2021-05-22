@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="ENTIDADES\Administrador.cs" />
     <Compile Include="ENTIDADES\Cliente_por_Id_Cliente.cs" />
+    <Compile Include="ENTIDADES\ConsumoH.cs" />
     <Compile Include="ENTIDADES\Consumo_Historico_por_Anio_Numero_Medidor.cs" />
     <Compile Include="ENTIDADES\Consumo_por_Numero_Medidor_Fecha.cs" />
     <Compile Include="ENTIDADES\Contrato_por_Numero_Servicio.cs" />

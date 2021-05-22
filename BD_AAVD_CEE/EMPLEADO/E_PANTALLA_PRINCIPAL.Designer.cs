@@ -110,15 +110,7 @@
             this.BTNE_RGPDF = new System.Windows.Forms.Button();
             this.BTNE_VISUALIZAR = new System.Windows.Forms.Button();
             this.DGVE_REPORTEG = new System.Windows.Forms.DataGridView();
-            this.nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.año = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tot1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CMBE_RGTIPOS = new System.Windows.Forms.ComboBox();
-            this.CMBE_RGMES = new System.Windows.Forms.ComboBox();
-            this.CMBE_RGANIO = new System.Windows.Forms.ComboBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
@@ -154,14 +146,8 @@
             this.BTNE_CHPDF = new System.Windows.Forms.Button();
             this.BTNE_CHVISUALIZAR = new System.Windows.Forms.Button();
             this.DGVE_REPORTECH = new System.Windows.Forms.DataGridView();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox22 = new System.Windows.Forms.TextBox();
             this.textBox21 = new System.Windows.Forms.TextBox();
-            this.CMBE_CHANIO = new System.Windows.Forms.ComboBox();
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
@@ -184,6 +170,20 @@
             this.CMBE_RTIPOS = new System.Windows.Forms.ComboBox();
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
+            this.dateTimePicker7 = new System.Windows.Forms.DateTimePicker();
+            this.anioRGDT = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker9 = new System.Windows.Forms.DateTimePicker();
+            this.nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.año = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tot1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -959,13 +959,13 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage3.Controls.Add(this.dateTimePicker9);
+            this.tabPage3.Controls.Add(this.anioRGDT);
             this.tabPage3.Controls.Add(this.BTNE_RGCSV);
             this.tabPage3.Controls.Add(this.BTNE_RGPDF);
             this.tabPage3.Controls.Add(this.BTNE_VISUALIZAR);
             this.tabPage3.Controls.Add(this.DGVE_REPORTEG);
             this.tabPage3.Controls.Add(this.CMBE_RGTIPOS);
-            this.tabPage3.Controls.Add(this.CMBE_RGMES);
-            this.tabPage3.Controls.Add(this.CMBE_RGANIO);
             this.tabPage3.Controls.Add(this.label34);
             this.tabPage3.Controls.Add(this.label31);
             this.tabPage3.Controls.Add(this.label27);
@@ -1003,6 +1003,7 @@
             this.BTNE_VISUALIZAR.TabIndex = 7;
             this.BTNE_VISUALIZAR.Text = "Visualizar";
             this.BTNE_VISUALIZAR.UseVisualStyleBackColor = true;
+            this.BTNE_VISUALIZAR.Click += new System.EventHandler(this.BTNE_VISUALIZAR_Click);
             // 
             // DGVE_REPORTEG
             // 
@@ -1019,59 +1020,16 @@
             this.DGVE_REPORTEG.Size = new System.Drawing.Size(639, 297);
             this.DGVE_REPORTEG.TabIndex = 6;
             // 
-            // nom
-            // 
-            this.nom.HeaderText = "Nro. Servicio";
-            this.nom.Name = "nom";
-            // 
-            // año
-            // 
-            this.año.HeaderText = "Año";
-            this.año.Name = "año";
-            // 
-            // Mes
-            // 
-            this.Mes.HeaderText = "Mes";
-            this.Mes.Name = "Mes";
-            // 
-            // Tipo
-            // 
-            this.Tipo.HeaderText = "Tipo de servicio";
-            this.Tipo.Name = "Tipo";
-            // 
-            // tot1
-            // 
-            this.tot1.HeaderText = "Total Pagado";
-            this.tot1.Name = "tot1";
-            // 
-            // totp
-            // 
-            this.totp.HeaderText = "Total pendiente de pago";
-            this.totp.Name = "totp";
-            // 
             // CMBE_RGTIPOS
             // 
             this.CMBE_RGTIPOS.FormattingEnabled = true;
+            this.CMBE_RGTIPOS.Items.AddRange(new object[] {
+            "Domiciliar",
+            "Industrial"});
             this.CMBE_RGTIPOS.Location = new System.Drawing.Point(330, 41);
             this.CMBE_RGTIPOS.Name = "CMBE_RGTIPOS";
             this.CMBE_RGTIPOS.Size = new System.Drawing.Size(121, 21);
             this.CMBE_RGTIPOS.TabIndex = 5;
-            // 
-            // CMBE_RGMES
-            // 
-            this.CMBE_RGMES.FormattingEnabled = true;
-            this.CMBE_RGMES.Location = new System.Drawing.Point(179, 41);
-            this.CMBE_RGMES.Name = "CMBE_RGMES";
-            this.CMBE_RGMES.Size = new System.Drawing.Size(121, 21);
-            this.CMBE_RGMES.TabIndex = 4;
-            // 
-            // CMBE_RGANIO
-            // 
-            this.CMBE_RGANIO.FormattingEnabled = true;
-            this.CMBE_RGANIO.Location = new System.Drawing.Point(33, 41);
-            this.CMBE_RGANIO.Name = "CMBE_RGANIO";
-            this.CMBE_RGANIO.Size = new System.Drawing.Size(116, 21);
-            this.CMBE_RGANIO.TabIndex = 3;
             // 
             // label34
             // 
@@ -1350,13 +1308,13 @@
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage5.Controls.Add(this.dateTimePicker7);
             this.tabPage5.Controls.Add(this.BTNE_CHCSV);
             this.tabPage5.Controls.Add(this.BTNE_CHPDF);
             this.tabPage5.Controls.Add(this.BTNE_CHVISUALIZAR);
             this.tabPage5.Controls.Add(this.DGVE_REPORTECH);
             this.tabPage5.Controls.Add(this.textBox22);
             this.tabPage5.Controls.Add(this.textBox21);
-            this.tabPage5.Controls.Add(this.CMBE_CHANIO);
             this.tabPage5.Controls.Add(this.label37);
             this.tabPage5.Controls.Add(this.label36);
             this.tabPage5.Controls.Add(this.label35);
@@ -1365,6 +1323,7 @@
             this.tabPage5.Size = new System.Drawing.Size(959, 445);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Consumo historico";
+            this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
             // 
             // BTNE_CHCSV
             // 
@@ -1394,6 +1353,7 @@
             this.BTNE_CHVISUALIZAR.TabIndex = 7;
             this.BTNE_CHVISUALIZAR.Text = "Visualizar";
             this.BTNE_CHVISUALIZAR.UseVisualStyleBackColor = true;
+            this.BTNE_CHVISUALIZAR.Click += new System.EventHandler(this.BTNE_CHVISUALIZAR_Click);
             // 
             // DGVE_REPORTECH
             // 
@@ -1409,31 +1369,6 @@
             this.DGVE_REPORTECH.Size = new System.Drawing.Size(541, 288);
             this.DGVE_REPORTECH.TabIndex = 6;
             // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Periodo de facturacion";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Consumo kWh";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Importe";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Pago";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Pendiente de pago";
-            this.Column6.Name = "Column6";
-            // 
             // textBox22
             // 
             this.textBox22.Location = new System.Drawing.Point(318, 45);
@@ -1447,14 +1382,6 @@
             this.textBox21.Name = "textBox21";
             this.textBox21.Size = new System.Drawing.Size(126, 20);
             this.textBox21.TabIndex = 4;
-            // 
-            // CMBE_CHANIO
-            // 
-            this.CMBE_CHANIO.FormattingEnabled = true;
-            this.CMBE_CHANIO.Location = new System.Drawing.Point(32, 44);
-            this.CMBE_CHANIO.Name = "CMBE_CHANIO";
-            this.CMBE_CHANIO.Size = new System.Drawing.Size(121, 21);
-            this.CMBE_CHANIO.TabIndex = 3;
             // 
             // label37
             // 
@@ -1666,6 +1593,93 @@
             this.label40.TabIndex = 0;
             this.label40.Text = "Tipo de servicio";
             // 
+            // dateTimePicker7
+            // 
+            this.dateTimePicker7.Location = new System.Drawing.Point(32, 45);
+            this.dateTimePicker7.Name = "dateTimePicker7";
+            this.dateTimePicker7.Size = new System.Drawing.Size(97, 20);
+            this.dateTimePicker7.TabIndex = 10;
+            // 
+            // anioRGDT
+            // 
+            this.anioRGDT.Location = new System.Drawing.Point(33, 42);
+            this.anioRGDT.Name = "anioRGDT";
+            this.anioRGDT.Size = new System.Drawing.Size(88, 20);
+            this.anioRGDT.TabIndex = 10;
+            // 
+            // dateTimePicker9
+            // 
+            this.dateTimePicker9.Location = new System.Drawing.Point(179, 41);
+            this.dateTimePicker9.Name = "dateTimePicker9";
+            this.dateTimePicker9.Size = new System.Drawing.Size(100, 20);
+            this.dateTimePicker9.TabIndex = 11;
+            // 
+            // nom
+            // 
+            this.nom.DataPropertyName = "Numero_Servicio";
+            this.nom.HeaderText = "Nro. Servicio";
+            this.nom.Name = "nom";
+            // 
+            // año
+            // 
+            this.año.DataPropertyName = "AnioF";
+            this.año.HeaderText = "Año";
+            this.año.Name = "año";
+            // 
+            // Mes
+            // 
+            this.Mes.DataPropertyName = "MesF";
+            this.Mes.HeaderText = "Mes";
+            this.Mes.Name = "Mes";
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "Tipo_Servicio";
+            this.Tipo.HeaderText = "Tipo de servicio";
+            this.Tipo.Name = "Tipo";
+            // 
+            // tot1
+            // 
+            this.tot1.DataPropertyName = "Cantidad_Pagada";
+            this.tot1.HeaderText = "Total Pagado";
+            this.tot1.Name = "tot1";
+            // 
+            // totp
+            // 
+            this.totp.DataPropertyName = "Cantidad_Pendiente";
+            this.totp.HeaderText = "Total pendiente de pago";
+            this.totp.Name = "totp";
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "Fecha";
+            this.Column2.HeaderText = "Periodo de facturacion";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "Consumo";
+            this.Column3.HeaderText = "Consumo kWh";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Importe_IVA";
+            this.Column4.HeaderText = "Importe";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "Cantidad_Pagada";
+            this.Column5.HeaderText = "Pago";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "Cantidad_Pendiente";
+            this.Column6.HeaderText = "Pendiente de pago";
+            this.Column6.Name = "Column6";
+            // 
             // E_PANTALLA_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1789,15 +1803,7 @@
         private System.Windows.Forms.Button BTNE_RGPDF;
         private System.Windows.Forms.Button BTNE_VISUALIZAR;
         private System.Windows.Forms.DataGridView DGVE_REPORTEG;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn año;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tot1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totp;
         private System.Windows.Forms.ComboBox CMBE_RGTIPOS;
-        private System.Windows.Forms.ComboBox CMBE_RGMES;
-        private System.Windows.Forms.ComboBox CMBE_RGANIO;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label27;
@@ -1806,14 +1812,8 @@
         private System.Windows.Forms.Button BTNE_CHPDF;
         private System.Windows.Forms.Button BTNE_CHVISUALIZAR;
         private System.Windows.Forms.DataGridView DGVE_REPORTECH;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.TextBox textBox22;
         private System.Windows.Forms.TextBox textBox21;
-        private System.Windows.Forms.ComboBox CMBE_CHANIO;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label35;
@@ -1869,5 +1869,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
         private System.Windows.Forms.DateTimePicker dateTimePicker6;
         private System.Windows.Forms.DateTimePicker dateTimePicker5;
+        private System.Windows.Forms.DateTimePicker dateTimePicker7;
+        private System.Windows.Forms.DateTimePicker dateTimePicker9;
+        private System.Windows.Forms.DateTimePicker anioRGDT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn año;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Mes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tot1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }

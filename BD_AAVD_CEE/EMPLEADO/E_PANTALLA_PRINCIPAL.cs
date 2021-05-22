@@ -39,6 +39,17 @@ namespace BD_MAD_CEE.EMPLEADO
             dateTimePicker6.CustomFormat = "M";
             dateTimePicker6.ShowUpDown = true;
 
+            dateTimePicker7.Format = DateTimePickerFormat.Custom;
+            dateTimePicker7.CustomFormat = "yyyy";
+            dateTimePicker7.ShowUpDown = true;
+
+            dateTimePicker9.Format = DateTimePickerFormat.Custom;
+            dateTimePicker9.CustomFormat = "M";
+            dateTimePicker9.ShowUpDown = true;
+
+            anioRGDT.Format = DateTimePickerFormat.Custom;
+            anioRGDT.CustomFormat = "yyyy";
+            anioRGDT.ShowUpDown = true;
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -622,6 +633,7 @@ namespace BD_MAD_CEE.EMPLEADO
                                 dbm.InsertConsumoUNIT('I', vConsumo);
                                 // VARIABLES PARA LLENAR EL RECIBO
                                 Recibo_por_Numero_Servicio_Anio_Mes vRecibo = new Recibo_por_Numero_Servicio_Anio_Mes();
+                                vRecibo.Consumo = Convert.ToInt32(TXTE_CONSUMOKWH.Text);
                                 vRecibo.Numero_Servicio = num;
                                 vRecibo.Fecha = DTPE_FECHACONSUMO.Value;
                                 vRecibo.AnioF = DTPE_FECHACONSUMO.Value.Year.ToString();
@@ -648,6 +660,16 @@ namespace BD_MAD_CEE.EMPLEADO
                                 vRecibo.Importe_IVA = vRecibo.Importe + iva;
                                 vRecibo.Cantidad_Pendiente = vRecibo.Importe_IVA;
                                 dbm.Recibo(vRecibo);
+
+                                //LLENAR TABLA PARA CONSUMO HISTORICO 
+                                dbm.ConsumoH(num, Convert.ToInt32(TXTE_CMEDIDOR.Text), vRecibo.AnioF,
+                                    vRecibo.MesF, vRecibo.Dia, Convert.ToInt32(TXTE_CONSUMOKWH.Text),
+                                    vRecibo.Importe_IVA, 0, vRecibo.Cantidad_Pendiente,tipo, vRecibo.FechaF);
+
+
+
+
+                                //
                                 TXTE_CMEDIDOR.Text = "";
                                 TXTE_CONSUMOKWH.Text = "";
                                 MessageBox.Show("Consumo cargado con exito ");
@@ -853,6 +875,7 @@ namespace BD_MAD_CEE.EMPLEADO
                                 //Guid g = new Guid(idN); //Convertir ese string en un guid para meter en la tabla 
                                 //Insertar para la tabla de recibos 
                                 Recibo_por_Numero_Servicio_Anio_Mes vRecibo = new Recibo_por_Numero_Servicio_Anio_Mes();
+                                vRecibo.Consumo = Convert.ToInt32(TXTE_CONSUMOKWH.Text);
                                 vRecibo.Numero_Servicio = num;
                                 vRecibo.Fecha = DTPE_FECHACONSUMO.Value;
                                 vRecibo.AnioF = DTPE_FECHACONSUMO.Value.Year.ToString();
@@ -878,6 +901,13 @@ namespace BD_MAD_CEE.EMPLEADO
                                 iva = vRecibo.Importe * .16;
                                 vRecibo.Importe_IVA = vRecibo.Importe + iva;
                                 vRecibo.Cantidad_Pendiente = vRecibo.Importe_IVA;
+
+                                //LLENAR TABLA PARA CONSUMO HISTORICO 
+                                dbm.ConsumoH(num, Convert.ToInt32(TXTE_CMEDIDOR.Text), vRecibo.AnioF,
+                                     vRecibo.MesF, vRecibo.Dia, Convert.ToInt32(TXTE_CONSUMOKWH.Text),
+                                     vRecibo.Importe_IVA, 0, vRecibo.Cantidad_Pendiente, tipo, vRecibo.FechaF);
+
+
                                 dbm.Recibo(vRecibo);
 
                                 dbm.InsertConsumoUNIT('S', vConsumo);
@@ -1028,9 +1058,10 @@ namespace BD_MAD_CEE.EMPLEADO
             existe = dbm.ReciboExistente(anio, mes, CMBE_RTIPOS.Text);
             if (existe == true)
             {
-                MessageBox.Show("Si hay consumos para generar los recibos de la fecha indicada");
+                MessageBox.Show("Recibos Cargados");
                 //Hacer un update para actualizar el estado de generado a no generado 
                 dbm.ActivarRecibos(anio, mes, CMBE_RTIPOS.Text);
+                dbm.ActivarConsumoH(anio, mes, CMBE_RTIPOS.Text);
             }
             else
             {
@@ -1039,6 +1070,126 @@ namespace BD_MAD_CEE.EMPLEADO
 
         }
 
+        private void BTNE_CHVISUALIZAR_Click(object sender, EventArgs e)
+        {
+            //PRIMERO VERIFICAR QUE EXISTAN RECIBOS GENERADOS EN ESE AÑO
+            //checar que si ingrese cosas
+            DataBaseManager dbm = DataBaseManager.getInstance();
+            
 
+            if (string.IsNullOrEmpty(textBox21.Text) && string.IsNullOrEmpty(textBox22.Text))
+            {
+                MessageBox.Show("Faltan campos a llenar para hacer la consulta");
+            }
+            else 
+            {
+                //este es el caso de que se busque por numero de servicio
+                if (string.IsNullOrEmpty(textBox21.Text) )
+                {
+                    string anio = "";
+                    int servicio = 0;
+                    bool existe = false;
+                    bool existeS = false;
+                    servicio = Convert.ToInt32(textBox22.Text);
+                    anio = dateTimePicker7.Value.Year.ToString();
+                    existeS = dbm.NumSerExistente(servicio);
+                    if (existeS == true)
+                    {
+                        existe = dbm.ConsumoHistoricoExistente('S', anio, 0, servicio);
+                        if (existe == true)
+                        {
+                            MessageBox.Show("El cliente si tiene consumos en este año");
+                            ///Llenar datagriew con informacion de la tabla de consumosH
+                            ///
+                            List<ConsumoH> CH = new List<ConsumoH>();
+                            CH = dbm.AllConsumosS(anio, servicio);
+                            DGVE_REPORTECH.DataSource = CH;
+                        }
+                        else
+                        {
+                            MessageBox.Show("El cliente no tiene consumos en este año");
+                            DGVE_REPORTECH.DataSource = "";
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No existe el numero de servicio ingresado");
+                    }
+                   
+                }
+                else
+                {
+                    bool existeM = false;
+                    string anio = "";
+                    int medidor = 0;
+                    bool existe = false;
+
+                    medidor = Convert.ToInt32(textBox21.Text);
+                    anio = dateTimePicker7.Value.Year.ToString();
+                    existeM = dbm.MedidorExistente(textBox21.Text);
+                    if (existeM == true)
+                    {
+                        existe = dbm.ConsumoHistoricoExistente('M', anio, medidor, 0);
+                        if (existe == true)
+                        {
+                            MessageBox.Show("El cliente si tiene consumos en este año");
+                            List<ConsumoH> CH = new List<ConsumoH>();
+                            CH = dbm.AllConsumosM(anio, medidor);
+                            DGVE_REPORTECH.DataSource = CH;
+                        }
+                        else
+                        {
+                            MessageBox.Show("El cliente no tiene consumos en este año");
+                            DGVE_REPORTECH.DataSource = "";
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No existe el medidor ingresado");
+                    }
+                    
+                    //este es el caso de que se busque por medidor
+                }
+            }
+            
+        }
+
+        private void BTNE_VISUALIZAR_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(CMBE_RGTIPOS.Text))
+            {
+                MessageBox.Show("Faltan campos a llenar para hacer la consulta");
+            }
+            else
+            {
+                bool existe = false;
+                string anio = "";
+                string mes = "";
+                anio = anioRGDT.Value.Year.ToString();
+                mes = dateTimePicker9.Value.Month.ToString();
+                DataBaseManager dbm = DataBaseManager.getInstance();
+                existe = dbm.ReciboRGExistente(anio, mes, CMBE_RGTIPOS.Text);
+
+                if (existe == true)
+                {
+                    MessageBox.Show("Si existen recibos generados");
+                    //Llenar el datagriew con todos los datos 
+                    List<Recibo_por_Numero_Servicio_Anio_Mes> Recibos = new List<Recibo_por_Numero_Servicio_Anio_Mes>();
+                    Recibos = dbm.AllRecibosRG(anio, mes, CMBE_RGTIPOS.Text);
+                    DGVE_REPORTEG.DataSource = Recibos;
+
+                }
+                else
+                {
+                    MessageBox.Show("Aun no hay recibos generados");
+                }
+
+            }
+        }
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
