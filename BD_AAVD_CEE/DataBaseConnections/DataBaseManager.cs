@@ -1489,5 +1489,57 @@ namespace BD_AAVD_CEE.DataBaseConnections
             IEnumerable<ConsumoH> consumo = mapper.Fetch<ConsumoH>(query);
             return consumo.ToList();
         }
+
+        //CHECAR GENERACION DEL PDF DE UN RECIBO
+        public bool ReciboPDF(char opc, string anio,string mes, int medidor, int servicio)
+        {
+            bool existe = false;
+            var ps = "";
+            var ps2 = "";
+            var ps3 = "";
+            var ps4 = "";
+            var ps5 = "";
+            switch (opc)
+            {
+                case 'M':
+                    //Caso en el que consulte con el medidor 
+                    session = cluster.Connect(keyspace);
+                    string query = String.Format("SELECT  AnioF, MesF,  Medidor  FROM ConsumoH WHERE  AnioF = '{0}' AND MesF= '{1}' AND Medidor= {2} AND Generado= true ALLOW FILTERING; ",
+                          anio,mes, medidor);
+                    var rs = session.Execute(query);
+                    foreach (Row row in rs)
+                    {
+                        ps = row["aniof"].ToString();
+                        ps3 = row["mesf"].ToString();
+                        ps2 = row["medidor"].ToString();
+                        int m = 0;
+                        m = Convert.ToInt32(ps2);
+                        if (anio == ps && medidor == m && mes==ps3)
+                        { existe = true; }
+                    }
+
+                    break;
+                case 'S':
+                    session = cluster.Connect(keyspace);
+                    string query2 = String.Format("SELECT  AnioF,MesF,  Numero_Servicio  FROM ConsumoH WHERE  AnioF = '{0}' MesF= '{1}' AND  Numero_Servicio= {2} AND Generado= true ALLOW FILTERING; ",
+                          anio,mes, servicio);
+                    var rs2 = session.Execute(query2);
+                    foreach (Row row in rs2)
+                    {
+                        ps3 = row["aniof"].ToString();
+                        ps5 = row["mesf"].ToString();
+                        ps4 = row["numero_servicio"].ToString();
+                        int m = 0;
+                        m = Convert.ToInt32(ps4);
+                        if (anio == ps3 && servicio == m && mes== ps5)
+                        { existe = true; }
+                    }
+                    break;
+            }
+
+
+
+            return existe;
+        }
     }
 }

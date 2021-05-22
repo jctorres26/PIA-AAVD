@@ -154,8 +154,6 @@
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.BTNE_GENERARPDF = new System.Windows.Forms.Button();
-            this.CMBE_RCRMES = new System.Windows.Forms.ComboBox();
-            this.CMBE_RCRANIO = new System.Windows.Forms.ComboBox();
             this.textBox24 = new System.Windows.Forms.TextBox();
             this.textBox23 = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
@@ -184,6 +182,8 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateTimePicker8 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker10 = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -1423,9 +1423,9 @@
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.dateTimePicker10);
+            this.groupBox8.Controls.Add(this.dateTimePicker8);
             this.groupBox8.Controls.Add(this.BTNE_GENERARPDF);
-            this.groupBox8.Controls.Add(this.CMBE_RCRMES);
-            this.groupBox8.Controls.Add(this.CMBE_RCRANIO);
             this.groupBox8.Controls.Add(this.textBox24);
             this.groupBox8.Controls.Add(this.textBox23);
             this.groupBox8.Controls.Add(this.label46);
@@ -1448,22 +1448,7 @@
             this.BTNE_GENERARPDF.TabIndex = 8;
             this.BTNE_GENERARPDF.Text = "Generar recibo PDF";
             this.BTNE_GENERARPDF.UseVisualStyleBackColor = false;
-            // 
-            // CMBE_RCRMES
-            // 
-            this.CMBE_RCRMES.FormattingEnabled = true;
-            this.CMBE_RCRMES.Location = new System.Drawing.Point(173, 125);
-            this.CMBE_RCRMES.Name = "CMBE_RCRMES";
-            this.CMBE_RCRMES.Size = new System.Drawing.Size(121, 21);
-            this.CMBE_RCRMES.TabIndex = 7;
-            // 
-            // CMBE_RCRANIO
-            // 
-            this.CMBE_RCRANIO.FormattingEnabled = true;
-            this.CMBE_RCRANIO.Location = new System.Drawing.Point(18, 125);
-            this.CMBE_RCRANIO.Name = "CMBE_RCRANIO";
-            this.CMBE_RCRANIO.Size = new System.Drawing.Size(121, 21);
-            this.CMBE_RCRANIO.TabIndex = 6;
+            this.BTNE_GENERARPDF.Click += new System.EventHandler(this.BTNE_GENERARPDF_Click);
             // 
             // textBox24
             // 
@@ -1680,6 +1665,20 @@
             this.Column6.HeaderText = "Pendiente de pago";
             this.Column6.Name = "Column6";
             // 
+            // dateTimePicker8
+            // 
+            this.dateTimePicker8.Location = new System.Drawing.Point(18, 130);
+            this.dateTimePicker8.Name = "dateTimePicker8";
+            this.dateTimePicker8.Size = new System.Drawing.Size(122, 20);
+            this.dateTimePicker8.TabIndex = 9;
+            // 
+            // dateTimePicker10
+            // 
+            this.dateTimePicker10.Location = new System.Drawing.Point(173, 130);
+            this.dateTimePicker10.Name = "dateTimePicker10";
+            this.dateTimePicker10.Size = new System.Drawing.Size(122, 20);
+            this.dateTimePicker10.TabIndex = 10;
+            // 
             // E_PANTALLA_PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1834,8 +1833,6 @@
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button BTNE_GENERARPDF;
-        private System.Windows.Forms.ComboBox CMBE_RCRMES;
-        private System.Windows.Forms.ComboBox CMBE_RCRANIO;
         private System.Windows.Forms.TextBox textBox24;
         private System.Windows.Forms.TextBox textBox23;
         private System.Windows.Forms.Label label46;
@@ -1883,5 +1880,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DateTimePicker dateTimePicker10;
+        private System.Windows.Forms.DateTimePicker dateTimePicker8;
     }
 }

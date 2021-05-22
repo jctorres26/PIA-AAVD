@@ -50,6 +50,16 @@ namespace BD_MAD_CEE.EMPLEADO
             anioRGDT.Format = DateTimePickerFormat.Custom;
             anioRGDT.CustomFormat = "yyyy";
             anioRGDT.ShowUpDown = true;
+
+            dateTimePicker10.Format = DateTimePickerFormat.Custom;
+            dateTimePicker10.CustomFormat = "yyyy";
+            dateTimePicker10.ShowUpDown = true;
+
+            dateTimePicker8.Format = DateTimePickerFormat.Custom;
+            dateTimePicker8.CustomFormat = "M";
+            dateTimePicker8.ShowUpDown = true;
+
+
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -1190,6 +1200,93 @@ namespace BD_MAD_CEE.EMPLEADO
 
         private void tabPage5_Click(object sender, EventArgs e)
         {
+        }
+
+        private void BTNE_GENERARPDF_Click(object sender, EventArgs e)
+        {
+            //Checar si existe el recibo a consultar en el año, fecha, numero, servicio indicados
+            DataBaseManager dbm = DataBaseManager.getInstance();
+
+
+            if (string.IsNullOrEmpty(textBox23.Text) && string.IsNullOrEmpty(textBox24.Text))
+            {
+                MessageBox.Show("Faltan campos a llenar para hacer el recibo");
+            }
+            else
+            {
+                //caso para checarlo con el numero de servicio 
+                if (string.IsNullOrEmpty(textBox24.Text))
+                {
+                    string anio = "";
+                    string mes = "";
+                    int servicio = 0;
+                    bool existe = false;
+                    bool existeS = false;
+                    servicio = Convert.ToInt32(textBox23.Text);
+                    anio = dateTimePicker8.Value.Year.ToString();
+                    mes = dateTimePicker10.Value.Month.ToString();
+                    existeS = dbm.NumSerExistente(servicio);
+                    if (existeS == true)
+                    {
+                        existe = dbm.ReciboPDF('S', anio, mes, 0, servicio);
+                        if (existe == true)
+                        {
+                            MessageBox.Show("El cliente si tiene recibos en la fecha indicada");
+                            ///Llenar datagriew con informacion de la tabla de consumosH
+                            ///
+                            List<ConsumoH> CH = new List<ConsumoH>();
+                            CH = dbm.AllConsumosS(anio, servicio);
+                            DGVE_REPORTECH.DataSource = CH;
+                        }
+                        else
+                        {
+                            MessageBox.Show("El cliente no tiene recibos en la fecha indicada");
+                            DGVE_REPORTECH.DataSource = "";
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No existe el numero de servicio ingresado");
+                    }
+
+                }
+                else
+                {
+                    //caso de generarlo con el medidor
+                    bool existeM = false;
+                    string anio = "";
+                    string mes = "";
+                    int medidor = 0;
+                    bool existe = false;
+
+                    medidor = Convert.ToInt32(textBox24.Text);
+                    anio = dateTimePicker8.Value.Year.ToString();
+                    mes = dateTimePicker10.Value.Month.ToString();
+                    existeM = dbm.MedidorExistente(textBox24.Text);
+                    if (existeM == true)
+                    {
+                        existe = dbm.ReciboPDF('M', anio, mes, medidor, 0);
+                        if (existe == true)
+                        {
+                            MessageBox.Show("El cliente si recibos en la fecha indicada");
+                            List<ConsumoH> CH = new List<ConsumoH>();
+                            CH = dbm.AllConsumosM(anio, medidor);
+                            DGVE_REPORTECH.DataSource = CH;
+                        }
+                        else
+                        {
+                            MessageBox.Show("El cliente no tiene recibos en la fecha indicada");
+                            DGVE_REPORTECH.DataSource = "";
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("No existe el medidor ingresado");
+                    }
+                }
+            }
+
         }
     }
 }

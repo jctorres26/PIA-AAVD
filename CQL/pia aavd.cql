@@ -291,7 +291,7 @@ CREATE TABLE Reporte_Consumos(
 truncate   Reporte_Consumos;
 truncate Recibo_por_Numero_Servicio_Anio_Mes;
 truncate Consumo_por_Numero_Medidor_Fecha;
-SELECT * FROM ConsumoH;
+truncate ConsumoH;
 truncate Reporte_Consumos;
 truncate Tarifa_por_Tipo_Anio_Mes;
 --truncate Tarifa_por_Anio;
