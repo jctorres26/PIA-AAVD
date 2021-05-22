@@ -183,7 +183,8 @@ CREATE TABLE Recibo_por_Numero_Servicio_Anio_Mes(
 	Cantidad_Pendiente DOUBLE,
 	Recibo_Generado BOOLEAN,
 	Medidor INT,
-	PRIMARY KEY ((Numero_Servicio, AnioF, MesF,Fecha ))
+	Dia VARCHAR,
+	PRIMARY KEY ((Numero_Servicio, AnioF, MesF,Dia ))
 );
 
 
@@ -272,6 +273,6 @@ SELECT * FROM Recibo_por_Numero_Servicio_Anio_Mes;
 truncate Consumo_por_Numero_Medidor_Fecha;
 truncate Reporte_Consumos;
 truncate Tarifa_por_Tipo_Anio_Mes;
-truncate Tarifa_por_Anio;
+--truncate Tarifa_por_Anio;
 
 

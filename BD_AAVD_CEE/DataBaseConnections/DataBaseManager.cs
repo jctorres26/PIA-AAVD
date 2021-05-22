@@ -1187,11 +1187,11 @@ namespace BD_AAVD_CEE.DataBaseConnections
             bool queryCorrecto = true;
             try
             {
-                string query3 = String.Format("INSERT INTO Recibo_por_Numero_Servicio_Anio_Mes ( Numero_Servicio, Fecha,  AnioF, MesF, FechaF, FechaI, Tipo_Servicio, Consumo_Basico, Consumo_Intermedio, Consumo_Excedente, Tarifa_Basico, Tarifa_Intermedio, Tarifa_Excedente, Subtotal_Basico, Subtotal_Intermedio, Subtotal_Excedente, Is_Paid, Importe, Importe_IVA, Cantidad_Pagada, Cantidad_Pendiente, Recibo_Generado, Medidor) " +
-                   "VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, false, {16}, {17}, {18}, {19}, false, {20} ) ;"
+                string query3 = String.Format("INSERT INTO Recibo_por_Numero_Servicio_Anio_Mes ( Numero_Servicio, Fecha,  AnioF, MesF, FechaF, FechaI, Tipo_Servicio, Consumo_Basico, Consumo_Intermedio, Consumo_Excedente, Tarifa_Basico, Tarifa_Intermedio, Tarifa_Excedente, Subtotal_Basico, Subtotal_Intermedio, Subtotal_Excedente, Is_Paid, Importe, Importe_IVA, Cantidad_Pagada, Cantidad_Pendiente, Recibo_Generado, Medidor, Dia) " +
+                   "VALUES ({0}, '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', {7}, {8}, {9}, {10}, {11}, {12}, {13}, {14}, {15}, false, {16}, {17}, {18}, {19}, false, {20}, '{21}' ) ;"
               , vRecibo.Numero_Servicio,vRecibo.Fecha.ToString("yyyy-MM-dd"), vRecibo.AnioF, vRecibo.MesF, vRecibo.FechaF, vRecibo.FechaI, vRecibo.Tipo_Servicio, 
               vRecibo.Consumo_Basico, vRecibo.Consumo_Intermedio, vRecibo.Consumo_Excedente, vRecibo.Tarifa_Basico, vRecibo.Tarifa_Intermedio, vRecibo.Tarifa_Excedente, vRecibo.Subtotal_Basico,
-              vRecibo.Subtotal_Intermedio, vRecibo.Subtotal_Excedente,  vRecibo.Importe, vRecibo.Importe_IVA, vRecibo.Cantidad_Pagada, vRecibo.Cantidad_Pendiente,  vRecibo.Medidor);
+              vRecibo.Subtotal_Intermedio, vRecibo.Subtotal_Excedente,  vRecibo.Importe, vRecibo.Importe_IVA, vRecibo.Cantidad_Pagada, vRecibo.Cantidad_Pendiente,  vRecibo.Medidor, vRecibo.Dia);
                 session = cluster.Connect(keyspace);
                 session.Execute(query3);
 
@@ -1237,7 +1237,75 @@ namespace BD_AAVD_CEE.DataBaseConnections
 
             return existe;
         }
-      
-        
+        public bool ReciboExistente (string anio, string mes, string tipo)
+        {
+            bool existe = false;
+            var ps = "";
+            var ps2 = "";
+            var ps3 = "";
+                    session = cluster.Connect(keyspace);
+                    string query = String.Format("SELECT  AnioF, MesF, Tipo_Servicio  FROM Recibo_por_Numero_Servicio_Anio_Mes WHERE  AnioF = '{0}' AND MesF= '{1}' AND Tipo_Servicio= '{2}' ALLOW FILTERING; ",
+                          anio, mes, tipo);
+                    var rs = session.Execute(query);
+                    foreach (Row row in rs)
+                    {
+                        ps = row["aniof"].ToString();
+                        ps2 = row["mesf"].ToString();
+                        ps3 = row["tipo_servicio"].ToString();
+                        if (anio == ps && mes == ps2 && tipo == ps3)
+                        { existe = true; }
+                    }
+
+
+            return existe;
+        }
+        public bool ActivarRecibos (string anio, string mes, string tipo)
+        {
+            bool queryCorrecto = true;
+            try
+            {
+                var ps = "";
+                var ps2 = "";
+                var ps3 = "";
+                var fechita1 = "";
+                var num = "";
+                int num2 = 0;
+                session = cluster.Connect(keyspace);
+                string query = String.Format("SELECT  Numero_Servicio, AnioF, MesF, Tipo_Servicio, Dia   FROM Recibo_por_Numero_Servicio_Anio_Mes WHERE  AnioF = '{0}' AND MesF= '{1}' AND Tipo_Servicio= '{2}' ALLOW FILTERING; ",
+                      anio, mes, tipo);
+                var rs = session.Execute(query);
+                foreach (Row row in rs)
+                {
+                    num = row["numero_servicio"].ToString();
+                    ps = row["aniof"].ToString();
+                    ps2 = row["mesf"].ToString();
+                    ps3 = row["tipo_servicio"].ToString();
+                    fechita1 = row["dia"].ToString();
+                    num2=Convert.ToInt32(num);
+                    int aux = 0;
+                    //string query3 = String.Format(
+
+                    //        "UPDATE Recibo_por_Numero_Servicio_Anio_Mes SET Recibo_Generado = true WHERE Numero_Servicio= {0} AnioF= '{1}'  AND MesF= '{2}'  AND Fecha = '{3}';"
+                    //        , num2, anio, mes, fechita1
+                    //   );
+                    //session = cluster.Connect(keyspace);
+                    //session.Execute(query3);
+                    session = cluster.Connect(keyspace);
+                    string qry = "UPDATE Recibo_por_Numero_Servicio_Anio_Mes SET Recibo_Generado = true WHERE Numero_Servicio = " + num2 + " AND AnioF='"+anio+"' AND MesF= '"+mes+"' AND Dia= '"+fechita1 +"'  ;";
+
+                    var rs2 = session.Execute(qry);
+                }
+
+                
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return queryCorrecto;
+        }
     }
 }

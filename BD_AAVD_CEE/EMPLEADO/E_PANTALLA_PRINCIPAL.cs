@@ -576,6 +576,7 @@ namespace BD_MAD_CEE.EMPLEADO
                                 vConsumo.FechaFinal = DTPE_FECHACONSUMO.Value.ToShortDateString();
                                 vConsumo.FechaInicio = DTPE_FECHACONSUMO.Value.AddMonths(-1).ToShortDateString();
                                 vConsumo.FechaExcedente = DTPE_FECHACONSUMO.Value.AddMonths(1).ToShortDateString();
+                                
                                 // vConsumo.FechaInicio = DTPE_FECHACONSUMO.Value.AddMonths(-1).ToString();
 
                                 //Hacer ahora el insert en la tabla de consumos 
@@ -627,6 +628,7 @@ namespace BD_MAD_CEE.EMPLEADO
                                 vRecibo.MesF = DTPE_FECHACONSUMO.Value.Month.ToString();
                                 vRecibo.FechaF = DTPE_FECHACONSUMO.Value.ToShortDateString();
                                 vRecibo.FechaI = DTPE_FECHACONSUMO.Value.AddMonths(-1).ToShortDateString();
+                                vRecibo.Dia = DTPE_FECHACONSUMO.Value.Day.ToString();
                                 vRecibo.Tipo_Servicio = tipo;
                                 vRecibo.Consumo_Basico = bas;
                                 vRecibo.Consumo_Intermedio = med;
@@ -855,6 +857,7 @@ namespace BD_MAD_CEE.EMPLEADO
                                 vRecibo.Fecha = DTPE_FECHACONSUMO.Value;
                                 vRecibo.AnioF = DTPE_FECHACONSUMO.Value.Year.ToString();
                                 vRecibo.MesF = DTPE_FECHACONSUMO.Value.Month.ToString();
+                                vRecibo.Dia = DTPE_FECHACONSUMO.Value.Day.ToString();
                                 vRecibo.FechaF = DTPE_FECHACONSUMO.Value.ToShortDateString();
                                 vRecibo.FechaI = DTPE_FECHACONSUMO.Value.AddMonths(-2).ToShortDateString();
                                 vRecibo.Tipo_Servicio = tipo;
@@ -962,6 +965,7 @@ namespace BD_MAD_CEE.EMPLEADO
             anio1 = Convert.ToInt32(anio);
             mes2 = Convert.ToInt32(mes);
             DataBaseManager dbm = DataBaseManager.getInstance();
+            #region before
             //debo de checar tambien si ya se generaron los recibos para este periodo 
             //if (CMBE_RTIPOS.Text == "Industrial")
             //{
@@ -1004,7 +1008,7 @@ namespace BD_MAD_CEE.EMPLEADO
             //        mes2 = 12;
 
             //    }
-               
+
             //    existe2 = dbm.ConsumosParaRecibo('I', anio1.ToString(), mes2.ToString(), CMBE_RTIPOS.Text);
             //    existe = dbm.ConsumosParaRecibo('I', anio, mes, CMBE_RTIPOS.Text);
             //    if (existe == true && existe2 == true)
@@ -1018,8 +1022,21 @@ namespace BD_MAD_CEE.EMPLEADO
 
 
             //}
-            
-           
+            #endregion
+            //Checar que existan recibos con fecha final en ese año y mes 
+            //Despues ahora si a los recibos en ese periodo seleccionado, cambiarles el valor de generado a verdadero
+            existe = dbm.ReciboExistente(anio, mes, CMBE_RTIPOS.Text);
+            if (existe == true)
+            {
+                MessageBox.Show("Si hay consumos para generar los recibos de la fecha indicada");
+                //Hacer un update para actualizar el estado de generado a no generado 
+                dbm.ActivarRecibos(anio, mes, CMBE_RTIPOS.Text);
+            }
+            else
+            {
+                MessageBox.Show("No hay consumos para generar los recibos de la fecha indicada");
+            }
+
         }
 
 

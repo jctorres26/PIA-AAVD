@@ -32,6 +32,7 @@ namespace BD_AAVD_CEE.ENTIDADES
         public double Cantidad_Pendiente { get; set; }
         public bool Recibo_Generado { get; set; }
         public int Medidor { get; set; }
+        public string Dia { get; set; }
 
     }
 }
