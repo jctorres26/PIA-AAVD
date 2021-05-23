@@ -34,6 +34,19 @@ namespace BD_AAVD_CEE.ENTIDADES
         public bool Recibo_Generado { get; set; }
         public int Medidor { get; set; }
         public string Dia { get; set; }
+        public string Usuario { get; set; }
+        public Recibo_por_Numero_Servicio_Anio_Mes()
+        {
 
+        }
+        public Recibo_por_Numero_Servicio_Anio_Mes(Recibo_por_Numero_Servicio_Anio_Mes vRecibo)
+        {
+            this.Numero_Servicio = vRecibo.Numero_Servicio;
+        }
+
+        public override string ToString()
+        {
+            return this.Numero_Servicio.ToString();
+        }
     }
 }

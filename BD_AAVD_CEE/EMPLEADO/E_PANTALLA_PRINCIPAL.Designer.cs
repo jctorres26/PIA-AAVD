@@ -106,10 +106,18 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dateTimePicker9 = new System.Windows.Forms.DateTimePicker();
+            this.anioRGDT = new System.Windows.Forms.DateTimePicker();
             this.BTNE_RGCSV = new System.Windows.Forms.Button();
             this.BTNE_RGPDF = new System.Windows.Forms.Button();
             this.BTNE_VISUALIZAR = new System.Windows.Forms.Button();
             this.DGVE_REPORTEG = new System.Windows.Forms.DataGridView();
+            this.nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.año = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tot1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CMBE_RGTIPOS = new System.Windows.Forms.ComboBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
@@ -142,6 +150,7 @@
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label38 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.dateTimePicker7 = new System.Windows.Forms.DateTimePicker();
             this.BTNE_CHCSV = new System.Windows.Forms.Button();
             this.BTNE_CHPDF = new System.Windows.Forms.Button();
             this.BTNE_CHVISUALIZAR = new System.Windows.Forms.Button();
@@ -153,6 +162,8 @@
             this.label35 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker10 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker8 = new System.Windows.Forms.DateTimePicker();
             this.BTNE_GENERARPDF = new System.Windows.Forms.Button();
             this.textBox24 = new System.Windows.Forms.TextBox();
             this.textBox23 = new System.Windows.Forms.TextBox();
@@ -168,22 +179,11 @@
             this.CMBE_RTIPOS = new System.Windows.Forms.ComboBox();
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
-            this.dateTimePicker7 = new System.Windows.Forms.DateTimePicker();
-            this.anioRGDT = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker9 = new System.Windows.Forms.DateTimePicker();
-            this.nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.año = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tot1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateTimePicker8 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker10 = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -975,6 +975,20 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Reporte General";
             // 
+            // dateTimePicker9
+            // 
+            this.dateTimePicker9.Location = new System.Drawing.Point(179, 41);
+            this.dateTimePicker9.Name = "dateTimePicker9";
+            this.dateTimePicker9.Size = new System.Drawing.Size(100, 20);
+            this.dateTimePicker9.TabIndex = 11;
+            // 
+            // anioRGDT
+            // 
+            this.anioRGDT.Location = new System.Drawing.Point(33, 42);
+            this.anioRGDT.Name = "anioRGDT";
+            this.anioRGDT.Size = new System.Drawing.Size(88, 20);
+            this.anioRGDT.TabIndex = 10;
+            // 
             // BTNE_RGCSV
             // 
             this.BTNE_RGCSV.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -1019,6 +1033,42 @@
             this.DGVE_REPORTEG.Name = "DGVE_REPORTEG";
             this.DGVE_REPORTEG.Size = new System.Drawing.Size(639, 297);
             this.DGVE_REPORTEG.TabIndex = 6;
+            // 
+            // nom
+            // 
+            this.nom.DataPropertyName = "Numero_Servicio";
+            this.nom.HeaderText = "Nro. Servicio";
+            this.nom.Name = "nom";
+            // 
+            // año
+            // 
+            this.año.DataPropertyName = "AnioF";
+            this.año.HeaderText = "Año";
+            this.año.Name = "año";
+            // 
+            // Mes
+            // 
+            this.Mes.DataPropertyName = "MesF";
+            this.Mes.HeaderText = "Mes";
+            this.Mes.Name = "Mes";
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "Tipo_Servicio";
+            this.Tipo.HeaderText = "Tipo de servicio";
+            this.Tipo.Name = "Tipo";
+            // 
+            // tot1
+            // 
+            this.tot1.DataPropertyName = "Cantidad_Pagada";
+            this.tot1.HeaderText = "Total Pagado";
+            this.tot1.Name = "tot1";
+            // 
+            // totp
+            // 
+            this.totp.DataPropertyName = "Cantidad_Pendiente";
+            this.totp.HeaderText = "Total pendiente de pago";
+            this.totp.Name = "totp";
             // 
             // CMBE_RGTIPOS
             // 
@@ -1325,6 +1375,13 @@
             this.tabPage5.Text = "Consumo historico";
             this.tabPage5.Click += new System.EventHandler(this.tabPage5_Click);
             // 
+            // dateTimePicker7
+            // 
+            this.dateTimePicker7.Location = new System.Drawing.Point(32, 45);
+            this.dateTimePicker7.Name = "dateTimePicker7";
+            this.dateTimePicker7.Size = new System.Drawing.Size(97, 20);
+            this.dateTimePicker7.TabIndex = 10;
+            // 
             // BTNE_CHCSV
             // 
             this.BTNE_CHCSV.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -1438,6 +1495,20 @@
             this.groupBox8.TabIndex = 8;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Consulta de recibo";
+            // 
+            // dateTimePicker10
+            // 
+            this.dateTimePicker10.Location = new System.Drawing.Point(173, 130);
+            this.dateTimePicker10.Name = "dateTimePicker10";
+            this.dateTimePicker10.Size = new System.Drawing.Size(122, 20);
+            this.dateTimePicker10.TabIndex = 10;
+            // 
+            // dateTimePicker8
+            // 
+            this.dateTimePicker8.Location = new System.Drawing.Point(18, 130);
+            this.dateTimePicker8.Name = "dateTimePicker8";
+            this.dateTimePicker8.Size = new System.Drawing.Size(122, 20);
+            this.dateTimePicker8.TabIndex = 9;
             // 
             // BTNE_GENERARPDF
             // 
@@ -1578,66 +1649,9 @@
             this.label40.TabIndex = 0;
             this.label40.Text = "Tipo de servicio";
             // 
-            // dateTimePicker7
-            // 
-            this.dateTimePicker7.Location = new System.Drawing.Point(32, 45);
-            this.dateTimePicker7.Name = "dateTimePicker7";
-            this.dateTimePicker7.Size = new System.Drawing.Size(97, 20);
-            this.dateTimePicker7.TabIndex = 10;
-            // 
-            // anioRGDT
-            // 
-            this.anioRGDT.Location = new System.Drawing.Point(33, 42);
-            this.anioRGDT.Name = "anioRGDT";
-            this.anioRGDT.Size = new System.Drawing.Size(88, 20);
-            this.anioRGDT.TabIndex = 10;
-            // 
-            // dateTimePicker9
-            // 
-            this.dateTimePicker9.Location = new System.Drawing.Point(179, 41);
-            this.dateTimePicker9.Name = "dateTimePicker9";
-            this.dateTimePicker9.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker9.TabIndex = 11;
-            // 
-            // nom
-            // 
-            this.nom.DataPropertyName = "Numero_Servicio";
-            this.nom.HeaderText = "Nro. Servicio";
-            this.nom.Name = "nom";
-            // 
-            // año
-            // 
-            this.año.DataPropertyName = "AnioF";
-            this.año.HeaderText = "Año";
-            this.año.Name = "año";
-            // 
-            // Mes
-            // 
-            this.Mes.DataPropertyName = "MesF";
-            this.Mes.HeaderText = "Mes";
-            this.Mes.Name = "Mes";
-            // 
-            // Tipo
-            // 
-            this.Tipo.DataPropertyName = "Tipo_Servicio";
-            this.Tipo.HeaderText = "Tipo de servicio";
-            this.Tipo.Name = "Tipo";
-            // 
-            // tot1
-            // 
-            this.tot1.DataPropertyName = "Cantidad_Pagada";
-            this.tot1.HeaderText = "Total Pagado";
-            this.tot1.Name = "tot1";
-            // 
-            // totp
-            // 
-            this.totp.DataPropertyName = "Cantidad_Pendiente";
-            this.totp.HeaderText = "Total pendiente de pago";
-            this.totp.Name = "totp";
-            // 
             // Column2
             // 
-            this.Column2.DataPropertyName = "Fecha";
+            this.Column2.DataPropertyName = "FechaF";
             this.Column2.HeaderText = "Periodo de facturacion";
             this.Column2.Name = "Column2";
             // 
@@ -1664,20 +1678,6 @@
             this.Column6.DataPropertyName = "Cantidad_Pendiente";
             this.Column6.HeaderText = "Pendiente de pago";
             this.Column6.Name = "Column6";
-            // 
-            // dateTimePicker8
-            // 
-            this.dateTimePicker8.Location = new System.Drawing.Point(18, 130);
-            this.dateTimePicker8.Name = "dateTimePicker8";
-            this.dateTimePicker8.Size = new System.Drawing.Size(122, 20);
-            this.dateTimePicker8.TabIndex = 9;
-            // 
-            // dateTimePicker10
-            // 
-            this.dateTimePicker10.Location = new System.Drawing.Point(173, 130);
-            this.dateTimePicker10.Name = "dateTimePicker10";
-            this.dateTimePicker10.Size = new System.Drawing.Size(122, 20);
-            this.dateTimePicker10.TabIndex = 10;
             // 
             // E_PANTALLA_PRINCIPAL
             // 
@@ -1875,12 +1875,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn tot1;
         private System.Windows.Forms.DataGridViewTextBoxColumn totp;
+        private System.Windows.Forms.DateTimePicker dateTimePicker10;
+        private System.Windows.Forms.DateTimePicker dateTimePicker8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DateTimePicker dateTimePicker10;
-        private System.Windows.Forms.DateTimePicker dateTimePicker8;
     }
 }

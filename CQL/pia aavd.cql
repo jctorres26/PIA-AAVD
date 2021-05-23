@@ -100,8 +100,9 @@ CREATE TABLE Contrato_por_Numero_Servicio(
 	Numero_Exterior INT,
 	Id_Cliente BIGINT,
 	Empleado_Modificacion VARCHAR,
+	Usuario VARCHAR,
 	PRIMARY KEY(Numero_Servicio, Id_Cliente)
-);
+); 
 
 CREATE TABLE NumServ (
 	idBASE VARCHAR,
@@ -127,7 +128,7 @@ SELECT * FROM Contrato_por_Numero_Servicio;
 truncate  NumCliente ;
 truncate NumServ;
 truncate Empleado_por_Id_Empleado;
-truncate Cliente_por_Id_Cliente;
+--SELECT * FROM  Cliente_por_Id_Cliente;
 SELECT * FROM Contrato_por_Numero_Servicio;
 
 CREATE TABLE Consumo_por_Numero_Medidor_Fecha(
@@ -184,9 +185,11 @@ CREATE TABLE Recibo_por_Numero_Servicio_Anio_Mes(
 	Recibo_Generado BOOLEAN,
 	Medidor INT,
 	Dia VARCHAR,
+	Usuario VARCHAR,
 	PRIMARY KEY ((Numero_Servicio, AnioF, MesF,Dia ))
 );
 
+select * from  Recibo_por_Numero_Servicio_Anio_Mes;
 CREATE TABLE ConsumoH(
 	Numero_Servicio BIGINT,
 	Medidor INT,
@@ -204,7 +207,7 @@ CREATE TABLE ConsumoH(
 	
 ); 
 
-SELECT  Numero_Servicio, AnioF, MesF, Tipo, Dia   FROM ConsumoH WHERE  AnioF = '2021' AND MesF= '5' AND Tipo= 'Domiciliar' ALLOW FILTERING;
+--SELECT  Numero_Servicio, AnioF, MesF, Tipo, Dia   FROM ConsumoH WHERE  AnioF = '2021' AND MesF= '5' AND Tipo= 'Domiciliar' ALLOW FILTERING;
 
 SELECT * FROM ConsumoH;
 SELECT * FROM Recibo_por_Numero_Servicio_Anio_Mes;
@@ -295,5 +298,5 @@ truncate ConsumoH;
 truncate Reporte_Consumos;
 truncate Tarifa_por_Tipo_Anio_Mes;
 --truncate Tarifa_por_Anio;
-
-
+SELECT * FROM Cliente_por_Id_Cliente;
+SELECT * FROM Recibo_por_Numero_Servicio_Anio_Mes;

@@ -46,9 +46,21 @@ namespace BD_AAVD_CEE
 
         }
 
-        
-      
-        
-        
+        static public void ComboServicios(ComboBox comboboxActualizar, List<Recibo_por_Numero_Servicio_Anio_Mes> listaServicios)
+        {
+            comboboxActualizar.DataSource = null;
+            comboboxActualizar.Items.Clear();
+            
+            for (int i = 0; i < listaServicios.Count; i++)
+            {
+                comboboxActualizar.Items.Add(listaServicios[i]);
+            }
+
+        }
+
+
+
+
+
     }
 }

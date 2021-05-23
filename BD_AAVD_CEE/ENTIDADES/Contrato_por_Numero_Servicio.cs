@@ -20,6 +20,7 @@ namespace BD_AAVD_CEE.ENTIDADES
         public int Numero_Exterior { get; set; }
         public long Id_Cliente { get; set; }
         public string Empleado_Modificacion { get; set; }
+        public string Usuario { get; set; }
 
     }
 }

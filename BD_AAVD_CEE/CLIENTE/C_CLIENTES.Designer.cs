@@ -30,14 +30,17 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.mesCC = new System.Windows.Forms.DateTimePicker();
+            this.anioCC = new System.Windows.Forms.DateTimePicker();
             this.BTNC_PDF = new System.Windows.Forms.Button();
-            this.CMBC_MES = new System.Windows.Forms.ComboBox();
-            this.CMBC_ANIO = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.CMBC_SERVICIOS = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.mesPR = new System.Windows.Forms.DateTimePicker();
+            this.anioPR = new System.Windows.Forms.DateTimePicker();
             this.TEXTC_ESTATUS = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.TEXTC_CANTP = new System.Windows.Forms.TextBox();
@@ -46,34 +49,28 @@
             this.BTNC_PAGAR = new System.Windows.Forms.Button();
             this.TEXTC_TOTAL = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.TEXTC_CUENTA = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.TEXTC_TARJETA = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.CMBC_FORMA = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.CMBC_PMES = new System.Windows.Forms.ComboBox();
-            this.CMBC_PANIO = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.CMBC_PSERVICIOS = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.anioCHH = new System.Windows.Forms.DateTimePicker();
             this.BTNC_CSV = new System.Windows.Forms.Button();
             this.BTNC_CHPDF = new System.Windows.Forms.Button();
             this.DTG_CONSUMOH = new System.Windows.Forms.DataGridView();
+            this.CMBC_CHVISUAL = new System.Windows.Forms.Button();
+            this.CMBC_CHSERVICIO = new System.Windows.Forms.TextBox();
+            this.CMBC_CHMEDIDOR = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CMBC_CHVISUAL = new System.Windows.Forms.Button();
-            this.CMBC_CHSERVICIO = new System.Windows.Forms.TextBox();
-            this.CMBC_CHMEDIDOR = new System.Windows.Forms.TextBox();
-            this.CMBC_CHANIO = new System.Windows.Forms.ComboBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -96,9 +93,9 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.mesCC);
+            this.tabPage1.Controls.Add(this.anioCC);
             this.tabPage1.Controls.Add(this.BTNC_PDF);
-            this.tabPage1.Controls.Add(this.CMBC_MES);
-            this.tabPage1.Controls.Add(this.CMBC_ANIO);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.CMBC_SERVICIOS);
@@ -110,6 +107,20 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Consultar recibo";
             // 
+            // mesCC
+            // 
+            this.mesCC.Location = new System.Drawing.Point(352, 30);
+            this.mesCC.Name = "mesCC";
+            this.mesCC.Size = new System.Drawing.Size(98, 20);
+            this.mesCC.TabIndex = 11;
+            // 
+            // anioCC
+            // 
+            this.anioCC.Location = new System.Drawing.Point(199, 34);
+            this.anioCC.Name = "anioCC";
+            this.anioCC.Size = new System.Drawing.Size(101, 20);
+            this.anioCC.TabIndex = 10;
+            // 
             // BTNC_PDF
             // 
             this.BTNC_PDF.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -120,22 +131,6 @@
             this.BTNC_PDF.Text = "Generar recibo PDF";
             this.BTNC_PDF.UseVisualStyleBackColor = false;
             this.BTNC_PDF.Click += new System.EventHandler(this.BTNC_PDF_Click);
-            // 
-            // CMBC_MES
-            // 
-            this.CMBC_MES.FormattingEnabled = true;
-            this.CMBC_MES.Location = new System.Drawing.Point(352, 33);
-            this.CMBC_MES.Name = "CMBC_MES";
-            this.CMBC_MES.Size = new System.Drawing.Size(121, 21);
-            this.CMBC_MES.TabIndex = 5;
-            // 
-            // CMBC_ANIO
-            // 
-            this.CMBC_ANIO.FormattingEnabled = true;
-            this.CMBC_ANIO.Location = new System.Drawing.Point(199, 33);
-            this.CMBC_ANIO.Name = "CMBC_ANIO";
-            this.CMBC_ANIO.Size = new System.Drawing.Size(121, 21);
-            this.CMBC_ANIO.TabIndex = 4;
             // 
             // label3
             // 
@@ -175,6 +170,9 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.mesPR);
+            this.tabPage2.Controls.Add(this.anioPR);
             this.tabPage2.Controls.Add(this.TEXTC_ESTATUS);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.TEXTC_CANTP);
@@ -183,14 +181,8 @@
             this.tabPage2.Controls.Add(this.BTNC_PAGAR);
             this.tabPage2.Controls.Add(this.TEXTC_TOTAL);
             this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.TEXTC_CUENTA);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.TEXTC_TARJETA);
-            this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.CMBC_FORMA);
             this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.CMBC_PMES);
-            this.tabPage2.Controls.Add(this.CMBC_PANIO);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.CMBC_PSERVICIOS);
@@ -202,9 +194,34 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Pagar recibo";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(525, 18);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(128, 47);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "Checar recibo";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // mesPR
+            // 
+            this.mesPR.Location = new System.Drawing.Point(326, 35);
+            this.mesPR.Name = "mesPR";
+            this.mesPR.Size = new System.Drawing.Size(100, 20);
+            this.mesPR.TabIndex = 25;
+            // 
+            // anioPR
+            // 
+            this.anioPR.Location = new System.Drawing.Point(173, 35);
+            this.anioPR.Name = "anioPR";
+            this.anioPR.Size = new System.Drawing.Size(111, 20);
+            this.anioPR.TabIndex = 24;
+            // 
             // TEXTC_ESTATUS
             // 
-            this.TEXTC_ESTATUS.Location = new System.Drawing.Point(256, 205);
+            this.TEXTC_ESTATUS.Enabled = false;
+            this.TEXTC_ESTATUS.Location = new System.Drawing.Point(177, 241);
             this.TEXTC_ESTATUS.Name = "TEXTC_ESTATUS";
             this.TEXTC_ESTATUS.Size = new System.Drawing.Size(107, 20);
             this.TEXTC_ESTATUS.TabIndex = 23;
@@ -212,7 +229,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(264, 189);
+            this.label12.Location = new System.Drawing.Point(181, 212);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(86, 13);
             this.label12.TabIndex = 22;
@@ -243,18 +260,22 @@
             this.BTN_MASIVO.TabIndex = 19;
             this.BTN_MASIVO.Text = "Pago masivo de los servicios";
             this.BTN_MASIVO.UseVisualStyleBackColor = false;
+            this.BTN_MASIVO.Click += new System.EventHandler(this.BTN_MASIVO_Click);
             // 
             // BTNC_PAGAR
             // 
+            this.BTNC_PAGAR.Enabled = false;
             this.BTNC_PAGAR.Location = new System.Drawing.Point(525, 101);
             this.BTNC_PAGAR.Name = "BTNC_PAGAR";
             this.BTNC_PAGAR.Size = new System.Drawing.Size(128, 76);
             this.BTNC_PAGAR.TabIndex = 18;
             this.BTNC_PAGAR.Text = "Pagar";
             this.BTNC_PAGAR.UseVisualStyleBackColor = true;
+            this.BTNC_PAGAR.Click += new System.EventHandler(this.BTNC_PAGAR_Click);
             // 
             // TEXTC_TOTAL
             // 
+            this.TEXTC_TOTAL.Enabled = false;
             this.TEXTC_TOTAL.Location = new System.Drawing.Point(184, 130);
             this.TEXTC_TOTAL.Name = "TEXTC_TOTAL";
             this.TEXTC_TOTAL.Size = new System.Drawing.Size(100, 20);
@@ -269,41 +290,14 @@
             this.label10.TabIndex = 16;
             this.label10.Text = "Cantidad pagada";
             // 
-            // TEXTC_CUENTA
-            // 
-            this.TEXTC_CUENTA.Location = new System.Drawing.Point(19, 270);
-            this.TEXTC_CUENTA.Name = "TEXTC_CUENTA";
-            this.TEXTC_CUENTA.Size = new System.Drawing.Size(125, 20);
-            this.TEXTC_CUENTA.TabIndex = 15;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 244);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(133, 13);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "Nro. cuenta (transferencia)";
-            // 
-            // TEXTC_TARJETA
-            // 
-            this.TEXTC_TARJETA.Location = new System.Drawing.Point(19, 201);
-            this.TEXTC_TARJETA.Name = "TEXTC_TARJETA";
-            this.TEXTC_TARJETA.Size = new System.Drawing.Size(125, 20);
-            this.TEXTC_TARJETA.TabIndex = 13;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 176);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Nro. tarjeta";
-            // 
             // CMBC_FORMA
             // 
             this.CMBC_FORMA.FormattingEnabled = true;
+            this.CMBC_FORMA.Items.AddRange(new object[] {
+            "Efectivo",
+            "Tarjeta debito",
+            "Tarjeta credito",
+            "Transferencia bancaria"});
             this.CMBC_FORMA.Location = new System.Drawing.Point(19, 129);
             this.CMBC_FORMA.Name = "CMBC_FORMA";
             this.CMBC_FORMA.Size = new System.Drawing.Size(125, 21);
@@ -317,22 +311,6 @@
             this.label7.Size = new System.Drawing.Size(78, 13);
             this.label7.TabIndex = 10;
             this.label7.Text = "Forma de pago";
-            // 
-            // CMBC_PMES
-            // 
-            this.CMBC_PMES.FormattingEnabled = true;
-            this.CMBC_PMES.Location = new System.Drawing.Point(326, 34);
-            this.CMBC_PMES.Name = "CMBC_PMES";
-            this.CMBC_PMES.Size = new System.Drawing.Size(121, 21);
-            this.CMBC_PMES.TabIndex = 9;
-            // 
-            // CMBC_PANIO
-            // 
-            this.CMBC_PANIO.FormattingEnabled = true;
-            this.CMBC_PANIO.Location = new System.Drawing.Point(173, 34);
-            this.CMBC_PANIO.Name = "CMBC_PANIO";
-            this.CMBC_PANIO.Size = new System.Drawing.Size(121, 21);
-            this.CMBC_PANIO.TabIndex = 8;
             // 
             // label5
             // 
@@ -359,6 +337,7 @@
             this.CMBC_PSERVICIOS.Name = "CMBC_PSERVICIOS";
             this.CMBC_PSERVICIOS.Size = new System.Drawing.Size(125, 21);
             this.CMBC_PSERVICIOS.TabIndex = 3;
+            this.CMBC_PSERVICIOS.SelectedIndexChanged += new System.EventHandler(this.CMBC_PSERVICIOS_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -372,13 +351,13 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage3.Controls.Add(this.anioCHH);
             this.tabPage3.Controls.Add(this.BTNC_CSV);
             this.tabPage3.Controls.Add(this.BTNC_CHPDF);
             this.tabPage3.Controls.Add(this.DTG_CONSUMOH);
             this.tabPage3.Controls.Add(this.CMBC_CHVISUAL);
             this.tabPage3.Controls.Add(this.CMBC_CHSERVICIO);
             this.tabPage3.Controls.Add(this.CMBC_CHMEDIDOR);
-            this.tabPage3.Controls.Add(this.CMBC_CHANIO);
             this.tabPage3.Controls.Add(this.label37);
             this.tabPage3.Controls.Add(this.label36);
             this.tabPage3.Controls.Add(this.label35);
@@ -387,6 +366,13 @@
             this.tabPage3.Size = new System.Drawing.Size(717, 315);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Consumo historico";
+            // 
+            // anioCHH
+            // 
+            this.anioCHH.Location = new System.Drawing.Point(18, 32);
+            this.anioCHH.Name = "anioCHH";
+            this.anioCHH.Size = new System.Drawing.Size(115, 20);
+            this.anioCHH.TabIndex = 18;
             // 
             // BTNC_CSV
             // 
@@ -422,31 +408,6 @@
             this.DTG_CONSUMOH.Size = new System.Drawing.Size(541, 206);
             this.DTG_CONSUMOH.TabIndex = 15;
             // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Periodo de facturacion";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Consumo kWh";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Importe";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Pago";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Pendiente de pago";
-            this.Column6.Name = "Column6";
-            // 
             // CMBC_CHVISUAL
             // 
             this.CMBC_CHVISUAL.Location = new System.Drawing.Point(445, 15);
@@ -455,6 +416,7 @@
             this.CMBC_CHVISUAL.TabIndex = 14;
             this.CMBC_CHVISUAL.Text = "Visualizar";
             this.CMBC_CHVISUAL.UseVisualStyleBackColor = true;
+            this.CMBC_CHVISUAL.Click += new System.EventHandler(this.CMBC_CHVISUAL_Click);
             // 
             // CMBC_CHSERVICIO
             // 
@@ -469,14 +431,6 @@
             this.CMBC_CHMEDIDOR.Name = "CMBC_CHMEDIDOR";
             this.CMBC_CHMEDIDOR.Size = new System.Drawing.Size(126, 20);
             this.CMBC_CHMEDIDOR.TabIndex = 12;
-            // 
-            // CMBC_CHANIO
-            // 
-            this.CMBC_CHANIO.FormattingEnabled = true;
-            this.CMBC_CHANIO.Location = new System.Drawing.Point(18, 31);
-            this.CMBC_CHANIO.Name = "CMBC_CHANIO";
-            this.CMBC_CHANIO.Size = new System.Drawing.Size(121, 21);
-            this.CMBC_CHANIO.TabIndex = 11;
             // 
             // label37
             // 
@@ -505,6 +459,36 @@
             this.label35.TabIndex = 8;
             this.label35.Text = "Año";
             // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "FechaF";
+            this.Column2.HeaderText = "Periodo de facturacion";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "Consumo";
+            this.Column3.HeaderText = "Consumo kWh";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Importe_IVA";
+            this.Column4.HeaderText = "Importe";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "Cantidad_Pagada";
+            this.Column5.HeaderText = "Pago";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "Cantidad_Pendiente";
+            this.Column6.HeaderText = "Pendiente de pago";
+            this.Column6.Name = "Column6";
+            // 
             // C_CLIENTES
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -514,6 +498,7 @@
             this.Name = "C_CLIENTES";
             this.Text = "CLIENTE";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.C_CLIENTES_FormClosed);
+            this.Load += new System.EventHandler(this.C_CLIENTES_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -532,8 +517,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ComboBox CMBC_MES;
-        private System.Windows.Forms.ComboBox CMBC_ANIO;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox CMBC_SERVICIOS;
@@ -542,14 +525,8 @@
         private System.Windows.Forms.Button BTNC_PAGAR;
         private System.Windows.Forms.TextBox TEXTC_TOTAL;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox TEXTC_CUENTA;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox TEXTC_TARJETA;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox CMBC_FORMA;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox CMBC_PMES;
-        private System.Windows.Forms.ComboBox CMBC_PANIO;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox CMBC_PSERVICIOS;
@@ -562,17 +539,22 @@
         private System.Windows.Forms.Button CMBC_CHVISUAL;
         private System.Windows.Forms.TextBox CMBC_CHSERVICIO;
         private System.Windows.Forms.TextBox CMBC_CHMEDIDOR;
-        private System.Windows.Forms.ComboBox CMBC_CHANIO;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.DataGridView DTG_CONSUMOH;
+        private System.Windows.Forms.Button BTNC_CSV;
+        private System.Windows.Forms.Button BTNC_CHPDF;
+        private System.Windows.Forms.DateTimePicker mesCC;
+        private System.Windows.Forms.DateTimePicker anioCC;
+        private System.Windows.Forms.DateTimePicker anioCHH;
+        private System.Windows.Forms.DateTimePicker mesPR;
+        private System.Windows.Forms.DateTimePicker anioPR;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.Button BTNC_CSV;
-        private System.Windows.Forms.Button BTNC_CHPDF;
     }
 }

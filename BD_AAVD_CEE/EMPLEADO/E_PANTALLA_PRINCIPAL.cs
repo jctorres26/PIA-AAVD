@@ -127,7 +127,7 @@ namespace BD_MAD_CEE.EMPLEADO
                     vContrato.Empleado_Modificacion = Program.usuarioIng.ToString();
                     vCliente.Empleado_Modificacion = Program.usuarioIng.ToString();
                     vContrato.Tipo_Servicio = CMBE_TIPOS.Text;
-
+                    vContrato.Usuario = TXTE_USUARIO.Text;
 
                     //FUNCION PARA HACER EL INSERT
                     dbm.Contratos('U', vContrato, vCliente);
@@ -160,6 +160,7 @@ namespace BD_MAD_CEE.EMPLEADO
                     vContrato.Tipo_Servicio = CMBE_TIPOS.Text;
                     vContrato.Numero_Medidor = Convert.ToInt32(TXTE_MEDIDOR.Text);
                     vContrato.Id_Cliente = Convert.ToInt64(ID_AUXCLIENTE.Text);
+                    vContrato.Usuario = TXTE_USUARIO.Text;
                     vContrato.Empleado_Modificacion = Program.usuarioIng.ToString();
                     dbm.Contratos('C', vContrato,null);
                     ActualizarDatosCliente();
@@ -669,14 +670,16 @@ namespace BD_MAD_CEE.EMPLEADO
                                 iva = vRecibo.Importe * .16;
                                 vRecibo.Importe_IVA = vRecibo.Importe + iva;
                                 vRecibo.Cantidad_Pendiente = vRecibo.Importe_IVA;
+                                string yu = "";
+                                yu = dbm.UsuarioParaRecibo(Convert.ToInt32(TXTE_CMEDIDOR.Text));
+                                vRecibo.Usuario = yu;
                                 dbm.Recibo(vRecibo);
 
                                 //LLENAR TABLA PARA CONSUMO HISTORICO 
                                 dbm.ConsumoH(num, Convert.ToInt32(TXTE_CMEDIDOR.Text), vRecibo.AnioF,
                                     vRecibo.MesF, vRecibo.Dia, Convert.ToInt32(TXTE_CONSUMOKWH.Text),
                                     vRecibo.Importe_IVA, 0, vRecibo.Cantidad_Pendiente,tipo, vRecibo.FechaF);
-
-
+                            
 
 
                                 //
@@ -911,7 +914,9 @@ namespace BD_MAD_CEE.EMPLEADO
                                 iva = vRecibo.Importe * .16;
                                 vRecibo.Importe_IVA = vRecibo.Importe + iva;
                                 vRecibo.Cantidad_Pendiente = vRecibo.Importe_IVA;
-
+                                string yu = "";
+                                yu = dbm.UsuarioParaRecibo(Convert.ToInt32(TXTE_CMEDIDOR.Text));
+                                vRecibo.Usuario = yu;
                                 //LLENAR TABLA PARA CONSUMO HISTORICO 
                                 dbm.ConsumoH(num, Convert.ToInt32(TXTE_CMEDIDOR.Text), vRecibo.AnioF,
                                      vRecibo.MesF, vRecibo.Dia, Convert.ToInt32(TXTE_CONSUMOKWH.Text),
@@ -1111,9 +1116,9 @@ namespace BD_MAD_CEE.EMPLEADO
                             MessageBox.Show("El cliente si tiene consumos en este año");
                             ///Llenar datagriew con informacion de la tabla de consumosH
                             ///
-                            List<ConsumoH> CH = new List<ConsumoH>();
-                            CH = dbm.AllConsumosS(anio, servicio);
-                            DGVE_REPORTECH.DataSource = CH;
+                            List<CH> CH2 = new List<CH>();
+                            CH2 = dbm.AllConsumosS(anio, servicio);
+                            DGVE_REPORTECH.DataSource = CH2;
                         }
                         else
                         {
@@ -1143,7 +1148,7 @@ namespace BD_MAD_CEE.EMPLEADO
                         if (existe == true)
                         {
                             MessageBox.Show("El cliente si tiene consumos en este año");
-                            List<ConsumoH> CH = new List<ConsumoH>();
+                            List<CH> CH = new List<CH>();
                             CH = dbm.AllConsumosM(anio, medidor);
                             DGVE_REPORTECH.DataSource = CH;
                         }
@@ -1234,9 +1239,9 @@ namespace BD_MAD_CEE.EMPLEADO
                             MessageBox.Show("El cliente si tiene recibos en la fecha indicada");
                             ///Llenar datagriew con informacion de la tabla de consumosH
                             ///
-                            List<ConsumoH> CH = new List<ConsumoH>();
-                            CH = dbm.AllConsumosS(anio, servicio);
-                            DGVE_REPORTECH.DataSource = CH;
+                            List<CH> CH2 = new List<CH>();
+                            CH2 = dbm.AllConsumosS(anio, servicio);
+                            DGVE_REPORTECH.DataSource = CH2;
                         }
                         else
                         {
@@ -1269,9 +1274,9 @@ namespace BD_MAD_CEE.EMPLEADO
                         if (existe == true)
                         {
                             MessageBox.Show("El cliente si recibos en la fecha indicada");
-                            List<ConsumoH> CH = new List<ConsumoH>();
-                            CH = dbm.AllConsumosM(anio, medidor);
-                            DGVE_REPORTECH.DataSource = CH;
+                            List<CH> CH2 = new List<CH>();
+                            CH2 = dbm.AllConsumosM(anio, medidor);
+                            DGVE_REPORTECH.DataSource = CH2;
                         }
                         else
                         {
